@@ -165,7 +165,7 @@ heisenpurr_geometries = {
     'Esfera':{
         'centro': heisenpurr_cabeza[0],
         'radio': heisenpurr_cabeza[1],
-        'textura': os.path.join(ruta_actual, ('mi_mapa_uv'))
+        'textura': os.path.join(ruta_actual, ('mi_mapa_uv.png'))
     }                       
 }
 
