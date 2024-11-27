@@ -36,13 +36,13 @@ def render_piramides(tupla_piramides, lista_colores):
             glEnd()
 
             # Pintamos las aristas de negro (lo añadí porque se perdia la oreja color blanco con la cabeza)
-            glColor3f(0, 0, 0)
+            """glColor3f(0, 0, 0)
             glBegin(GL_LINES)
             for cara in caras:
                 for i in range(len(cara)):
                     glVertex3fv(vertices[cara[i]])
                     glVertex3fv(vertices[cara[(i + 1) % len(cara)]])
-            glEnd()
+            glEnd()"""
         itera_color+=1
 
 
@@ -62,7 +62,7 @@ def dibujar_lineas(cara):
     if cara is not None:
         for faccion in cara:
             for i in range(len(faccion)-1):
-                glLineWidth(9)
+                glLineWidth(3)
                 glBegin(GL_LINES)
                 glColor3f(0.0, 0.0, 0.0)
                 glVertex3f(*faccion[i]) 
