@@ -82,9 +82,11 @@ class Nivel1:
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
     def asignar_posiciones_personajes(self):
         if self.banderaColision==1:
-            self.personaje[1]= PersonajesDeTodos("Personaje de Luis", b.figuraLuis(1), escala=(3.5, 3.5, 3.5))
+            self.personaje[1]= PersonajesDeTodos("Personaje de Luis", b.figuraLuis(2), escala=(3.5, 3.5, 3.5))
+            self.personaje[0]= PersonajesDeTodos("Personaje de Emma", b.figuraEmma(12), rotacion=190, escala=(0.6,0.6,0.6))
         if self.banderaColision==2:
             self.personaje[0]= PersonajesDeTodos("Personaje de Emma", b.figuraEmma(1), rotacion=190, escala=(0.6,0.6,0.6))
+            self.personaje[1]= PersonajesDeTodos("Personaje de Luis", b.figuraLuis(3), escala=(3.5, 3.5, 3.5))
         if self.banderaColision==0:
             self.personaje[0]= PersonajesDeTodos("Personaje de Emma", b.figuraEmma(0), rotacion=190, escala=(0.6,0.6,0.6))
             self.personaje[1]= PersonajesDeTodos("Personaje de Luis", b.figuraLuis(0), escala=(3.5, 3.5, 3.5))
