@@ -55,7 +55,7 @@ class Nivel1:
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)
         self.texto_instrucciones = [
-            "                               G U E R R A    D E   A B A C O S ",
+            "                               D U E L O    D E   A B A C O S ",
             "               _____________________________________________", "",
             "                  JUGADOR 1, contesta las preguntas con A,S,D",
             "         Contesta correctamente y ataca la torre rival con W,A,S,D",
