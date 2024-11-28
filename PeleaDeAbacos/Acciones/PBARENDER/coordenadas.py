@@ -1,7 +1,11 @@
 from OpenGL.GL import GL_QUADS,GL_TRIANGLES
 
-#Heisenpurr
 
+import os
+
+ruta_actual = os.path.dirname(__file__)
+
+#Colores
 negro= (0.01,0.01,0.01,1.0)
 blanco=(1.0,1.0,1.0,1.0)
 gris=(0.5,0.5,0.5,1.0)
@@ -10,6 +14,7 @@ marron_oscuro = (0.49, 0.35, 0.21,1.0)
 plata=(0.9, 0.9, 0.8,1.0)
 azul=(0.5, 0.8, 1.0,1.0)
 
+#Heisenpurr
 prisma_caras = [
     0, 1, 2, 3,  
     4, 5, 6, 7,  
@@ -160,7 +165,7 @@ heisenpurr_geometries = {
     'Esfera':{
         'centro': heisenpurr_cabeza[0],
         'radio': heisenpurr_cabeza[1],
-        'textura':'mi_mapa_uv.png'
+        'textura': os.path.join(ruta_actual, ('mi_mapa_uv.png'))
     }                       
 }
 
