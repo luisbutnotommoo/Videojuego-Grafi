@@ -3,10 +3,10 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from pygame.locals import *
 from PIL import *
-import objetos as ob
-import lucesNuev as lc
+import PersonajeLin.blue_multiverso.machote.objetos as ob
+import PersonajeLin.blue_multiverso.machote.lucesNuev as lc
 
-class PersonajeLin:
+class clasePersonajeBlue:
     def __init__(self):
         
         #-----------------------------------------------------------------------
@@ -111,91 +111,84 @@ class PersonajeLin:
         glDisable(GL_LIGHT0)
         glPopMatrix()
 
-    def draw_movomg(movX,movY):
-        global PosX_objeto1,PosY_objeto1 #coordenadas globales
-        PosX_objeto1 = PosX_objeto1+movX #se suma a los ejes el movimiento
-        PosY_objeto1 = PosY_objeto1+movY
+    def draw_movomg(self, movX,movY):
+        self.PosX_objeto1 = self.PosX_objeto1+movX #se suma a los ejes el movimiento
+        self.PosY_objeto1 = self.PosY_objeto1+movY
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
-        glTranslatef(PosX_objeto1,PosY_objeto1,PosZ_objeto1) #trasladar a las nuevas coordenadas
-        draw_omg()
+        glTranslatef(self.PosX_objeto1,self.PosY_objeto1,self.PosZ_objeto1) #trasladar a las nuevas coordenadas
+        self.draw_omg()
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)
         glPopMatrix()
         
-    def draw_movsad(movX,movY):
-        global PosX_objeto1,PosY_objeto1 #coordenadas globales
-        PosX_objeto1 = PosX_objeto1+movX #se suma a los ejes el movimiento
-        PosY_objeto1 = PosY_objeto1+movY
+    def draw_movsad(self,movX,movY):
+        self.PosX_objeto1 = self.PosX_objeto1+movX #se suma a los ejes el movimiento
+        self.PosY_objeto1 = self.PosY_objeto1+movY
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
-        glTranslatef(PosX_objeto1,PosY_objeto1,PosZ_objeto1) #trasladar a las nuevas coordenadas
-        draw_sad()
+        glTranslatef(self.PosX_objeto1,self.PosY_objeto1,self.PosZ_objeto1) #trasladar a las nuevas coordenadas
+        self.draw_sad()
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)
         glPopMatrix()
 
-    def draw_mov_brazoD(movX,movY):
-        global PosX_objeto1,PosY_objeto1 #coordenadas globales
-        PosX_objeto1 = PosX_objeto1+movX #se suma a los ejes el movimiento
-        PosY_objeto1 = PosY_objeto1+movY
+    def draw_mov_brazoD(self,movX,movY):
+        self.PosX_objeto1 = self.PosX_objeto1+movX #se suma a los ejes el movimiento
+        self.PosY_objeto1 = self.PosY_objeto1+movY
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
-        glTranslatef(PosX_objeto1,PosY_objeto1,PosZ_objeto1) #trasladar a las nuevas coordenadas
-        draw_mov_brazo_D()
+        glTranslatef(self.PosX_objeto1,self.PosY_objeto1,self.PosZ_objeto1) #trasladar a las nuevas coordenadas
+        self.draw_mov_brazo_D()
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)
         glPopMatrix()
 
-    def draw_mov_brazoI(movX,movY):
-        global PosX_objeto1,PosY_objeto1 #coordenadas globales
-        PosX_objeto1 = PosX_objeto1+movX #se suma a los ejes el movimiento
-        PosY_objeto1 = PosY_objeto1+movY
+    def draw_mov_brazoI(self,movX,movY):
+        self.PosX_objeto1 = self.PosX_objeto1+movX #se suma a los ejes el movimiento
+        self.PosY_objeto1 = self.PosY_objeto1+movY
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
-        glTranslatef(PosX_objeto1,PosY_objeto1,PosZ_objeto1) #trasladar a las nuevas coordenadas
-        draw_mov_brazo_I()
+        glTranslatef(self.PosX_objeto1,self.PosY_objeto1,self.PosZ_objeto1) #trasladar a las nuevas coordenadas
+        self.draw_mov_brazo_I()
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)
         glPopMatrix()
 
-    def draw_movcuello(movX,movY):
-        global PosX_objeto1,PosY_objeto1 #coordenadas globales
-        PosX_objeto1 = PosX_objeto1+movX #se suma a los ejes el movimiento
-        PosY_objeto1 = PosY_objeto1+movY
+    def draw_movcuello(self,movX,movY):
+        self.PosX_objeto1 = self.PosX_objeto1+movX #se suma a los ejes el movimiento
+        self.PosY_objeto1 = self.PosY_objeto1+movY
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
-        glTranslatef(PosX_objeto1,PosY_objeto1,PosZ_objeto1) #trasladar a las nuevas coordenadas
-        mov_cuello()
+        glTranslatef(self.PosX_objeto1,self.PosY_objeto1,self.PosZ_objeto1) #trasladar a las nuevas coordenadas
+        self.mov_cuello()
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)
         glPopMatrix()
 
-    def draw_movPD(movX,movY):
-        global PosX_objeto1,PosY_objeto1 #coordenadas globales
-        PosX_objeto1 = PosX_objeto1+movX #se suma a los ejes el movimiento
-        PosY_objeto1 = PosY_objeto1+movY
+    def draw_movPD(self,movX,movY):
+        self.PosX_objeto1 = self.PosX_objeto1+movX #se suma a los ejes el movimiento
+        self.PosY_objeto1 = self.PosY_objeto1+movY
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
-        glTranslatef(PosX_objeto1,PosY_objeto1,PosZ_objeto1) #trasladar a las nuevas coordenadas
-        mov_piernaD()
+        glTranslatef(self.PosX_objeto1,self.PosY_objeto1,self.PosZ_objeto1) #trasladar a las nuevas coordenadas
+        self.mov_piernaD()
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)
         glPopMatrix()
 
-    def draw_movPI(movX,movY):
-        global PosX_objeto1,PosY_objeto1 #coordenadas globales
-        PosX_objeto1 = PosX_objeto1+movX #se suma a los ejes el movimiento
-        PosY_objeto1 = PosY_objeto1+movY
+    def draw_movPI(self,movX,movY):
+        self.PosX_objeto1 = self.PosX_objeto1+movX #se suma a los ejes el movimiento
+        self.PosY_objeto1 = self.PosY_objeto1+movY
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
-        glTranslatef(PosX_objeto1,PosY_objeto1,PosZ_objeto1) #trasladar a las nuevas coordenadas
-        mov_piernaI()
+        glTranslatef(self.PosX_objeto1,self.PosY_objeto1,self.PosZ_objeto1) #trasladar a las nuevas coordenadas
+        self.mov_piernaI()
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)
         glPopMatrix()
 
-    def draw_mov_cuello():
+    def draw_mov_cuello(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.9, 0.8, 0.6)
         glPushMatrix()
@@ -209,7 +202,7 @@ class PersonajeLin:
         
         glPopMatrix()
 
-    def draw_mov_cara():
+    def draw_mov_cara(self):
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
         # Traslada las figuras a la posición deseada
@@ -221,7 +214,7 @@ class PersonajeLin:
         
         glPopMatrix()
     
-    def draw_pies():
+    def draw_pies(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.9, 0.8, 0.6)
         glPushMatrix()
@@ -236,7 +229,7 @@ class PersonajeLin:
         glPopMatrix()
 
 
-    def draw_Tor():
+    def draw_Tor(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.0, 1.0, 0.0)
         glPushMatrix()
@@ -248,7 +241,7 @@ class PersonajeLin:
         ob.draw_Torzo()
         glPopMatrix()
 
-    def draw_Cuello():
+    def draw_Cuello(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.9, 0.8, 0.6)
         glPushMatrix()
@@ -260,7 +253,7 @@ class PersonajeLin:
         ob.Cuello()
         glPopMatrix()
 
-    def draw_Cab():
+    def draw_Cab(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.9, 0.8, 0.6)
         glPushMatrix()
@@ -273,7 +266,7 @@ class PersonajeLin:
         glPopMatrix()
 
 
-    def draw_eyes():
+    def draw_eyes(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.0, 0.0, 0.0)
         glPushMatrix()
@@ -286,7 +279,7 @@ class PersonajeLin:
         glPopMatrix()
 
 
-    def draw_Brazos():
+    def draw_Brazos(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.9, 0.8, 0.6)
         glPushMatrix()
@@ -299,7 +292,7 @@ class PersonajeLin:
         ob.draw_BrazoIz()
         glPopMatrix()
 
-    def brazo_mov_D():
+    def brazo_mov_D(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.9, 0.8, 0.6)
         glPushMatrix()
@@ -312,7 +305,7 @@ class PersonajeLin:
         ob.draw_BrazoIz()
         glPopMatrix()
 
-    def pierna_mov_D():
+    def pierna_mov_D(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.9, 0.8, 0.6)
         glPushMatrix()
@@ -325,7 +318,7 @@ class PersonajeLin:
         ob.draw_piernaDemov()
         glPopMatrix()
 
-    def pierna_mov_I():
+    def pierna_mov_I(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.9, 0.8, 0.6)
         glPushMatrix()
@@ -338,7 +331,7 @@ class PersonajeLin:
         ob.draw_piernaIzmov()
         glPopMatrix()
 
-    def brazo_mov_I():
+    def brazo_mov_I(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.9, 0.8, 0.6)
         glPushMatrix()
@@ -351,7 +344,7 @@ class PersonajeLin:
         ob.draw_BrazoDe()
         glPopMatrix()
 
-    def enojo():
+    def enojo(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.0, 0.0, 0.0)
         glPushMatrix()
@@ -363,7 +356,7 @@ class PersonajeLin:
         ob.draw_enojo()
         glPopMatrix()
 
-    def triste():
+    def triste(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.0, 0.0, 0.0)
         glPushMatrix()
@@ -376,7 +369,7 @@ class PersonajeLin:
         ob.lagrimas()
         glPopMatrix()
 
-    def feliz():
+    def feliz(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(1.0, 1.0, 1.0)
         glPushMatrix()
@@ -389,7 +382,7 @@ class PersonajeLin:
         glPopMatrix()
 
     
-    def feliz_dientes():
+    def feliz_dientes(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.0, 0.0, 0.0)
         glPushMatrix()
@@ -401,7 +394,7 @@ class PersonajeLin:
         ob.dientes()
         glPopMatrix()
 
-    def dras_asombro():
+    def dras_asombro(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(1.0, 1.0, 1.0)
         glPushMatrix()
@@ -413,7 +406,7 @@ class PersonajeLin:
         ob.asombro()
         glPopMatrix()
 
-    def draw_asco():
+    def draw_asco(self):
         glEnable(GL_DEPTH_TEST)
         glColor3f(0.4, 0.8, 0.2)
         glPushMatrix()
@@ -433,88 +426,88 @@ class PersonajeLin:
         ob.draw_Torzo()
         glPopMatrix()
         
-    def draw():
-        draw_pies()
-        draw_Tor()
-        draw_Cuello()
-        draw_Cab()
-        draw_eyes()
-        draw_Brazos()
+    def draw(self):
+        self.draw_pies()
+        self.draw_Tor()
+        self.draw_Cuello()
+        self.draw_Cab()
+        self.draw_eyes()
+        self.draw_Brazos()
 
-    def draw_mov_brazo_D():
-        draw_pies()
-        draw_Tor()
-        draw_Cuello()
-        draw_Cab()
-        draw_eyes()
-        brazo_mov_D()
+    def draw_mov_brazo_D(self):
+        self.draw_pies()
+        self.draw_Tor()
+        self.draw_Cuello()
+        self.draw_Cab()
+        self.draw_eyes()
+        self.brazo_mov_D()
 
-    def draw_mov_brazo_I():
-        draw_pies()
-        draw_Tor()
-        draw_Cuello()
-        draw_Cab()
-        draw_eyes()
-        brazo_mov_I()
+    def draw_mov_brazo_I(self):
+        self.draw_pies()
+        self.draw_Tor()
+        self.draw_Cuello()
+        self.draw_Cab()
+        self.draw_eyes()
+        self.brazo_mov_I()
 
-    def mov_piernaD():
-        pierna_mov_D()
-        draw_Tor()
-        draw_Cuello()
-        draw_eyes()
-        draw_Cab()
-        draw_Brazos()
+    def mov_piernaD(self):
+        self.pierna_mov_D()
+        self.draw_Tor()
+        self.draw_Cuello()
+        self.draw_eyes()
+        self.draw_Cab()
+        self.draw_Brazos()
 
-    def mov_piernaI():
-        pierna_mov_I()
-        draw_Tor()
-        draw_Cuello()
-        draw_Cab()
-        draw_eyes()
-        draw_Brazos()
+    def mov_piernaI(self):
+        self.pierna_mov_I()
+        self.draw_Tor()
+        self.draw_Cuello()
+        self.draw_Cab()
+        self.draw_eyes()
+        self.draw_Brazos()
 
-    def draw_happy():
-        draw_pies()
-        draw_Tor()
-        draw_Cuello()
-        draw_Cab()
-        draw_eyes()
-        draw_Brazos()
-        feliz()
-        feliz_dientes()
+    def draw_happy(self):
+        self.draw_pies()
+        self.draw_Tor()
+        self.draw_Cuello()
+        self.draw_Cab()
+        self.draw_eyes()
+        self.draw_Brazos()
+        self.feliz()
+        self.feliz_dientes()
         
 
-    def draw_angry():
-        draw_pies()
-        draw_Tor()
-        draw_Cuello()
-        draw_Cab()
-        draw_eyes()
-        draw_Brazos()
-        enojo()
+    def draw_angry(self):
+        self.draw_pies()
+        self.draw_Tor()
+        self.draw_Cuello()
+        self.draw_Cab()
+        self.draw_eyes()
+        self.draw_Brazos()
+        self.enojo()
 
-    def draw_sad():
-        draw_pies()
-        draw_Tor()
-        draw_Cuello()
-        draw_eyes()
-        draw_Brazos()
-        draw_Cab()
-        triste()
+    def draw_sad(self):
+        self.draw_pies()
+        self.draw_Tor()
+        self.draw_Cuello()
+        self.draw_eyes()
+        self.draw_Brazos()
+        self.draw_Cab()
+        self.triste()
 
-    def draw_omg():
-        draw_pies()
-        draw_Tor()
-        draw_Cuello()
-        draw_eyes()
-        draw_Brazos()
-        draw_Cab()
-        dras_asombro()
+    def draw_omg(self):
+        self.draw_pies()
+        self.draw_Tor()
+        self.draw_Cuello()
+        self.draw_eyes()
+        self.draw_Brazos()
+        self.draw_Cab()
+        self.dras_asombro()
 
-    def mov_cuello():
-        draw_pies()
-        draw_Tor()
-        draw_Brazos()
-        draw_Cab()
-        draw_mov_cuello()
-        draw_mov_cara()
+    def mov_cuello(self):
+        self.draw_pies()
+        self.draw_Tor()
+        self.draw_Brazos()
+        self.draw_Cab()
+        self.draw_mov_cuello()
+        self.draw_mov_cara()

@@ -7,7 +7,7 @@ from PIL import*
 from PersonajeLuis.AccionesLuis.personaje import Personaje
 from PersonajeEmma.actionsEV.clasePersonaje import Newt
 from PersonajeStarenka.clasePintar import PintarPersonajeStar
-#from PersonajeLin.machote.clasePersonajeBlue import PersonajeLin
+from PersonajeLin.blue_multiverso.dibujaPersonajeJuegoEmocion import pesonajeLinEmocionesJuego as PersonajeLin
 import math
 
 class PersonajesDeTodos:
@@ -68,10 +68,10 @@ def figuraEmma(emocion):
     funcion_dibujo2=[temp2.personaje]
     return funcion_dibujo2
 
-"""def figuraLin():
-    temp3=PersonajeLin()
-    funcion_dibujo3=[temp3.draw]
-    return funcion_dibujo3"""
+def figuraLin(emocion):
+    temp3=PersonajeLin(emocion)
+    funcion_dibujo3=[temp3.personaje]
+    return funcion_dibujo3
 
 def figuraStar(emocion):
     temp4=PintarPersonajeStar(emocion)

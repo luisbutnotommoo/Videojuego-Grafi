@@ -17,10 +17,10 @@ class SeleccionPersonaje:
         # Estados de selección de personajes
         self.selected_character = -1
         self.personaje = [
-            PersonajesDeTodos("Personaje de Emma", b.figuraEmma(),rotacion=190, escala=(0.22, 0.22, 0.22)),
-            PersonajesDeTodos("Personaje de Luis", b.figuraLuis(), escala=(1.4, 1.4, 1.4)),
-            PersonajesDeTodos("Personaje de Lin",b.figuraLin(), rotacion=0, escala=(0.4, 0.4, 0.4)),
-            PersonajesDeTodos("Personaje de Star",  b.original(),rotacion=190, escala=(0.25, 0.25, 0.25))
+            PersonajesDeTodos("Personaje de Emma", b.figuraEmma(0),rotacion=190, escala=(0.22, 0.22, 0.22)),
+            PersonajesDeTodos("Personaje de Luis", b.figuraLuis(0), escala=(1.4, 1.4, 1.4)),
+            PersonajesDeTodos("Personaje de Lin",b.figuraLin(0), rotacion=0, escala=(0.4, 0.4, 0.4)),
+            PersonajesDeTodos("Personaje de Star",  b.figuraStar(0),rotacion=190, escala=(0.25, 0.25, 0.25))
         ]
 
         self.contador=0
@@ -29,8 +29,8 @@ class SeleccionPersonaje:
         self.asignar_posiciones_personajes()
 
         # Cargar texturas
-        self.floor_texture = self.load_texture("Imagenes/piso.jpg")
-        self.wall_texture = self.load_texture("Imagenes/pared.jpg")
+        self.floor_texture = self.load_texture("Imagenes/pasto.jpg")
+        self.wall_texture = self.load_texture("Imagenes/pared2.jpg")
 
         self.jump_height = 0.0  # Altura del salto
         self.jump_speed = 0.1    # Velocidad del salto
@@ -141,7 +141,7 @@ class SeleccionPersonaje:
 
     def dibuja_textos(self):
         glColor4f(2, 2, 2, 1)
-        self.render_text_2d(self.display,"Guerra de Abacos",110,530,self.font_titulo)
+        self.render_text_2d(self.display,"Duelo de Abacos",135,530,self.font_titulo)
         self.render_text_2d(self.display,"Menú de selección",195,490,self.font_menu)
         self.render_text_2d(self.display,"Dr. Newt",70,200,self.font_personajes)
         self.render_text_2d(self.display,"Heisenpurr",250,200,self.font_personajes)
@@ -151,15 +151,16 @@ class SeleccionPersonaje:
 
 
     def dibujar_piso_pared(self):
+       
         glEnable(GL_TEXTURE_2D)
         
         # Configurar material para las texturas con un filtro neutral
         glMaterialfv(GL_FRONT, GL_SPECULAR, [0.2, 0.2, 0.2, 1.0])
         glMaterialf(GL_FRONT, GL_SHININESS, 16.0)
 
-        # Suelo con filtro de color gris
+        # Suelo
         glBindTexture(GL_TEXTURE_2D, self.floor_texture)
-        glColor3f(0.6, 0.6, 0.6)  # Aplicar filtro gris a la textura del suelo
+        glColor3f(0.6, 0.6, 0.6)  # Filtro gris
         glBegin(GL_QUADS)
         glNormal3f(0.0, 1.0, 0.0)
         glTexCoord2f(0, 0); glVertex3f(-20.0, -2.0, -20.0)
@@ -168,18 +169,63 @@ class SeleccionPersonaje:
         glTexCoord2f(0, 1); glVertex3f(-20.0, -2.0, 20.0)
         glEnd()
 
-        # Pared con filtro de color gris
+        # Techo
         glBindTexture(GL_TEXTURE_2D, self.wall_texture)
-        glColor3f(0.6, 0.6, 0.6)  # Aplicar filtro gris a la textura de la pared
+        glColor3f(0.6, 0.6, 0.6)
+        glBegin(GL_QUADS)
+        glNormal3f(0.0, -1.0, 0.0)
+        glTexCoord2f(0, 0); glVertex3f(-20.0, 25.0, -20.0)
+        glTexCoord2f(1, 0); glVertex3f(20.0, 25.0, -20.0)
+        glTexCoord2f(1, 1); glVertex3f(20.0, 25.0, 20.0)
+        glTexCoord2f(0, 1); glVertex3f(-20.0, 25.0, 20.0)
+        glEnd()
+
+        # Pared trasera
+        glBindTexture(GL_TEXTURE_2D, self.wall_texture)
+        glColor3f(0.6, 0.6, 0.6)
         glBegin(GL_QUADS)
         glNormal3f(0.0, 0.0, 1.0)
-        glTexCoord2f(0, 0); glVertex3f(-30.0, -2.0, -20.0)
-        glTexCoord2f(1, 0); glVertex3f(30.0, -2.0, -20.0)
-        glTexCoord2f(1, 1); glVertex3f(30.0, 25.0, -20.0)
-        glTexCoord2f(0, 1); glVertex3f(-30.0, 25.0, -20.0)
+        glTexCoord2f(0, 0); glVertex3f(-20.0, -2.0, -20.0)
+        glTexCoord2f(1, 0); glVertex3f(20.0, -2.0, -20.0)
+        glTexCoord2f(1, 1); glVertex3f(20.0, 25.0, -20.0)
+        glTexCoord2f(0, 1); glVertex3f(-20.0, 25.0, -20.0)
+        glEnd()
+
+        # Pared delantera
+        glBindTexture(GL_TEXTURE_2D, self.wall_texture)
+        glColor3f(0.6, 0.6, 0.6)
+        glBegin(GL_QUADS)
+        glNormal3f(0.0, 0.0, -1.0)
+        glTexCoord2f(0, 0); glVertex3f(-20.0, -2.0, 20.0)
+        glTexCoord2f(1, 0); glVertex3f(20.0, -2.0, 20.0)
+        glTexCoord2f(1, 1); glVertex3f(20.0, 25.0, 20.0)
+        glTexCoord2f(0, 1); glVertex3f(-20.0, 25.0, 20.0)
+        glEnd()
+
+        # Pared izquierda
+        glBindTexture(GL_TEXTURE_2D, self.wall_texture)
+        glColor3f(0.6, 0.6, 0.6)
+        glBegin(GL_QUADS)
+        glNormal3f(1.0, 0.0, 0.0)
+        glTexCoord2f(0, 0); glVertex3f(-20.0, -2.0, -20.0)
+        glTexCoord2f(1, 0); glVertex3f(-20.0, -2.0, 20.0)
+        glTexCoord2f(1, 1); glVertex3f(-20.0, 25.0, 20.0)
+        glTexCoord2f(0, 1); glVertex3f(-20.0, 25.0, -20.0)
+        glEnd()
+
+        # Pared derecha
+        glBindTexture(GL_TEXTURE_2D, self.wall_texture)
+        glColor3f(0.6, 0.6, 0.6)
+        glBegin(GL_QUADS)
+        glNormal3f(-1.0, 0.0, 0.0)
+        glTexCoord2f(0, 0); glVertex3f(20.0, -2.0, -20.0)
+        glTexCoord2f(1, 0); glVertex3f(20.0, -2.0, 20.0)
+        glTexCoord2f(1, 1); glVertex3f(20.0, 25.0, 20.0)
+        glTexCoord2f(0, 1); glVertex3f(20.0, 25.0, -20.0)
         glEnd()
 
         glDisable(GL_TEXTURE_2D)
+
 
     def render_text_2d(self, display, text, x, y, font, line_height=18):
         lines = text.split('\n')  # Dividir el texto en líneas donde haya saltos de línea (\n)
