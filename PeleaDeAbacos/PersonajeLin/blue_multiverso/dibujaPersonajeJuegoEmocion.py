@@ -1,4 +1,4 @@
-from PersonajeLin.blue_multiverso.machote.dibuja import clasePersonajeBlue as CP
+from PersonajeLin.blue_multiverso.machote.dibuja2 import clasePersonajeBlue as CP
 
 class pesonajeLinEmocionesJuego:
 
@@ -7,7 +7,12 @@ class pesonajeLinEmocionesJuego:
         self.instancia=CP()
         
 
-    def personaje(self):
-        if self.emocion==0:
+    def personaje(self, emocion):
+        if emocion==0:
             self.instancia.draw()
+        if emocion==2:
+            self.instancia.draw_happy()
+        if emocion==1:
+            self.instancia.draw_angry()
+
         

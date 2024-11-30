@@ -95,7 +95,7 @@ class SeleccionPersonaje:
     def set_perspective(self):
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-        gluPerspective(60, (self.display[0] / self.display[1]), 0.1, 100.0)
+        gluPerspective(60, (self.display[0] / self.display[1]), 0.5, 100.0)
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
         glTranslatef(0.0, 0.0, -20.0)
