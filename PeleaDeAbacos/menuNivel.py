@@ -9,6 +9,7 @@ class MenuNivel:
         pygame.init()  # Asegúrate de inicializar pygame
         self.jugar = True
         self.nivel = 0
+        
 
         # Configura la pantalla
         self.WINDOW_WIDTH = 800
@@ -17,7 +18,7 @@ class MenuNivel:
         pygame.display.set_caption('Mi Juego')
 
         # Ruta de la imagen de fondo
-        ruta_imagen = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Imagenes', 'aguaORG.jpg')
+        ruta_imagen = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Imagenes', 'pared2.jpg')
         try:
             self.background_image = pygame.image.load(ruta_imagen)
             self.background_image = pygame.transform.scale(self.background_image, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
@@ -62,7 +63,9 @@ class MenuNivel:
         self.jugar = False
 
     def volver(self):
+        
         print("Regresando al menú principal...")
+        self.nivel= 4
         self.jugar = False
 
     def main(self):

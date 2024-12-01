@@ -311,10 +311,30 @@ class SeleccionPersonaje:
                 running=False
                 self.cleanup()
                 
-        
+     
 
     def cleanup(self):
-        pygame.quit()
+        try:
+        # Limpiar texturas
+            if hasattr(self, 'floor_texture'):
+                glDeleteTextures([self.floor_texture, self.wall_texture])
+            
+                # Deshabilitar luces
+                glDisable(GL_LIGHT0)
+                glDisable(GL_LIGHT1)
+                glDisable(GL_LIGHT2)
+                
+                # Limpiar contexto de OpenGL
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+               
+                pygame.mixer.music.stop()
+                pygame.mixer.music.unload()
+                pygame.mixer.quit()
+                # Reiniciar estado de Pygame
+                pygame.display.quit()
+                pygame.display.init()
+        except Exception as e:
+            print(f"Error en cleanup: {e}")
 
     def load_texture(self, path):
         texture_surface = pygame.image.load(path)

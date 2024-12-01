@@ -24,9 +24,12 @@ class controlaClase:
         self.personajesJugables = []
         self.banderaSeleccion=True
         self.banderaNivel=True
-
+        pygame.init()  
+   
+        
     def main(self):
         while True:
+            print("Esta aqui")
             self.banderaSeleccion=True
             self.banderaNivel=True
             
@@ -39,6 +42,12 @@ class controlaClase:
                 self.banderaSeleccion=True
                 menuNivel=MenuNivel()
                 menuNivel.main()
+
+                if(menuNivel.nivel==4):
+                    self.banderaSeleccion=False
+                    self.banderaNivel=False
+                    menuPrincipal.reset()
+                    
                 
 
                 if(menuNivel.jugar==False):
@@ -47,8 +56,6 @@ class controlaClase:
                             menu = SeleccionPersonaje()
                             menu.run()
                             
-                            
-
                             # Aquí puedes verificar si el menú fue cerrado
                             
                             if menu.bandera==1:  
@@ -73,17 +80,36 @@ class controlaClase:
                             if(menuNivel.nivel==1):
                                 nivel1 = Nivel1(personajesJugables=eleccion.personajesJugables)
                                 nivel1.run()
+                                if nivel1.banderaSiguienteNivel==False:
+                                    menuNivel.nivel=2
+
                                 if nivel1.banderaMenuNivel==False:
                                     self.banderaSeleccion=False
-                                    
+                                    menuNivel.reset()
                                 if nivel1.banderaMenuPrincipal==False:
                                     self.banderaSeleccion=False
                                     self.banderaNivel=False
+                                    menuNivel.reset()
                                     menuPrincipal.reset()
+                                    
+                                
 
                             if(menuNivel.nivel==2):
                                 nivel2 = Nivel2(personajesJugables=eleccion.personajesJugables)
                                 nivel2.run()
+                                if nivel2.banderaSiguienteNivel==False:
+                                    menuNivel.nivel=3
+
+                                if nivel2.banderaMenuNivel==False:
+                                    self.banderaSeleccion=False
+                                    menuNivel.reset()
+                                if nivel2.banderaMenuPrincipal==False:
+                                    self.banderaSeleccion=False
+                                    self.banderaNivel=False
+                                    menuNivel.reset()
+                                    menuPrincipal.reset()
+                            
+
 
 
                     

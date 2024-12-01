@@ -33,12 +33,18 @@ class Nivel2:
         self.reduc2=40
         self.personaje = personajesJugables
 
+        self.banderaMenu=True
+        self.banderaMenuPrincipal=True
+        self.banderaMenuNivel=True
+        self.banderaSiguienteNivel = True
+
         self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
         self.sonido_seleccion = pygame.mixer.Sound(os.path.join(ruta_audio, "click.mp3"))
         self.sonido_ganar = pygame.mixer.Sound(os.path.join(ruta_audio,"win.mp3"))
         pygame.mixer.music.load(os.path.join(ruta_audio,"nivel1.mp3"))
         pygame.mixer.music.play(loops=-1)
+
         self.bandera_instrucciones = True
         self.bandera_pausa = False
         self.bandera_control_instrucciones = True
@@ -72,9 +78,12 @@ class Nivel2:
         self.txopc3 = ""
         self.txopc4 = ""
         self.txopc5 = ""
+        self.txopc6 = ""
+        self.txopc7 = ""
         self.texto_pausa = [
             ""
         ]
+        self.texto_sig_nivel = [""]
 
     def actualizarRender(self):
         for personaje in self.personaje:
@@ -180,12 +189,16 @@ class Nivel2:
             self.actualizar_opciones()
             tx.draw_text2(self.texto_pausa,self.fuente_pausa,150,50,50)
         if not self.bandera_control_instrucciones and not self.bandera_pausa:
-            tx.draw_text2(["Presiona SPACE para mostrar la pregunta","Presiona P para pausar el juego"],self.fuente_instrucciones,0,50,500)
+            tx.draw_text2(["Presiona SPACE para mostrar la pregunta","Presiona P para pausar el juego"],self.fuente_instrucciones,0,20,500)
+            tx.draw_text2([f"Puntuación jugador 1= {self.jugador_1_score}"],self.fuente_instrucciones,0,50,20)
+            tx.draw_text2([f"Puntuación jugador 2= {self.jugador_2_score}"],self.fuente_instrucciones,0,500,20)
         if self.bandera_ganador==1:
-            tx.draw_text2(["¡JUGADOR 1 ganó el juego!"],self.fuente_pausa,150,200,280)
+            self.actualizar_opciones_sig_nivel(1)
+            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
         if self.bandera_ganador==2:
-            tx.draw_text2(["¡JUGADOR 2 ganó el juego!"],self.fuente_pausa,150,200,280)
-
+            self.actualizar_opciones_sig_nivel(2)
+            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
+        
         # Detectar la colisión cuando está activada
         if self.banderaColision==1:
             self.pocima(0, 0)
@@ -312,10 +325,42 @@ class Nivel2:
                             self.bandera_instrucciones =  not self.bandera_instrucciones
                             self.bandera_control_instrucciones = not self.bandera_control_instrucciones
                         elif self.opc_sel == 4:
-                            pass # VOLVER A SELECCIONAR PERSONAJES
+                            self.banderaMenu=False
+                            return False
                         elif self.opc_sel == 5:
+                            self.banderaMenuNivel=False
+                            return False
+                        elif self.opc_sel == 6:
+                            self.banderaMenuPrincipal=False
+                            return False
+                        elif self.opc_sel == 7:
+                            pygame.quit()  # Cierra Pygame
+                            sys.exit()
                             return False
                     self.sonido_seleccion.play()
+                    # Opciones de siguiente nivel
+                if self.bandera_ganador != 0:
+                    if event.key == pygame.K_UP:
+                        self.opciones_sig_nivel(-1)
+                    if event.key == pygame.K_DOWN:
+                        self.opciones_sig_nivel(1)
+                    if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
+                        if self.opc_sel == 1:
+                            self.banderaSiguienteNivel=False
+                            return False
+                        elif self.opc_sel == 2:
+                            pygame.mixer.music.stop()
+                            pygame.mixer.music.play()
+                            self.jugador_1_score=0
+                            self.jugador_2_score=0
+                            self.bandera_instrucciones=not self.bandera_instrucciones
+                            self.bandera_control_instrucciones=not self.bandera_control_instrucciones
+                            self.bandera_ganador=0
+                        elif self.opc_sel == 3:
+                            self.banderaMenuPrincipal=False
+                            return False
+                    self.sonido_seleccion.play()
+                
                 
                 if self.show_message:  # Si la pregunta está en pantalla
                     # Verificar si ambos jugadores ya están bloqueados
@@ -412,10 +457,10 @@ class Nivel2:
     
     def opciones_pausa(self,opcion):
         self.opc_sel += opcion
-        if self.opc_sel > 5:
+        if self.opc_sel > 7:
             self.opc_sel = 1
         if self.opc_sel < 1:
-            self.opc_sel = 5
+            self.opc_sel = 7
 
     def actualizar_opciones(self):
         self.txopc1 = ""
@@ -423,6 +468,8 @@ class Nivel2:
         self.txopc3 = ""
         self.txopc4 = ""
         self.txopc5 = ""
+        self.txopc6 = ""
+        self.txopc7 = ""
 
         if self.opc_sel == 1:
             self.txopc1 = ">"
@@ -434,6 +481,11 @@ class Nivel2:
             self.txopc4 = ">"
         elif self.opc_sel == 5:
             self.txopc5 = ">"
+        elif self.opc_sel == 6:
+            self.txopc6 = ">"
+        elif self.opc_sel == 7:
+            self.txopc7 = ">"
+        
         
         self.texto_pausa = [
             "P A U S A",
@@ -442,7 +494,9 @@ class Nivel2:
             self.txopc2+" Reiniciar",
             self.txopc3+" Mostrar instrucciones",
             self.txopc4+" Volver a seleccionar personajes",
-            self.txopc5+" Salir"
+            self.txopc5+" Volver a seleccionar un nivel",
+            self.txopc6+" Volver al menu principal",
+            self.txopc7+" Salir"
         ]
     def opciones_sig_nivel(self,opcion):
         self.opc_sel += opcion
@@ -473,12 +527,45 @@ class Nivel2:
         running = True
         while running:
             running = self.handle_input()
+            if not self.banderaMenu:  # Si la bandera del menú es falsa, salimos del bucle
+                self.cleanup()
+                break
+            if not self.banderaMenuNivel:
+                self.cleanup()
+                break
+            if not self.banderaMenuPrincipal:
+                self.cleanup()
+                break
+            if not self.banderaSiguienteNivel:
+                self.cleanup()
+                break
             self.draw_scene()
             pygame.time.wait(10)
            
 
     def cleanup(self):
-        pygame.quit()
+        try:
+        # Limpiar texturas
+            if hasattr(self, 'floor_texture'):
+                glDeleteTextures([self.floor_texture, self.wall_texture])
+            
+                # Deshabilitar luces
+                glDisable(GL_LIGHT0)
+                glDisable(GL_LIGHT1)
+                glDisable(GL_LIGHT2)
+                
+                # Limpiar contexto de OpenGL
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+               
+                pygame.mixer.music.stop()
+                pygame.mixer.music.unload()
+                pygame.mixer.quit()
+                # Reiniciar estado de Pygame
+                pygame.display.quit()
+                pygame.display.init()
+        except Exception as e:
+            print(f"Error en cleanup: {e}")
+
 
 if __name__ == "__main__":
     sP = Nivel2()

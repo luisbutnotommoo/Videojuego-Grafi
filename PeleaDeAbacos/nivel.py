@@ -30,16 +30,19 @@ class Nivel1:
         self.reduc1=40
         self.reduc2=40
         self.personaje = personajesJugables
+
         self.banderaMenu=True
         self.banderaMenuPrincipal=True
         self.banderaMenuNivel=True
-        self.banderaSiguienteNivel = False
+        self.banderaSiguienteNivel = True
+
         self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
         self.sonido_seleccion = pygame.mixer.Sound("Sonidos/click.mp3")
         self.sonido_ganar = pygame.mixer.Sound("Sonidos/win.mp3")
         pygame.mixer.music.load("Sonidos/nivel1.mp3")
         pygame.mixer.music.play(loops=-1)
+        
         self.bandera_instrucciones = True
         self.bandera_pausa = False
         self.bandera_control_instrucciones = True
@@ -76,6 +79,7 @@ class Nivel1:
         self.texto_pausa = [
             ""
         ]
+        self.texto_sig_nivel = [""]
 
     def actualizarRender(self):
         for personaje in self.personaje:
@@ -287,6 +291,7 @@ class Nivel1:
                 if event.key == pygame.K_ESCAPE:
                     self.bandera = 1
                     return False
+                
                  # Configurar pausa
                 if event.key == pygame.K_p:
                     if self.bandera_control_instrucciones:
@@ -341,7 +346,8 @@ class Nivel1:
                         self.opciones_sig_nivel(1)
                     if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         if self.opc_sel == 1:
-                            pass
+                            self.banderaSiguienteNivel=False
+                            return False
                         elif self.opc_sel == 2:
                             pygame.mixer.music.stop()
                             pygame.mixer.music.play()
@@ -351,7 +357,8 @@ class Nivel1:
                             self.bandera_control_instrucciones=not self.bandera_control_instrucciones
                             self.bandera_ganador=0
                         elif self.opc_sel == 3:
-                            pass
+                            self.banderaMenuPrincipal=False
+                            return False
                     self.sonido_seleccion.play()
                 
                 if self.show_message:  # Si la pregunta está en pantalla
@@ -521,17 +528,43 @@ class Nivel1:
         while running:
             running = self.handle_input()
             if not self.banderaMenu:  # Si la bandera del menú es falsa, salimos del bucle
+                self.cleanup()
                 break
             if not self.banderaMenuNivel:
+                self.cleanup()
                 break
             if not self.banderaMenuPrincipal:
+                self.cleanup()
+                break
+            if not self.banderaSiguienteNivel:
+                self.cleanup()
                 break
             self.draw_scene()
             pygame.time.wait(10)
            
 
     def cleanup(self):
-        pygame.quit()
+        try:
+        # Limpiar texturas
+            if hasattr(self, 'floor_texture'):
+                glDeleteTextures([self.floor_texture, self.wall_texture])
+            
+                # Deshabilitar luces
+                glDisable(GL_LIGHT0)
+                glDisable(GL_LIGHT1)
+                glDisable(GL_LIGHT2)
+                
+                # Limpiar contexto de OpenGL
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+               
+                pygame.mixer.music.stop()
+                pygame.mixer.music.unload()
+                pygame.mixer.quit()
+                # Reiniciar estado de Pygame
+                pygame.display.quit()
+                pygame.display.init()
+        except Exception as e:
+            print(f"Error en cleanup: {e}")
 
 if __name__ == "__main__":
     sP = Nivel1()
