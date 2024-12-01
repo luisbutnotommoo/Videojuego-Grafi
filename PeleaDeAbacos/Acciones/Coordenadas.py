@@ -2,7 +2,8 @@ from OpenGL.GL import GL_QUADS,GL_TRIANGLES
 
 import os
 
-ruta_actual = os.path.dirname(__file__)
+from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
+
 
 #Colores
 negro= (0.01,0.01,0.01,1.0)
@@ -164,7 +165,7 @@ heisenpurr_geometries = {
     'Esfera':{
         'centro': heisenpurr_cabeza[0],
         'radio': heisenpurr_cabeza[1],
-        'textura': os.path.join(ruta_actual, ('mi_mapa_uv.png'))
+        'textura': os.path.join(ruta_img, ('heisenpurBase.png'))
     }                       
 }
 
