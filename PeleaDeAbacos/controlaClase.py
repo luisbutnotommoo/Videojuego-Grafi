@@ -66,13 +66,17 @@ class controlaClase:
                                     z = 4
                                 if menu.guardado[i] == 0:
                                     self.personajesJugables.append(z + menu.guardado[i])
+                                    personajeCorrer = PersonajeEmma()
                                 elif menu.guardado[i] == 1:
                                     self.personajesJugables.append(z + menu.guardado[i])
                                 elif menu.guardado[i] == 2:
                                     self.personajesJugables.append(z + menu.guardado[i])
                                 elif menu.guardado[i] == 3:
+                                    personajeCorrer=PersonajeStarenka()
                                     self.personajesJugables.append(z + menu.guardado[i])
 
+                                personajeCorrer.run()
+                            
                             eleccion = Propiedades(self.personajesJugables)
 
                         

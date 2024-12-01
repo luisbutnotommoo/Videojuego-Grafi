@@ -5,9 +5,9 @@ from PersonajeEmma.actionsEV import escenario as esc
 from PersonajeEmma.actionsEV import draw2 as dr
 
 class Newt():
-    def __init__(self, estado=0):
+    def __init__(self):
         # Aquí puedes agregar atributos para guardar información del personaje, como su estado actual.
-        self.estado = estado
+        self.estado = 0
 
     def convertColor(r, g, b, a=255):
         return (r / 255.0, g / 255.0, b / 255.0, a / 255.0)
@@ -50,8 +50,8 @@ class Newt():
         #Expresiones 1-5
         if self.estado == 1: #Enojado
 
-            #esc.draw_paredes("images/callejon.jpg")
-            #esc.draw_techo()
+            esc.draw_paredes("images/callejon.jpg")
+            esc.draw_techo()
 
             dr.cabeza(255,0,0,10, 25, 7)
             dr.ojos()
@@ -62,7 +62,7 @@ class Newt():
             dr.piernaR(90)
             dr.piernaL(90)
             dr.brazoL(90,1,0,0)
-            dr.brazoR(180,1,0,0)
+            dr.brazoR(90,1,0,0)
             dr.baston()
 
         if self.estado == 2: #TRISTE
@@ -156,8 +156,8 @@ class Newt():
         #Movimientos 6-0
         if self.estado == 6: #Levantar brazo derecho
 
-            ##esc.draw_paredes("images/fondo1.jpg")
-            ##esc.draw_techo()
+            esc.draw_paredes("images/fondo1.jpg")
+            esc.draw_techo()
 
             dr.cabeza(195,159,129,10, 25, 7)
             dr.ojos()

@@ -5,8 +5,8 @@ from OpenGL.GLUT import *
 from pygame.locals import *
 from PIL import *
 
-from actionsEV import luces as lc
-from actionsEV import objetos as obj
+from PersonajeEmma.actionsEV import luces as lc
+from PersonajeEmma.actionsEV import objetos as obj
 
 PosX_objeto1 = 3
 PosY_objeto1 = 6
