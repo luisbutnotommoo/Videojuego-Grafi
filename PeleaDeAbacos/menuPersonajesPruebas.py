@@ -4,6 +4,10 @@ from OpenGL.GLU import *
 from pygame.locals import *
 from Acciones import boceto2 as b
 from Acciones.boceto2 import PersonajesDeTodos
+import os
+from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
+from Sonidos.ruta import ruta_actual as ruta_audio
+
 
 
 class SeleccionPersonaje:
@@ -28,8 +32,10 @@ class SeleccionPersonaje:
         self.asignar_posiciones_personajes()
 
         # Cargar texturas
-        self.floor_texture = self.load_texture("Imagenes/pasto.jpeg")
-        self.wall_texture = self.load_texture("Imagenes/pared.jpg")
+        floor=os.path.join(ruta_img,'pasto.jpeg')
+        wall=os.path.join(ruta_img,'pared.jpg')
+        self.floor_texture = self.load_texture(floor)
+        self.wall_texture = self.load_texture(wall)
 
         self.jump_height = 0.0  # Altura del salto
         self.jump_speed = 0.1    # Velocidad del salto
@@ -40,8 +46,8 @@ class SeleccionPersonaje:
         self.font_personajes = pygame.font.SysFont('Imprint MT Shadow', 35)
         self.font_instrucciones = pygame.font.SysFont('Imprint MT Shadow', 25)
         
-        self.sonido_seleccion = pygame.mixer.Sound("Sonidos/seleccion_personaje_espada.mp3")
-        pygame.mixer.music.load("Sonidos/menu_medieval.mp3")
+        self.sonido_seleccion = pygame.mixer.Sound(os.path.join(ruta_audio,"seleccion_personaje_espada.mp3"))
+        pygame.mixer.music.load(os.path.join(ruta_audio,"menu_medieval.mp3"))
         pygame.mixer.music.play(loops=-1) 
 
 
