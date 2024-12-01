@@ -14,9 +14,9 @@ from Acciones.colisionRectangular import RectangularCollision3D
 from Acciones.texto import textos as tx
 
 
-class Nivel1:
+class Nivel2:
 
-    def __init__(self, display_size=(800, 600)):
+    def __init__(self, display_size=(800, 600), personajesJugables=[]):
         self.bandera = 0
         self.banderaJugador1 = False
         self.banderaJugador2 = False
@@ -29,13 +29,7 @@ class Nivel1:
         self.jugador_2_score = 0
         self.reduc1=40
         self.reduc2=40
-        self.estado_emma = 0
-        self.estado_luis=0
-        self.personaje = [
-           {"nombre": "Emma", "estado": 0, "objeto": PersonajesDeTodos("Emma", b.figuraLin(0),posicion=(38, -8, 0), rotacion=-10, escala=(1.1, 1.1, 1.1))},
-           {"nombre": "Lin", "estado": 0, "objeto": PersonajesDeTodos("Emma", b.figuraLin(0),posicion=(5, -8, 0), rotacion=-10, escala=(1.1, 1.1, 1.1))}
-        ]
-       
+        self.personaje = personajesJugables
 
         self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
@@ -330,8 +324,8 @@ class Nivel1:
                             self.jugador_1_score += 1  # Jugador 1 gana un punto
                             self.eventoParaGanar()
                             self.banderaColision = 1
-                            self.actualizar_estado_emocional(self.personaje[0]["nombre"],2 )
-                            self.actualizar_estado_emocional(self.personaje[1]["nombre"], 1)
+                            self.actualizar_estado_emocional(self.personaje[0]["nombre"],1 )
+                            self.actualizar_estado_emocional(self.personaje[1]["nombre"], 2)
                             self.actualizarRender()
 
                            
@@ -343,8 +337,8 @@ class Nivel1:
                         if self.respuesta(event.key, player=2):
                             self.jugador_2_score += 1  # Jugador 2 gana un punto
                             self.banderaColision=2
-                            self.actualizar_estado_emocional(self.personaje[0]["nombre"], 1)
-                            self.actualizar_estado_emocional(self.personaje[1]["nombre"], 2)
+                            self.actualizar_estado_emocional(self.personaje[0]["nombre"], 2)
+                            self.actualizar_estado_emocional(self.personaje[1]["nombre"], 1)
                             self.actualizarRender()
                             self.eventoParaGanar()
                             
@@ -446,7 +440,31 @@ class Nivel1:
             self.txopc4+" Volver a seleccionar personajes",
             self.txopc5+" Salir"
         ]
+    def opciones_sig_nivel(self,opcion):
+        self.opc_sel += opcion
+        if self.opc_sel > 3:
+            self.opc_sel = 1
+        if self.opc_sel < 1:
+            self.opc_sel = 3
+    def actualizar_opciones_sig_nivel(self,ganador):
+        self.txopc1 = ""
+        self.txopc2 = ""
+        self.txopc3 = ""
 
+        if self.opc_sel == 1:
+            self.txopc1 = ">"
+        elif self.opc_sel == 2:
+            self.txopc2 = ">"
+        elif self.opc_sel == 3:
+            self.txopc3 = ">"
+        
+        self.texto_sig_nivel = [
+            f"Jugador {ganador} ganó",
+            "",
+            self.txopc1+" Siguiente nivel",
+            self.txopc2+" Reiniciar nivel",
+            self.txopc3+" Volver al Menú",
+        ]
     def run(self):
         running = True
         while running:
@@ -459,5 +477,5 @@ class Nivel1:
         pygame.quit()
 
 if __name__ == "__main__":
-    sP = Nivel1()
+    sP = Nivel2()
     sP.run()

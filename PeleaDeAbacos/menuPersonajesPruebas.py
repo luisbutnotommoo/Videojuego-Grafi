@@ -28,8 +28,8 @@ class SeleccionPersonaje:
         self.asignar_posiciones_personajes()
 
         # Cargar texturas
-        self.floor_texture = self.load_texture("Imagenes/pasto.jpg")
-        self.wall_texture = self.load_texture("Imagenes/pared2.jpg")
+        self.floor_texture = self.load_texture("Imagenes/pasto.jpeg")
+        self.wall_texture = self.load_texture("Imagenes/pared.jpg")
 
         self.jump_height = 0.0  # Altura del salto
         self.jump_speed = 0.1    # Velocidad del salto
@@ -62,29 +62,7 @@ class SeleccionPersonaje:
         pygame.event.set_grab(True)
 
     def init_opengl(self):
-        glEnable(GL_DEPTH_TEST)
-        glEnable(GL_LIGHTING)
-        glEnable(GL_LIGHT0)
-        glEnable(GL_COLOR_MATERIAL)
-        glEnable(GL_NORMALIZE)
-        
-        # Configuración de luz principal totalmente neutral
-        glLightfv(GL_LIGHT0, GL_POSITION, [5.0, 10.0, 5.0, 1.0])
-        glLightfv(GL_LIGHT0, GL_AMBIENT, [0.2, 0.2, 0.2, 1.0])  # Luz ambiente neutral y baja
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, [0.7, 0.7, 0.7, 1.0])     # Luz difusa neutral
-        glLightfv(GL_LIGHT0, GL_SPECULAR, [0.4, 0.4, 0.4, 1.0])
 
-        # Segunda luz de relleno, también neutral y suave
-        glEnable(GL_LIGHT1)
-        glLightfv(GL_LIGHT1, GL_POSITION, [-3.0, 5.0, -3.0, 1.0])
-        glLightfv(GL_LIGHT1, GL_AMBIENT, [0.1, 0.1, 0.1, 1.0])
-        glLightfv(GL_LIGHT1, GL_DIFFUSE, [0.15, 0.15, 0.15, 1.0])
-        glLightfv(GL_LIGHT1, GL_SPECULAR, [0.0, 0.0, 0.0, 1.0])
-
-        # Material para mantener colores naturales sin reflejo adicional
-        glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE)
-        glMaterialfv(GL_FRONT, GL_SPECULAR, [0.2, 0.2, 0.2, 1.0])
-        glMaterialf(GL_FRONT, GL_SHININESS, 20.0)
 
         # Fondo oscuro
         glClearColor(0.1, 0.1, 0.1, 1.0)
