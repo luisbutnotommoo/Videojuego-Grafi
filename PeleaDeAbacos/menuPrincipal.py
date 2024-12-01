@@ -15,7 +15,7 @@ def show_about():
     print("Este es un juego hecho con Pygame y pygame_menu.")
 
 # Crea el menú principal
-menu = pygame_menu.Menu('Bienvenido', 400, 300, theme=pygame_menu.themes.THEME_BLUE)
+menu = pygame_menu.Menu('Bienvenido', 600, 400, theme=pygame_menu.themes.THEME_ORANGE)
 menu.add.button('Jugar', start_the_game)
 menu.add.button('Acerca de', show_about)
 menu.add.button('Salir', pygame_menu.events.EXIT)
