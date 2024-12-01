@@ -7,7 +7,7 @@ from PIL import*
 import Acciones.objetosTextura as obj
 import Acciones.escenario as esc
 import Acciones.viewPortPreguntas as view
-import Acciones.bancoPreguntas as bp
+import Acciones.bancoPreguntas2 as bp
 from Acciones.boceto2 import  PersonajesDeTodos
 import Acciones.boceto2 as b
 from Acciones.colisionRectangular import RectangularCollision3D
@@ -48,8 +48,10 @@ class Nivel2:
         self.texturaPocima=obj.load_texture(os.path.join(ruta_img,"moradoPocimaOrg.jpg"))
         self.texturaTorre=obj.load_texture(os.path.join(ruta_img,"torreOrg.jpg"))
         self.objEscenario = esc.escenario(os.path.join(ruta_img,"piso3.jpg"),os.path.join(ruta_img, "castillo2.jpg"))
-        self.objetoPregunta = bp.bancoPreguntas()
-        self.objetoPregunta.elige_pregunta2()
+        self.iteraPregunta=0
+        self.objetoBanco = bp.BancoPreguntas(5,2)
+        self.cuestionario=self.objetoBanco.generar_banco_preguntas()
+        self.preguntaActual=self.cuestionario[self.iteraPregunta]
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)
         self.texto_instrucciones = [
@@ -171,7 +173,7 @@ class Nivel2:
             glPopMatrix()  # Llamar al método dibujar del personaje
         
         if self.show_message:
-            view.viewPort(self.display).draw_viewport2(self.objetoPregunta)
+            view.viewPort(self.display).draw_viewport2(f"Pregunta {self.iteraPregunta}:"+self.preguntaActual['texto'])
         if self.bandera_control_instrucciones:
             tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,150,50,50)
         if self.bandera_pausa:
@@ -363,13 +365,13 @@ class Nivel2:
         self.show_message = False  # Ocultar la pregunta 
         self.banderaJugador1 = False
         self.banderaJugador2 = False
-        self.objetoPregunta.elige_pregunta2()
+        self.iteraPregunta+=1
         
 
     def eventoNoAcertaron(self):
         print("Evento: Ambos jugadores fallaron")
         self.show_message = True  # Ocultar la pregunta
-        self.objetoPregunta.elige_pregunta2()
+        self.iteraPregunta+=1
         self.banderaJugador1 = False
         self.banderaJugador2 = False
 
@@ -404,7 +406,7 @@ class Nivel2:
             pygame.K_DOWN: "b",
             pygame.K_RIGHT: "c"  # Jugador 2 presiona 'UP'
         }
-        if key in key_answer_map and key_answer_map[key] == self.objetoPregunta.respuestaActual:
+        if key in key_answer_map and key_answer_map[key] == self.preguntaActual['respuesta_correcta']:
             return True
         return False
     

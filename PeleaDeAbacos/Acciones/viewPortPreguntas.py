@@ -79,10 +79,10 @@ class viewPort:
         glEnd()
 
          # Dibujar el texto de la pregunta
-        if objetoPregunta.preguntaActual:
+        if objetoPregunta is not None:
             text_x = x_offset + 20  # Ajuste horizontal
             text_y = y_offset - 25  # Ajuste vertical
-            txt.textos().display_text(objetoPregunta.preguntaActual, text_x, text_y, 16)
+            txt.textos().display_text(objetoPregunta, text_x, text_y, 16)
 
 
         # Restaurar las matrices
