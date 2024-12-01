@@ -3,12 +3,19 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from PIL import Image 
-import mapasUV
 
-class Personajes:
-    def __init__(self):
-        self.personajes = {}
-        self.texturas = {}  # Diccionario para almacenar texturas
+
+class Personaje:
+    def __init__(self, nombre,geometrias):
+        self.nombre = nombre
+        self.texturas = {}  
+        self.extremidades={}
+
+        for clave in geometrias: 
+            valor=geometrias[clave]
+            self.agregar_extremidad(clave,valor)
+            
+        
                
     def cargar_textura(self, ruta_textura):
         """
@@ -40,70 +47,90 @@ class Personajes:
         
         self.texturas[ruta_textura] = id_textura
         return id_textura
-
-
-    def agregar_personaje(self, nombre_personaje, extremidades):
-        self.personajes[nombre_personaje] = {}
         
-        for nombre_extremidad, geometria in extremidades.items():
-            
-            if "Esfera" in nombre_extremidad:
+
+    def agregar_extremidad(self, nombre_extremidad, geometria):
+        caseCorrecto=""+nombre_extremidad
+
+        if "Esfera" in nombre_extremidad:
+            caseCorrecto="Esfera"
+
+        if "Cilindro" in nombre_extremidad:
+            caseCorrecto="Cilindro"
+
+        match caseCorrecto:
+            case "Esfera":
                 centro = geometria['centro']
                 radio = geometria['radio']
                 color = geometria.get('colors', [1.0, 1.0, 1.0, 1.0])
                 colores = np.array([color], dtype=np.float32)
-                
+            
                 # Agregar soporte para textura en esferas
                 textura = None
                 if 'textura' in geometria:
                     textura = self.cargar_textura(geometria['textura'])
                 
-                self.personajes[nombre_personaje][nombre_extremidad] = {            
+            
+                self.extremidades[nombre_extremidad] = {            
                     'centro': centro,
                     'radio': radio,
                     'colores': colores,
-                    'coords_textura': mapasUV.uv_esfera,
                     'id_textura': textura
                 }
-                
-            else:
+            
+
+            case "Cilindro":
+                centro = geometria['centro']
+                radio = geometria.get('radio', 0.5)
+                altura = geometria.get('altura', 1.0)
+                color = geometria.get('colors', [1.0, 1.0, 1.0, 1.0])
+                colores = np.array([color], dtype=np.float32)
+                rotacion=[-90,1,0,0]
+                if 'rotate' in geometria:
+                    rotacion=geometria['rotate']
+        
+                # Agregar soporte para textura en cilindros
+                textura = None
+                if 'textura' in geometria:
+                    textura = self.cargar_textura(geometria['textura'])
+        
+                self.extremidades[nombre_extremidad] = {            
+                    'centro': centro,
+                    'radio': radio,
+                    'altura': altura,
+                    'colores': colores,
+                    'id_textura': textura,
+                    'rotate':rotacion
+                }
+            
+            case _:
                 vertices = np.array(geometria['vertices'], dtype=np.float32)
                 faces = np.array(geometria.get('faces', []), dtype=np.uint32)
                 primitive = geometria.get('primitive', GL_TRIANGLES)
-                
+            
                 # Crear array de colores para cada vértice
                 color = geometria.get('colors', [1.0, 1.0, 1.0, 1.0])
                 colores = np.tile(color, (len(vertices), 1)).astype(np.float32)
-                
-                coords_textura = np.array(geometria.get('texcoords', []), dtype=np.float32)
-                textura_path = geometria.get('texture_path', None)
-                
+            
                 # Crear VAO y VBOs
                 vao = glGenVertexArrays(1)
                 vbo_vertices = glGenBuffers(1)
                 vbo_colores = glGenBuffers(1)
-                vbo_texcoords = glGenBuffers(1) if len(coords_textura) > 0 else None
-                
+            
                 glBindVertexArray(vao)
-                
+            
                 # Buffer de vértices
                 glBindBuffer(GL_ARRAY_BUFFER, vbo_vertices)
                 glBufferData(GL_ARRAY_BUFFER, vertices.nbytes, vertices, GL_STATIC_DRAW)
                 glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, None)
                 glEnableVertexAttribArray(0)
-                
+            
                 # Buffer de colores
                 glBindBuffer(GL_ARRAY_BUFFER, vbo_colores)
                 glBufferData(GL_ARRAY_BUFFER, colores.nbytes, colores, GL_STATIC_DRAW)
                 glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, None)
                 glEnableVertexAttribArray(1)
-                
-                if vbo_texcoords:
-                    glBindBuffer(GL_ARRAY_BUFFER, vbo_texcoords)
-                    glBufferData(GL_ARRAY_BUFFER, coords_textura.nbytes, coords_textura, GL_STATIC_DRAW)
-                    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, None)
-                    glEnableVertexAttribArray(2)
-                
+            
                 # EBO si hay faces
                 if len(faces) > 0:
                     ebo = glGenBuffers(1)
@@ -111,41 +138,35 @@ class Personajes:
                     glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces.nbytes, faces, GL_STATIC_DRAW)
                 else:
                     ebo = None
-                
+            
                 # Cargar textura si existe
                 id_textura = None
-                if textura_path:
-                    id_textura = self.cargar_textura(textura_path)
-                
-                self.personajes[nombre_personaje][nombre_extremidad] = {
+                if 'textura' in geometria:
+                    id_textura = self.cargar_textura(geometria['textura'])
+            
+                self.extremidades[nombre_extremidad] = {
                     'vao': vao,
                     'vbo_vertices': vbo_vertices,
                     'vbo_colores': vbo_colores,
-                    'vbo_texcoords': vbo_texcoords,
                     'ebo': ebo,
                     'vertices': vertices,
                     'colores': colores,
-                    'coords_textura': coords_textura,
                     'faces': faces,
                     'primitive': primitive,
                     'id_textura': id_textura
                 }
-                
+            
                 glBindVertexArray(0)
                 glBindBuffer(GL_ARRAY_BUFFER, 0)
-                if ebo:
+                if ebo: 
                     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
-
     
-    def render_personaje(self, nombre_personaje):       
-        if nombre_personaje not in self.personajes:
-            print(f"Personaje {nombre_personaje} no encontrado!")
-            return        
-            
+
+    def render(self):       
         glEnable(GL_COLOR_MATERIAL)
         
-        for extremidad, buffers in self.personajes[nombre_personaje].items():
-            if "Esfera" in extremidad:
+        for nombre_extremidad, buffers in self.extremidades.items():
+            if "Esfera" in nombre_extremidad:
                 radio = buffers['radio']
                 slices = 16  
                 stacks = 8  
@@ -173,6 +194,38 @@ class Personajes:
                     glDisable(GL_TEXTURE_2D)
                     
                 gluDeleteQuadric(quadric)
+                glPopMatrix()
+                continue
+
+            elif "Cilindro" in nombre_extremidad:
+                radio = buffers.get('radio', 0.5)
+                altura = buffers.get('altura', 1.0)
+                slices = 16
+                stacks = 8
+
+                glPushMatrix()
+                color = buffers['colores'][0] if len(buffers['colores']) > 0 else [1.0, 1.0, 1.0, 1.0]
+                glColor4fv(color)
+            
+            # Configuración de textura para el cilindro
+                if buffers['id_textura'] is not None:
+                    glEnable(GL_TEXTURE_2D)
+                    glBindTexture(GL_TEXTURE_2D, buffers['id_textura'])
+                    gluQuadricTexture(quadric, GL_TRUE)
+                    gluQuadricNormals(quadric, GLU_SMOOTH)
+                
+                quadric = gluNewQuadric()
+            
+                glTranslatef(*buffers['centro'])
+                glRotatef(*buffers['rotate'])
+
+                # Renderizar cilindro
+                gluCylinder(quadric, radio, radio, altura, slices, stacks)
+            
+                if buffers['id_textura'] is not None:
+                    glDisable(GL_TEXTURE_2D)
+                
+                #gluDeleteQuadric(quadric)
                 glPopMatrix()
                 continue
             
@@ -214,26 +267,57 @@ class Personajes:
             glBindVertexArray(0)
         
         glDisable(GL_COLOR_MATERIAL)
-
+    
     
     def limpiar_buffers(self):
         # Limpiar buffers de geometría
-        for personaje in self.personajes.values():
-            for buffers in personaje.values():
-                if 'centro' in buffers and 'radio' in buffers:
-                    continue
-                    
-                if buffers['vao']:
-                    glDeleteVertexArrays(1, [buffers['vao']])
-                if buffers['vbo_vertices']:
-                    glDeleteBuffers(1, [buffers['vbo_vertices']])
-                if buffers['vbo_colores']:
-                    glDeleteBuffers(1, [buffers['vbo_colores']])
-                if buffers['vbo_texcoords']:
-                    glDeleteBuffers(1, [buffers['vbo_texcoords']])
-                if buffers['ebo']:
-                    glDeleteBuffers(1, [buffers['ebo']])
-                    
+        for buffers in self.extremidades.values():
+            if 'centro' in buffers and 'radio' in buffers:
+                continue
+                
+            if 'vao' in buffers and buffers['vao']:
+                glDeleteVertexArrays(1, [buffers['vao']])
+            if 'vbo_vertices' in buffers and buffers['vbo_vertices']:
+                glDeleteBuffers(1, [buffers['vbo_vertices']])
+            if 'vbo_colores' in buffers and buffers['vbo_colores']:
+                glDeleteBuffers(1, [buffers['vbo_colores']])
+            if 'ebo' in buffers and buffers['ebo']:
+                glDeleteBuffers(1, [buffers['ebo']])
+                
         # Limpiar texturas
         for id_textura in self.texturas.values():
             glDeleteTextures(1, [id_textura])
+
+
+    def mover_extremidad(self, nombre_extremidad, desplazamiento):
+        """
+        Mueve una extremidad del personaje aplicando un desplazamiento a su posición.
+
+        :param nombre_extremidad: Nombre de la extremidad a mover.
+        :param desplazamiento: Lista o tupla de tres valores [dx, dy, dz] que indica el movimiento.
+        """
+        if nombre_extremidad not in self.extremidades:
+            print(f"Extremidad '{nombre_extremidad}' no encontrada.")
+            return
+    
+        buffers = self.extremidades[nombre_extremidad]
+    
+        if 'centro' in buffers:
+        # Mover esferas o cilindros
+            buffers['centro'] = [c + d for c, d in zip(buffers['centro'], desplazamiento)]
+        elif 'vertices' in buffers:
+        # Mover geometrías basadas en vértices
+            vertices = buffers['vertices']
+            desplazamiento_array = np.array(desplazamiento, dtype=np.float32)
+            buffers['vertices'] = vertices + desplazamiento_array
+        
+        # Actualizar el VBO de vértices en OpenGL
+            glBindBuffer(GL_ARRAY_BUFFER, buffers['vbo_vertices'])
+            glBufferSubData(GL_ARRAY_BUFFER, 0, buffers['vertices'].nbytes, buffers['vertices'])
+            glBindBuffer(GL_ARRAY_BUFFER, 0)
+        else:
+            print(f"La extremidad '{nombre_extremidad}' no se puede mover.")
+          
+    def mover_personaje(self,desplazamiento):
+        for clave in self.extremidades:
+            self.mover_extremidad(clave,desplazamiento)

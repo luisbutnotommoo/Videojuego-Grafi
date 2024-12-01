@@ -1,9 +1,9 @@
 from OpenGL.GL import GL_QUADS,GL_TRIANGLES
 
-
 import os
 
-ruta_actual = os.path.dirname(__file__)
+from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
+
 
 #Colores
 negro= (0.01,0.01,0.01,1.0)
@@ -50,14 +50,14 @@ heisenpurr_cuerpo = [
 ]
 
 heisenpurr_cola = [
-    [-0.11, 1.8, -1],      # [0.11, 1.8, 1]
-    [0.11, 1.8, -1],       # [-0.11, 1.8, 1]
-    [0.19, 1.43, -1],      # [-0.19, 1.43, 1]
-    [0, 1.43, -1],         # [0, 1.43, 1]
-    [-0.11, 1.8, -2.2],    # [0.11, 1.8, 2.2]
-    [0.11, 1.8, -2.2],     # [-0.11, 1.8, 2.2]
-    [0.19, 1.43, -2.2],    # [-0.19, 1.43, 2.2]
-    [0, 1.43, -2.2]        # [0, 1.43, 2.2]
+    [-0.11, 1.8, -1],      
+    [0.11, 1.8, -1],       
+    [0.19, 1.43, -1],      
+    [0, 1.43, -1],         
+    [-0.11, 1.8, -2.2],    
+    [0.11, 1.8, -2.2],     
+    [0.19, 1.43, -2.2],    
+    [0, 1.43, -2.2]        
 ]
 
 heisenpurr_brazo = [
@@ -67,8 +67,6 @@ heisenpurr_brazo = [
     [-0.9, 1.85, -0.52],   
     [-2, 1.19, -0.02]      #apice
 ]
-
-heisenpurr_brazo_apice=heisenpurr_brazo[4]
 
 heisenpurr_brazo2 = [
     [0.9, 2.69, 0.46],     
@@ -115,6 +113,8 @@ heisenpurr_pata2 = [
 ]
 
 heisenpurr_cabeza=[[0,3.74,0],0.75]
+
+heisenpurr_brazo_apice=heisenpurr_brazo[4]
 
 heisenpurr_geometries = {
     'Cuerpo': {
@@ -165,17 +165,117 @@ heisenpurr_geometries = {
     'Esfera':{
         'centro': heisenpurr_cabeza[0],
         'radio': heisenpurr_cabeza[1],
-        'textura': os.path.join(ruta_actual, ('mi_mapa_uv.png'))
+        'textura': os.path.join(ruta_img, ('heisenpurBase.png'))
     }                       
 }
 
+
+dr_newt_cabeza=[[0,6.8,0],3.5]
+
+dr_newt_pierna_der=[[1.5, -15, 7],0.9,10.0,azul]
+
+dr_newt_pierna_izq=[[-1.5, -15, 7],0.9,10.0,azul]
+
+
+dr_newt_brazo_der=[[4.5, 4, 7], 0.9, 8.0,[0.4,0.4,0.4,1.0]]
+
+dr_newt_brazo_izq=[[-4.5, 4, 7], 0.9, 8.0,[0.4,0.4,0.4,1.0]]
+
+dr_newt_baston=[[4.5,-16,7],0.5,13.0,[0.6,0.4,0.0,1.0]]
+
+dr_newt_cuerpo=[
+    [-3.0, -6.0, 9.0],
+    [-3, -6, 5],
+    [3, -6, 5],
+    [3, -6, 9],
+    [-4, 6, 9],
+    [-4, 6, 5],
+    [4, 6, 5],
+    [4, 6, 9]
+]
+
+dr_newt_pie_der = [
+	[1, -15, 5],
+	[1, -15, 8],
+	[1, -16, 5],
+	[1, -16, 8],
+	[3, -15, 5],
+	[3, -15, 8],
+	[3, -16, 5],
+	[3, -16, 8]
+]
+
+dr_newt_pie_izq = [
+	[-1, -15, 5],
+	[-1, -15, 8],
+	[-1, -16, 5],
+	[-1, -16, 8],
+	[-3, -15, 5],
+	[-3, -15, 8],
+	[-3, -16, 5],
+	[-3, -16, 8]
+]
+
+
+dr_newt_geometries={
+    'Esfera':{
+        'centro': dr_newt_cabeza[0],
+        'radio': dr_newt_cabeza[1],
+    },
+    'Pierna_Der_Cilindro': {
+        'centro': dr_newt_pierna_der[0],
+        'radio': dr_newt_pierna_der[1],
+        'altura': dr_newt_pierna_der[2],
+        'colors': dr_newt_pierna_der[3]
+    },
+    'Pierna_Izq_Cilindro': {
+        'centro': dr_newt_pierna_izq[0],
+        'radio': dr_newt_pierna_izq[1],
+        'altura': dr_newt_pierna_izq[2],
+        'colors': dr_newt_pierna_izq[3]
+    },
+    'Brazo_Der_Cilindro': {
+        'centro': dr_newt_brazo_der[0],
+        'radio': dr_newt_brazo_der[1],
+        'altura': dr_newt_brazo_der[2],
+        'colors': dr_newt_brazo_der[3],
+        'rotate': (90,1,0,0)
+    },
+    'Brazo_Izq_Cilindro': {
+        'centro': dr_newt_brazo_izq[0],
+        'radio': dr_newt_brazo_izq[1],
+        'altura': dr_newt_brazo_izq[2],
+        'colors': dr_newt_brazo_izq[3],
+        'rotate': (90,1,0,0)
+    },
+    'Baston_Cilindro': {
+        'centro': dr_newt_baston[0],
+        'radio': dr_newt_baston[1],
+        'altura': dr_newt_baston[2],
+        'colors': dr_newt_baston[3]
+    },
+    'Cuerpo': {
+        'vertices': dr_newt_cuerpo,
+        'faces': prisma_caras,
+        'primitive': GL_QUADS,
+        'colors': azul
+    },
+    'Pie_Der': {
+        'vertices': dr_newt_pie_der,
+        'faces': prisma_caras,
+        'primitive': GL_QUADS,
+        'colors': azul
+    },
+    'Pie_Izq': {
+        'vertices': dr_newt_pie_izq,
+        'faces': prisma_caras,
+        'primitive': GL_QUADS,
+        'colors': azul
+    }
+
+}
+
+
+
 heisenpurr_diccionario=["Heisenpurr",heisenpurr_geometries]
-
-
-
-
-
-
-
-
-
+dr_newt_diccionario=["Dr. Newt",dr_newt_geometries]

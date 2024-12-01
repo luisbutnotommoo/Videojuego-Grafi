@@ -12,6 +12,8 @@ from Acciones.boceto2 import  PersonajesDeTodos
 import Acciones.boceto2 as b
 from Acciones.colisionRectangular import RectangularCollision3D
 from Acciones.texto import textos as tx
+from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
+from Sonidos.ruta import ruta_actual as ruta_audio
 
 
 class Nivel2:
@@ -33,19 +35,19 @@ class Nivel2:
 
         self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
-        self.sonido_seleccion = pygame.mixer.Sound("Sonidos/click.mp3")
-        self.sonido_ganar = pygame.mixer.Sound("Sonidos/win.mp3")
-        pygame.mixer.music.load("Sonidos/nivel1.mp3")
+        self.sonido_seleccion = pygame.mixer.Sound(os.path.join(ruta_audio, "click.mp3"))
+        self.sonido_ganar = pygame.mixer.Sound(os.path.join(ruta_audio,"win.mp3"))
+        pygame.mixer.music.load(os.path.join(ruta_audio,"nivel1.mp3"))
         pygame.mixer.music.play(loops=-1)
         self.bandera_instrucciones = True
         self.bandera_pausa = False
         self.bandera_control_instrucciones = True
         self.bandera_ganador=0
         self.puntaje_ganador = 10
-        self.texturaBola=obj.load_texture("Imagenes/aguaOrg.jpg")
-        self.texturaPocima=obj.load_texture("Imagenes/moradoPocimaOrg.jpg")
-        self.texturaTorre=obj.load_texture("Imagenes/torreOrg.jpg")
-        self.objEscenario = esc.escenario("Imagenes/piso3.jpg", "Imagenes/castillo2.jpg")
+        self.texturaBola=obj.load_texture(os.path.join(ruta_img,"aguaOrg.jpg"))
+        self.texturaPocima=obj.load_texture(os.path.join(ruta_img,"moradoPocimaOrg.jpg"))
+        self.texturaTorre=obj.load_texture(os.path.join(ruta_img,"torreOrg.jpg"))
+        self.objEscenario = esc.escenario(os.path.join(ruta_img,"piso3.jpg"),os.path.join(ruta_img, "castillo2.jpg"))
         self.objetoPregunta = bp.bancoPreguntas()
         self.objetoPregunta.elige_pregunta2()
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
