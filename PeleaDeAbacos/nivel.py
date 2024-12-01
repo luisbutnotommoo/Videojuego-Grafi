@@ -31,6 +31,8 @@ class Nivel1:
         self.reduc2=40
         self.personaje = personajesJugables
         self.banderaMenu=True
+        self.banderaMenuPrincipal=True
+        self.banderaMenuNivel=True
         self.banderaSiguienteNivel = False
         self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
@@ -69,6 +71,8 @@ class Nivel1:
         self.txopc3 = ""
         self.txopc4 = ""
         self.txopc5 = ""
+        self.txopc6 = ""
+        self.txopc7 = ""
         self.texto_pausa = [
             ""
         ]
@@ -319,6 +323,14 @@ class Nivel1:
                             self.banderaMenu=False
                             return False
                         elif self.opc_sel == 5:
+                            self.banderaMenuNivel=False
+                            return False
+                        elif self.opc_sel == 6:
+                            self.banderaMenuPrincipal=False
+                            return False
+                        elif self.opc_sel == 7:
+                            pygame.quit()  # Cierra Pygame
+                            sys.exit()
                             return False
                     self.sonido_seleccion.play()
                     # Opciones de siguiente nivel
@@ -436,10 +448,10 @@ class Nivel1:
     
     def opciones_pausa(self,opcion):
         self.opc_sel += opcion
-        if self.opc_sel > 5:
+        if self.opc_sel > 7:
             self.opc_sel = 1
         if self.opc_sel < 1:
-            self.opc_sel = 5
+            self.opc_sel = 7
 
     def actualizar_opciones(self):
         self.txopc1 = ""
@@ -447,6 +459,8 @@ class Nivel1:
         self.txopc3 = ""
         self.txopc4 = ""
         self.txopc5 = ""
+        self.txopc6 = ""
+        self.txopc7 = ""
 
         if self.opc_sel == 1:
             self.txopc1 = ">"
@@ -458,6 +472,11 @@ class Nivel1:
             self.txopc4 = ">"
         elif self.opc_sel == 5:
             self.txopc5 = ">"
+        elif self.opc_sel == 6:
+            self.txopc6 = ">"
+        elif self.opc_sel == 7:
+            self.txopc7 = ">"
+        
         
         self.texto_pausa = [
             "P A U S A",
@@ -466,7 +485,9 @@ class Nivel1:
             self.txopc2+" Reiniciar",
             self.txopc3+" Mostrar instrucciones",
             self.txopc4+" Volver a seleccionar personajes",
-            self.txopc5+" Salir"
+            self.txopc5+" Volver a seleccionar un nivel",
+            self.txopc6+" Volver al menu principal",
+            self.txopc7+" Salir"
         ]
     def opciones_sig_nivel(self,opcion):
         self.opc_sel += opcion
@@ -500,6 +521,10 @@ class Nivel1:
         while running:
             running = self.handle_input()
             if not self.banderaMenu:  # Si la bandera del menú es falsa, salimos del bucle
+                break
+            if not self.banderaMenuNivel:
+                break
+            if not self.banderaMenuPrincipal:
                 break
             self.draw_scene()
             pygame.time.wait(10)
