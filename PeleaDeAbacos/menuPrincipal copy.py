@@ -16,7 +16,7 @@ class MenuPrincipal:
         # Carga de imagen de fondo
         try:
             # Reemplaza 'background.jpg' con la ruta de tu imagen de fondo
-            self.background_image = pygame.image.load('Imagenes/pared3.jpg')
+            self.background_image = pygame.image.load('Imagenes/pared4.jpg')
             # Redimensiona la imagen para que coincida con el tamaño de la ventana
             self.background_image = pygame.transform.scale(self.background_image, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
         except pygame.error:
@@ -33,9 +33,11 @@ class MenuPrincipal:
         )
 
         # Crea el menú principal con el tema personalizado
-        self.menu = pygame_menu.Menu('Duelos De Abacos', 400, 300, theme=self.menu_theme)
-        self.menu.add.button('Jugar', self.start_the_game)
-        self.menu.add.button('Acerca de', self.show_about)
+        self.menu = pygame_menu.Menu('Duelo De Abacos', 400, 300, theme=self.menu_theme)
+        self.menu.add.button('Nivel 1', self.start_the_game)
+        self.menu.add.button('Nivel 2', self.show_about)
+        self.menu.add.button('Nivel 3')
+        self.menu.add.button('Volver')
         self.menu.add.button('Salir', pygame_menu.events.EXIT)
 
     # Funciones para las opciones del menú

@@ -14,6 +14,7 @@ from PersonajeEmma.claseEmma import PersonajeEmma
 from Acciones.propiedadesPersonajes import Propiedades
 from nivel2 import Nivel2
 from nivel import Nivel1
+from menuPrincipal import MenuPrincipal
 import subprocess
 directorio_script = os.path.dirname(os.path.abspath(__file__))
 
@@ -24,13 +25,16 @@ class controlaClase:
     def main(self):
         while True:
             self.personajesJugables=[]
+            menuPrincipal=MenuPrincipal()
+            menuPrincipal.main()
             menu = SeleccionPersonaje()
             menu.run()
 
             # Aquí puedes verificar si el menú fue cerrado
+            if menuPrincipal.jugar==True:
+                break
             if menu.bandera==1:  
                 break  
-
             z = 0
             for i in range(2):
                 if (i == 1):
