@@ -1,6 +1,7 @@
 import pygame
 import pygame_menu
 import os
+from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
 
 class MenuPrincipal:
     def __init__(self):
@@ -16,7 +17,7 @@ class MenuPrincipal:
         # Carga de imagen de fondo
         try:
             # Reemplaza 'background.jpg' con la ruta de tu imagen de fondo
-            self.background_image = pygame.image.load('Imagenes/pared3.jpg')
+            self.background_image = pygame.image.load(os.path.join(ruta_img,'pared3.jpg'))
             # Redimensiona la imagen para que coincida con el tamaño de la ventana
             self.background_image = pygame.transform.scale(self.background_image, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
         except pygame.error:
