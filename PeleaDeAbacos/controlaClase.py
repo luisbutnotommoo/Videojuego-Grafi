@@ -11,31 +11,51 @@ from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
 #from PersonajeLuis.clasePrincipalLuis import PersonajeLuis
 from PersonajeEmma.claseEmma import PersonajeEmma
 #from PersonajeLin.machote.main_sincolision import MainLin
+from Acciones.propiedadesPersonajes import Propiedades
+from nivel2_Prueba import Nivel2Prueba
 import subprocess
 directorio_script = os.path.dirname(os.path.abspath(__file__))
-def main():
-    
- while True:  
-    menu = SeleccionPersonaje()
-    menu.run()
-    
-    if menu.bandera==1:  
-        break  
 
-    
-    """ for i in range(2):
-            if menu.guardado[i] == 0:
-                personajeCorrer = PersonajeEmma()
-            elif menu.guardado[i] == 1:
-                personajeCorrer = PersonajeLuis()
-            elif menu.guardado[i] == 2:
-                personajeCorrer = MainLin()
-            elif menu.guardado[i] == 3:
-                personajeCorrer = PersonajeStarenka()
+class controlaClase:
+    def __init__(self):
+        self.personajesJugables=[]
+
+    def main(self):
+
+      
+            menu = SeleccionPersonaje()
+            menu.run()
+            
             
 
-            personajeCorrer.run()  # Ejecutamos el personaje"""
+            z=0
+            for i in range(2):
+                    if (i==1):
+                         z=4
+                    if menu.guardado[i] == 0:
+                        self.personajesJugables.append(z+ menu.guardado[i])
+
+                        #personajeCorrer = PersonajeEmma()
+                    elif menu.guardado[i] == 1:
+                        self.personajesJugables.append(z+ menu.guardado[i])
+                        #personajeCorrer = PersonajeLuis()
+                    elif menu.guardado[i] == 2:
+                       self.personajesJugables.append(z+ menu.guardado[i])
+                        #personajeCorrer = MainLin()
+                    elif menu.guardado[i] == 3:
+                        self.personajesJugables.append(z+ menu.guardado[i])
+                        #personajeCorrer = PersonajeStarenka()
+                    
+            
+                    #personajeCorrer.run()  # Ejecutamos el personaje"""
+
+           
+            eleccion=Propiedades(self.personajesJugables)
+            nivel2=Nivel2Prueba(personajesJugables=eleccion.personajesJugables)
+            nivel2.run()
+
+
 
 
 if __name__ == "__main__":
-    main()
+    controlaClase().main()

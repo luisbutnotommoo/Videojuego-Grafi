@@ -66,7 +66,7 @@ class Personaje():
         self.patas=[pata,pata2]
         self.prismas=[cuerpo,cola]
         self.piramides=[brazo,brazo2,oreja,oreja2]
-        self.expresiones=[feliz,enojado,enamorado,triste,disgustado,aterrado,sorprendido]
+        self.expresiones=[feliz,enamorado,enojado,triste,disgustado,aterrado,sorprendido]
         self.emocion=emocion
         self.hilo=None
         self.hilo_aux=None

@@ -32,7 +32,7 @@ class NewtJuego():
 
 
         #Expresiones 1-5
-        if emocion == 1: #Enojado
+        if emocion == 2: #Enojado
 
             dr.cabeza(255,0,0,10, 25, 7)
             dr.ojos()
@@ -48,7 +48,7 @@ class NewtJuego():
 
         
 
-        if emocion == 2: # SONRIENTE FELiii
+        if emocion == 1: # SONRIENTE FELiii
             glPushMatrix()
 
             

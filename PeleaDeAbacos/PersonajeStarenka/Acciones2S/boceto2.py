@@ -175,7 +175,7 @@ def draw_bocaEnojado():
     glPopMatrix()
 
 def draw_CabezaEnojada():
-    glColor3f(0.925, 0.286, 0.263)
+    glColor3f(1, 0, 0)
     glPushMatrix()
     glTranslatef(0.9,17,0) 
     obj.draw_sphere(4,30,30)

@@ -19,9 +19,9 @@ class PintarPersonajeStar():
             
             b.original()
         
-        if emocion==1:
+        if emocion==2:
             b.molesto()
-        if emocion==2: 
+        if emocion==1: 
             b.felicidad2()
         
             

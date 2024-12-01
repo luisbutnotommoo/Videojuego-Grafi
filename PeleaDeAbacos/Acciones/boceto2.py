@@ -4,7 +4,7 @@ from OpenGL.GLUT import *
 from pygame.locals import *
 from PIL import Image
 # from Acciones import objetos as obj
-from PersonajeLuis.AccionesLuis.personaje import Personaje
+from PersonajeLuis.dibujaPersonajeLuisEmocion import Personaje
 from PersonajeEmma.emocioneJuegoEmma import NewtJuego
 from PersonajeStarenka.clasePintar import PintarPersonajeStar
 from PersonajeLin.blue_multiverso.dibujaPersonajeJuegoEmocion import pesonajeLinEmocionesJuego as PersonajeLin

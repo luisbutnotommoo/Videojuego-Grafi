@@ -2,10 +2,9 @@ import pygame
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from pygame.locals import *
-from Acciones import boceto as b
-from Acciones.boceto import PersonajesDeTodos
-from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
-import time
+from Acciones import boceto2 as b
+from Acciones.boceto2 import PersonajesDeTodos
+
 
 class SeleccionPersonaje:
     def __init__(self, display_size=(800, 600)):
