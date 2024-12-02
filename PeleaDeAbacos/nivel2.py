@@ -18,7 +18,7 @@ from Sonidos.controla_mp3 import MP3
 
 class Nivel2:
 
-    def __init__(self, display_size=(800, 600), personajesJugables=[],dificultad=2):
+    def __init__(self, display_size=(800, 600), personajesJugables=[]):
         self.bandera = 0
         self.banderaJugador1 = False
         self.banderaJugador2 = False
@@ -57,7 +57,7 @@ class Nivel2:
         self.objEscenario = esc.escenario(cargar_imagen("piso3.jpg"),cargar_imagen( "castillo2.jpg"))
         self.iteraPregunta=0
         self.viewportPreguntas=view.ViewPortPreguntas(self.display)
-        self.objetoBanco = bp.BancoPreguntas(dificultad)
+        self.objetoBanco = bp.BancoPreguntas(2)
         self.preguntaActual=None
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)
