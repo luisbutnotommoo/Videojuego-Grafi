@@ -12,7 +12,7 @@ def convertColor(r, g, b, a=255):
 def personaje(estado, pos_inicial_x, pos_inicial_y):
     if estado == 0:
 
-        esc.draw_paredes(os.path.join(ruta_carpeta_img,"fondo1.jpg"))
+        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
         esc.draw_techo()
 
         glPushMatrix()

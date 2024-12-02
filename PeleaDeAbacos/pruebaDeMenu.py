@@ -2,54 +2,88 @@ import pygame
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from pygame.locals import *
-from Acciones import boceto as b
 import sys
 import os
 from Acciones.boceto import PersonajesDeTodos
 from menuPersonajesPruebas import SeleccionPersonaje
 from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
-#from PersonajeLuis.clasePrincipalLuis import PersonajeLuis
 from PersonajeEmma.claseEmma import PersonajeEmmanuel
-#from PersonajeLin.machote.main_sincolision import MainLin
 from Acciones.propiedadesPersonajes import Propiedades
 from nivel2 import Nivel2
 from nivel import Nivel1
-from menuPrincipal2 import Menu
+from menuPrincipal import MenuPrincipal
 from menuNivel import MenuNivel
-import subprocess
-directorio_script = os.path.dirname(os.path.abspath(__file__))
 
 class ControlaClase:
     def __init__(self):
+        pygame.init()
+        pygame.mixer.init()
+        pygame.mixer.music.load("Sonidos/menu_principal.mp3")
+        pygame.mixer.music.play(loops=-1)
         self.personajesJugables = []
-        self.banderaSeleccion = True
-        self.banderaNivel = True
-
+    
     def main(self):
         while True:
-            self.banderaNivel = True
-            menu_principal = Menu()
-            menu_principal.main()
-            
+            self.menu_principal()
+    
+    def menu_principal(self):
+        """Muestra el menú principal."""
+        menuPrincipal = MenuPrincipal()
+        menuPrincipal.main()
+        
+        # Lógica para pasar al siguiente menú
+        if menuPrincipal.ir_a_niveles:
+            self.menu_niveles()
+    
+    def menu_niveles(self):
+        """Muestra el menú de niveles."""
+        menuNivel = MenuNivel()
+        menuNivel.main()
+        
+        if menuNivel.jugar:
+            self.seleccion_personaje(menuNivel.nivel)
+        elif menuNivel.volver_menu_principal:
+            self.menu_principal()
+    
+    def seleccion_personaje(self, nivel_actual):
+        """Muestra la selección de personajes."""
+        menu = SeleccionPersonaje()
+        menu.run()
+        
+        if menu.bandera == 1:  # Si seleccionó los personajes
+            self.personajesJugables = self._procesar_seleccion(menu.guardado)
+            if nivel_actual == 1:
+                self.ejecutar_nivel_1()
+            elif nivel_actual == 2:
+                self.ejecutar_nivel_2()
+    
+    def ejecutar_nivel_1(self):
+        """Ejecuta el Nivel 1."""
+        nivel1 = Nivel1(personajesJugables=self.personajesJugables)
+        nivel1.run()
+        
+        if nivel1.banderaSiguienteNivel:
+            self.ejecutar_nivel_2()
+        elif nivel1.banderaMenuPrincipal:
+            self.menu_principal()
+    
+    def ejecutar_nivel_2(self):
+        """Ejecuta el Nivel 2."""
+        nivel2 = Nivel2(personajesJugables=self.personajesJugables)
+        nivel2.run()
+        
+        if nivel2.banderaMenuPrincipal:
+            self.menu_principal()
+    
+    def _procesar_seleccion(self, seleccion):
+        """Procesa la selección de personajes."""
+        personajes = []
+        z = 0
+        for i in range(len(seleccion)):
+            if i == 1:
+                z = 4
+            personajes.append(z + seleccion[i])
+        return personajes
 
-            # Menú Principal
-            
-
-            # Bucle para manejar los niveles
-            while self.banderaNivel:
-                self.banderaSeleccion = True
-                menu_nivel = MenuNivel()
-                menu_nivel.main()
-                # Menú de Niveles
-                
-                banderaNivel=False
-
-                menu = SeleccionPersonaje()
-                menu.run()
-                self.banderaSeleccion=False
-              
-
-
-                            
 if __name__ == "__main__":
     ControlaClase().main()

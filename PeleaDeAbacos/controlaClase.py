@@ -10,7 +10,8 @@ from menuPersonajesPruebas import SeleccionPersonaje
 from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
 from PersonajeLuis2.claseMainLuis import PersonajeLuis
 from PersonajeEmma.claseEmma import PersonajeEmmanuel
-#from PersonajeLin.machote.main_sincolision import MainLin
+from PersonajeLin.blue_multiverso.machote.main import PersonajeLin
+
 from Acciones.propiedadesPersonajes import Propiedades
 from nivel2 import Nivel2
 from nivel import Nivel1
@@ -32,8 +33,9 @@ class controlaClase:
         self.banderaNivel=True
         self.personajeCorrer = None
         pygame.init()  
-        self.mp3.reproducir_sonido_fondo("menu_principal.mp3")
-
+        pygame.mixer.init()
+        pygame.mixer.music.load("Sonidos/menu_principal.mp3")
+        pygame.mixer.music.play(loops=-1)
         
     def main(self):
         while True:
@@ -74,14 +76,15 @@ class controlaClase:
                                     z = 4
                                 if menu.guardado[i] == 0:
                                     self.personajesJugables.append(z + menu.guardado[i])
-                                    self.personajeCorrer = PersonajeEmmanuel()
+                                    #personajeCorrer = PersonajeEmmanuel()
                                 elif menu.guardado[i] == 1:
                                     self.personajesJugables.append(z + menu.guardado[i])
                                     self.personajeCorrer = instanciaLuis
                                 elif menu.guardado[i] == 2:
                                     self.personajesJugables.append(z + menu.guardado[i])
+                                    personajeCorrer=PersonajeLin()
                                 elif menu.guardado[i] == 3:
-                                    self.personajeCorrer=PersonajeStarenka()
+                                    #personajeCorrer=PersonajeStarenka()
                                     self.personajesJugables.append(z + menu.guardado[i])
 
                                 self.personajeCorrer.run()
