@@ -3,6 +3,8 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from PersonajeEmma.actionsEV import escenario as esc
 from PersonajeEmma.actionsEV import draw2 as dr
+import os
+from PersonajeEmma.imagenesEV.ruta import ruta_carpeta_img
 
 def convertColor(r, g, b, a=255):
     return (r / 255.0, g / 255.0, b / 255.0, a / 255.0)
@@ -10,7 +12,7 @@ def convertColor(r, g, b, a=255):
 def personaje(estado, pos_inicial_x, pos_inicial_y):
     if estado == 0:
 
-        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
+        esc.draw_paredes(os.path.join(ruta_carpeta_img,"fondo1.jpg"))
         esc.draw_techo()
 
         glPushMatrix()
