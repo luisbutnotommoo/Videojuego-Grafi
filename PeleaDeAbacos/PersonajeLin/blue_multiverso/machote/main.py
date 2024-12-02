@@ -212,492 +212,492 @@ class PersonajeLin:
 
                
          if(self.ban==0):
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/paisaje.jpg', 
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-            glEnable(GL_DEPTH_TEST)
-            glPushMatrix()
-            glRotate(180,0,1,0)
-
-
-            if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
+               glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/paisaje.jpg', 
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
                glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
+               glPushMatrix()
+               glRotate(180,0,1,0)
+
+
+               if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+               if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+               if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
                
-            if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-            if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
-            
-            #muevo el personaje
-            if keys[py.K_i]:
-               self.draw(0,1)
-            if keys[py.K_k]:
-               self.draw(0,-1)
-            if keys[py.K_l]:
-               self.draw(-1,0)
-            if keys[py.K_j]:
-               self.draw(1,0)
+               #muevo el personaje
+               if keys[py.K_i]:
+                  self.draw(0,1)
+               if keys[py.K_k]:
+                  self.draw(0,-1)
+               if keys[py.K_l]:
+                  self.draw(-1,0)
+               if keys[py.K_j]:
+                  self.draw(1,0)
 
-            
-            self.draw(0,0)
-            if(rombo_collision(self.PosObj2_X, self.PosObj2_Y, self.PosObj2_Z,self.Obj2_width, self.Obj2_height,self.Obj2_depth,
-            self.PosXob1, self.PosYob1, self.PosZob1,self.Obj1_height)):
-               txt.draw_text("Colisión detectada",8,8,4,50,150,14,0,0,0,0)
-            else:
-            ##texto, px, py, pz, size, r g b rb gb bb
-               txt.draw_text("Graficacion",8,8,4,50,150,14,0,0,0,0)  
+               
+               self.draw(0,0)
+               if(rombo_collision(self.PosObj2_X, self.PosObj2_Y, self.PosObj2_Z,self.Obj2_width, self.Obj2_height,self.Obj2_depth,
+               self.PosXob1, self.PosYob1, self.PosZob1,self.Obj1_height)):
+                  txt.draw_text("Colisión detectada",8,8,4,50,150,14,0,0,0,0)
+               else:
+               ##texto, px, py, pz, size, r g b rb gb bb
+                  txt.draw_text("Graficacion",8,8,4,50,150,14,0,0,0,0)  
 
 
-            draw2()
-            draw_cone (12,5,2,2,7,50)
-            draw_mov(0,0)
-            glPopMatrix()  
+               draw2()
+               draw_cone (12,5,2,2,7,50)
+               draw_mov(0,0)
+               glPopMatrix()  
             
 
       
          if(self.ban==1):
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
-            glEnable(GL_DEPTH_TEST)
-            glPushMatrix()
-            glRotate(180,0,1,0)
-            if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-            if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-            if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
-            if keys[py.K_i]:
-               draw_mov(0,1)
-            if keys[py.K_k]:
-               draw_mov(0,-1)
-            if keys[py.K_l]:
-                draw_mov(-1,0)
-            if keys[py.K_j]:
-               draw_mov(1,0)
+                  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+                  es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
+                        'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                        'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
+                  glEnable(GL_DEPTH_TEST)
+                  glPushMatrix()
+                  glRotate(180,0,1,0)
+                  if self.ban4 == 1:
+                     glClearColor(0.0, 0.0, 0.0, 1.0)
+                     glEnable(GL_DEPTH_TEST)
+                     lc.phong(0.5,0.7,0.6)
+                     
+                  if self.ban4 == 2:
+                     glClearColor(0.0, 0.0, 0.0, 1.0)
+                     glEnable(GL_DEPTH_TEST)
+                     lc.gouraud(0.8,1,0.5)
+                  if self.ban4 == 3:
+                     glClearColor(0.0, 0.0, 0.0, 1.0)
+                     glEnable(GL_DEPTH_TEST)
+                     lc.interpolado(0.4,0.3,0.9)
+                  if keys[py.K_i]:
+                     draw_mov(0,1)
+                  if keys[py.K_k]:
+                     draw_mov(0,-1)
+                  if keys[py.K_l]:
+                     draw_mov(-1,0)
+                  if keys[py.K_j]:
+                     draw_mov(1,0)
 
-            draw2()
-            draw_cone (12,5,2,2,7,50)
-            draw_mov(0,0)
-            
+                  draw2()
+                  draw_cone (12,5,2,2,7,50)
+                  draw_mov(0,0)
+                  
 
-            glPopMatrix() 
+                  glPopMatrix() 
          
          if(self.ban==2):
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
-            glEnable(GL_DEPTH_TEST)
-            glPushMatrix()
-            glRotate(180,0,1,0)
-
-            if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
+               glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
                glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-            if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-            if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
+               glPushMatrix()
+               glRotate(180,0,1,0)
 
-            if keys[py.K_i]:
-               draw_mov(0,1)
-            if keys[py.K_k]:
-               draw_mov(0,-1)
-            if keys[py.K_l]:
-                draw_mov(-1,0)
-            if keys[py.K_j]:
-               draw_mov(1,0)
+               if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+               if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+               if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
 
-            draw_mov(0,0)
-            glPopMatrix() 
+               if keys[py.K_i]:
+                  draw_mov(0,1)
+               if keys[py.K_k]:
+                  draw_mov(0,-1)
+               if keys[py.K_l]:
+                  draw_mov(-1,0)
+               if keys[py.K_j]:
+                  draw_mov(1,0)
+
+               draw_mov(0,0)
+               glPopMatrix() 
 
          if(self.ban==3):
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
-            glEnable(GL_DEPTH_TEST)
-            glPushMatrix()
-            glRotate(180,0,1,0)
-
-            if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
+               glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
                glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-            if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-            if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
+               glPushMatrix()
+               glRotate(180,0,1,0)
 
-            if keys[py.K_i]:
-                draw_mov(0,1)
-            if keys[py.K_k]:
-               draw_mov(0,-1)
-            if keys[py.K_l]:
-               draw_mov(-1,0)
-            if keys[py.K_j]:
-               draw_mov(1,0)
-            draw2()
-            draw_cone (12,5,2,2,7,50)
-            draw_mov(0,0)
+               if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+               if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+               if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
 
-            glPopMatrix() 
+               if keys[py.K_i]:
+                  draw_mov(0,1)
+               if keys[py.K_k]:
+                  draw_mov(0,-1)
+               if keys[py.K_l]:
+                  draw_mov(-1,0)
+               if keys[py.K_j]:
+                  draw_mov(1,0)
+               draw2()
+               draw_cone (12,5,2,2,7,50)
+               draw_mov(0,0)
+
+               glPopMatrix() 
 
          if(self.ban==4):
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
-            glEnable(GL_DEPTH_TEST)
-            glPushMatrix()
-            glRotate(180,0,1,0)
+                  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+                  es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
+                        'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                        'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
+                  glEnable(GL_DEPTH_TEST)
+                  glPushMatrix()
+                  glRotate(180,0,1,0)
 
-            if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-            if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-            if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
+                  if self.ban4 == 1:
+                     glClearColor(0.0, 0.0, 0.0, 1.0)
+                     glEnable(GL_DEPTH_TEST)
+                     lc.phong(0.5,0.7,0.6)
+                     
+                  if self.ban4 == 2:
+                     glClearColor(0.0, 0.0, 0.0, 1.0)
+                     glEnable(GL_DEPTH_TEST)
+                     lc.gouraud(0.8,1,0.5)
+                  if self.ban4 == 3:
+                     glClearColor(0.0, 0.0, 0.0, 1.0)
+                     glEnable(GL_DEPTH_TEST)
+                     lc.interpolado(0.4,0.3,0.9)
 
-            if keys[py.K_i]:
-               draw_mov(0,1)
-            if keys[py.K_k]:
-               draw_mov(0,-1)
-            if keys[py.K_l]:
-               draw_mov(-1,0)
-            if keys[py.K_j]:
-               draw_mov(1,0)
+                  if keys[py.K_i]:
+                     draw_mov(0,1)
+                  if keys[py.K_k]:
+                     draw_mov(0,-1)
+                  if keys[py.K_l]:
+                     draw_mov(-1,0)
+                  if keys[py.K_j]:
+                     draw_mov(1,0)
 
-            self.draw (0,0)
-            self.draw2()
-            draw_cone (12,5,2,2,7,50)
-            draw_mov(0,0)
-            glPopMatrix() 
-         
+                  self.draw (0,0)
+                  self.draw2()
+                  draw_cone (12,5,2,2,7,50)
+                  draw_mov(0,0)
+                  glPopMatrix() 
+            
          #feliz
          if (self.ban2 == 1):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cabana.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
-         if keys[py.K_i]:
-            draw_movhappy(0,1)
-         if keys[py.K_k]:
-            draw_movhappy(0,-1)
-         if keys[py.K_l]:
-            draw_movhappy(-1,0)
-         if keys[py.K_j]:
-            draw_movhappy(1,0)
-         self.draw (0,0)
-         self.draw2()
-         draw_cone (12,5,2,2,7,50)
-         draw_movhappy(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         
-         glPopMatrix()
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cabana.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
+            if keys[py.K_i]:
+               draw_movhappy(0,1)
+            if keys[py.K_k]:
+               draw_movhappy(0,-1)
+            if keys[py.K_l]:
+               draw_movhappy(-1,0)
+            if keys[py.K_j]:
+               draw_movhappy(1,0)
+            self.draw (0,0)
+            self.draw2()
+            draw_cone (12,5,2,2,7,50)
+            draw_movhappy(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            
+            glPopMatrix()
 
 
          #expresión_asco
          if (self.ban2 == 2):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+            
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
 
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
-         if keys[py.K_i]:
-            draw_movasco(0,1)
-         if keys[py.K_k]:
-            draw_movasco(0,-1)
-         if keys[py.K_l]:
-            draw_movasco(-1,0)
-         if keys[py.K_j]:
-            draw_movasco(1,0)
-         self.draw (0,0)
-         self.draw2()
-         draw_cone (12,5,2,2,7,50)
-         draw_movasco(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         
-         glPopMatrix()
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
+            if keys[py.K_i]:
+               draw_movasco(0,1)
+            if keys[py.K_k]:
+               draw_movasco(0,-1)
+            if keys[py.K_l]:
+               draw_movasco(-1,0)
+            if keys[py.K_j]:
+               draw_movasco(1,0)
+            self.draw (0,0)
+            self.draw2()
+            draw_cone (12,5,2,2,7,50)
+            draw_movasco(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            
+            glPopMatrix()
 
 
       #expresión_asombro
          if (self.ban2 == 3):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
-         
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+            
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
 
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
-         if keys[py.K_i]:
-            draw_movomg(0,1)
-         if keys[py.K_k]:
-            draw_movomg(0,-1)
-         if keys[py.K_l]:
-            draw_movomg(-1,0)
-         if keys[py.K_j]:
-            draw_movomg(1,0)
-         self.draw (0,0)
-         self.draw2()
-         draw_cone (12,5,2,2,7,50)   
-         draw_movomg(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         
-         glPopMatrix()
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
+            if keys[py.K_i]:
+               draw_movomg(0,1)
+            if keys[py.K_k]:
+               draw_movomg(0,-1)
+            if keys[py.K_l]:
+               draw_movomg(-1,0)
+            if keys[py.K_j]:
+               draw_movomg(1,0)
+            self.draw (0,0)
+            self.draw2()
+            draw_cone (12,5,2,2,7,50)   
+            draw_movomg(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            
+            glPopMatrix()
 
 
          if (self.ban2 == 4):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
          
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
 
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
 
-         if keys[py.K_i]:
-            draw_movsad(0,1)
-         if keys[py.K_k]:
-            draw_movsad(0,-1)
-         if keys[py.K_l]:
-            draw_movsad(-1,0)
-         if keys[py.K_j]:
-            draw_movsad(1,0)
-         self.draw (0,0)
-         self.draw2()
-         draw_cone (12,5,2,2,7,50)  
-         draw_movsad(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         glPopMatrix()
+            if keys[py.K_i]:
+               draw_movsad(0,1)
+            if keys[py.K_k]:
+               draw_movsad(0,-1)
+            if keys[py.K_l]:
+               draw_movsad(-1,0)
+            if keys[py.K_j]:
+               draw_movsad(1,0)
+            self.draw (0,0)
+            self.draw2()
+            draw_cone (12,5,2,2,7,50)  
+            draw_movsad(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            glPopMatrix()
 
 
          #expresion de enojo
          if (self.ban2 == 5):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
 
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
-         if keys[py.K_i]:
-            draw_movEnojo(0,1)
-         if keys[py.K_k]:
-            draw_movEnojo(0,-1)
-         if keys[py.K_l]:
-            draw_movEnojo(-1,0)
-         if keys[py.K_j]:
-            draw_movEnojo(1,0)
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
+            if keys[py.K_i]:
+               draw_movEnojo(0,1)
+            if keys[py.K_k]:
+               draw_movEnojo(0,-1)
+            if keys[py.K_l]:
+               draw_movEnojo(-1,0)
+            if keys[py.K_j]:
+               draw_movEnojo(1,0)
 
-         self.draw (0,0)
-         self.draw2()
-         draw_cone (12,5,2,2,7,50)
-         draw_movEnojo(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         glPopMatrix()
+            self.draw (0,0)
+            self.draw2()
+            draw_cone (12,5,2,2,7,50)
+            draw_movEnojo(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            glPopMatrix()
 
          
       
@@ -708,276 +708,276 @@ class PersonajeLin:
          #brazo derecho
          if (self.ban3 == 1):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
 
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
-         if keys[py.K_i]:
-            draw_mov_brazoD(0,1)
-         if keys[py.K_k]:
-            draw_mov_brazoD(0,-1)
-         if keys[py.K_l]:
-            draw_mov_brazoD(-1,0)
-         if keys[py.K_j]:
-            draw_mov_brazoD(1,0)
-            
-         draw_mov_brazoD(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         glPopMatrix()
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
+            if keys[py.K_i]:
+               draw_mov_brazoD(0,1)
+            if keys[py.K_k]:
+               draw_mov_brazoD(0,-1)
+            if keys[py.K_l]:
+               draw_mov_brazoD(-1,0)
+            if keys[py.K_j]:
+               draw_mov_brazoD(1,0)
+               
+            draw_mov_brazoD(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            glPopMatrix()
          #brazo izquierdo
          if (self.ban3 == 2):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
 
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
-         if keys[py.K_i]:
-            draw_mov_brazoI(0,1)
-         if keys[py.K_k]:
-            draw_mov_brazoI(0,-1)
-         if keys[py.K_l]:
-            draw_mov_brazoI(-1,0)
-         if keys[py.K_j]:
-            draw_mov_brazoI(1,0)
-            
-         draw_mov_brazoI(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         glPopMatrix()
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
+            if keys[py.K_i]:
+               draw_mov_brazoI(0,1)
+            if keys[py.K_k]:
+               draw_mov_brazoI(0,-1)
+            if keys[py.K_l]:
+               draw_mov_brazoI(-1,0)
+            if keys[py.K_j]:
+               draw_mov_brazoI(1,0)
+               
+            draw_mov_brazoI(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            glPopMatrix()
 
 
          if (self.ban3 == 3):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
-         
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
-
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
-         if keys[py.K_i]:
-            draw_movPD(0,1)
-         if keys[py.K_k]:
-            draw_movPD(0,-1)
-         if keys[py.K_l]:
-            draw_movPD(-1,0)
-         if keys[py.K_j]:
-            draw_movPD(1,0)
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
             
-         draw_movPD(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         glPopMatrix()
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
+
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
+            if keys[py.K_i]:
+               draw_movPD(0,1)
+            if keys[py.K_k]:
+               draw_movPD(0,-1)
+            if keys[py.K_l]:
+               draw_movPD(-1,0)
+            if keys[py.K_j]:
+               draw_movPD(1,0)
+               
+            draw_movPD(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            glPopMatrix()
       
          if (self.ban3 == 4):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         
-         
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
-
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
-         if keys[py.K_i]:
-            draw_movPI(0,1)
-         if keys[py.K_k]:
-            draw_movPI(0,-1)
-         if keys[py.K_l]:
-            draw_movPI(-1,0)
-         if keys[py.K_j]:
-            draw_movPI(1,0)
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
             
-         draw_movPI(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         glPopMatrix()
+            
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
+
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
+            if keys[py.K_i]:
+               draw_movPI(0,1)
+            if keys[py.K_k]:
+               draw_movPI(0,-1)
+            if keys[py.K_l]:
+               draw_movPI(-1,0)
+            if keys[py.K_j]:
+               draw_movPI(1,0)
+               
+            draw_movPI(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            glPopMatrix()
 
 
 
          #cuello
          if (self.ban3 == 5):
-          glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if self.ban == 0:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif self.ban == 1:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif self.ban == 2:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif self.ban == 3:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif self.ban == 4:
-            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
-                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         
-         if self.ban4 == 1:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.phong(0.5,0.7,0.6)
-               
-         if self.ban4 == 2:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.gouraud(0.8,1,0.5)
-         if self.ban4 == 3:
-               glClearColor(0.0, 0.0, 0.0, 1.0)
-               glEnable(GL_DEPTH_TEST)
-               lc.interpolado(0.4,0.3,0.9)
-
-         glEnable(GL_DEPTH_TEST)
-         glPushMatrix()
-         glRotate(180,0,1,0)
-         if keys[py.K_i]:
-            draw_movcuello(0,1)
-         if keys[py.K_k]:
-            draw_movcuello(0,-1)
-         if keys[py.K_l]:
-            draw_movcuello(-1,0)
-         if keys[py.K_j]:
-            draw_movcuello(1,0)
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+            if self.ban == 0:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+            elif self.ban == 1:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+            elif self.ban == 2:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+            elif self.ban == 3:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+            elif self.ban == 4:
+               es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                     'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
             
-         draw_movcuello(0,0)
-         glDisable(GL_LIGHTING)
-         glDisable(GL_LIGHT0)
-         glPopMatrix()
+            if self.ban4 == 1:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.phong(0.5,0.7,0.6)
+                  
+            if self.ban4 == 2:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.gouraud(0.8,1,0.5)
+            if self.ban4 == 3:
+                  glClearColor(0.0, 0.0, 0.0, 1.0)
+                  glEnable(GL_DEPTH_TEST)
+                  lc.interpolado(0.4,0.3,0.9)
+
+            glEnable(GL_DEPTH_TEST)
+            glPushMatrix()
+            glRotate(180,0,1,0)
+            if keys[py.K_i]:
+               draw_movcuello(0,1)
+            if keys[py.K_k]:
+               draw_movcuello(0,-1)
+            if keys[py.K_l]:
+               draw_movcuello(-1,0)
+            if keys[py.K_j]:
+               draw_movcuello(1,0)
+               
+            draw_movcuello(0,0)
+            glDisable(GL_LIGHTING)
+            glDisable(GL_LIGHT0)
+            glPopMatrix()
          
 
       # Manejo del estado del menú o de otras interacciones fuera del bucle de transformaciones
