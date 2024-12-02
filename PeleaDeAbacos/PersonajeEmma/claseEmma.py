@@ -11,7 +11,7 @@ from PersonajeEmma.actionsEV import drawPersonaje as dr
 from PersonajeEmma.actionsEV import draw2 as dr2
 from PersonajeEmma.actionsEV import objetos as obj
 
-class PersonajeEmma:
+class PersonajeEmmanuel:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
@@ -80,7 +80,7 @@ class PersonajeEmma:
                     if event.key == pygame.K_i:
                         self.acercade = "\nDesarrollado por Emmanuel Vallejo"
                     elif event.key == pygame.K_n:
-                        snd.sonido("PersonajeEmma/sounds/choir.mp3")
+                        snd.sonido("PeleaDeAbacos/PersonajeEmma/soundsEV/choir.mp3")
                     elif event.key == pygame.K_m:
                         snd.stopsonido()
 
@@ -90,9 +90,15 @@ class PersonajeEmma:
                         pygame.K_5: 5, pygame.K_6: 6, pygame.K_7: 7, pygame.K_8: 8, pygame.K_9: 9,
                         pygame.K_0: 10, pygame.K_e: 11, pygame.K_r: 12, pygame.K_t: 13, pygame.K_y: 14
                     }
+
+                    # Lista de teclas válidas para reproducir sonidos
+                    teclas_sonido = [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_e, pygame.K_r]
+
                     if event.key in estado_keys:
                         self.estado = estado_keys[event.key]
-                        snd.sonido(f"PersonajeEmma/soundsEV/sound{self.estado}.mp3")
+                        if event.key in teclas_sonido:
+                            snd.sonido(f"PeleaDeAbacos/PersonajeEmma/soundsEV/sound{self.estado}.mp3")
+
 
                 # Movimiento de cámara con el ratón
                 if not self.paused and event.type == pygame.MOUSEMOTION:

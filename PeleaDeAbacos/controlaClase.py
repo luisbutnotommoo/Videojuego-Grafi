@@ -9,7 +9,7 @@ from Acciones.boceto import PersonajesDeTodos
 from menuPersonajesPruebas import SeleccionPersonaje
 from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
 #from PersonajeLuis.clasePrincipalLuis import PersonajeLuis
-from PersonajeEmma.claseEmma import PersonajeEmma
+from PersonajeEmma.claseEmma import PersonajeEmmanuel
 #from PersonajeLin.machote.main_sincolision import MainLin
 from Acciones.propiedadesPersonajes import Propiedades
 from nivel2 import Nivel2
@@ -25,7 +25,9 @@ class controlaClase:
         self.banderaSeleccion=True
         self.banderaNivel=True
         pygame.init()  
-   
+        pygame.mixer.init()
+        pygame.mixer.music.load("PeleaDeAbacos/Sonidos/menu_principal.mp3")
+        pygame.mixer.music.play(loops=-1)
         
     def main(self):
         while True:
@@ -51,6 +53,7 @@ class controlaClase:
                 
 
                 if(menuNivel.jugar==False):
+                    pygame.mixer.music.stop()
                     while(self.banderaSeleccion):
                             self.personajesJugables=[]
                             menu = SeleccionPersonaje()
@@ -66,7 +69,7 @@ class controlaClase:
                                     z = 4
                                 if menu.guardado[i] == 0:
                                     self.personajesJugables.append(z + menu.guardado[i])
-                                    personajeCorrer = PersonajeEmma()
+                                    personajeCorrer = PersonajeEmmanuel()
                                 elif menu.guardado[i] == 1:
                                     self.personajesJugables.append(z + menu.guardado[i])
                                 elif menu.guardado[i] == 2:
