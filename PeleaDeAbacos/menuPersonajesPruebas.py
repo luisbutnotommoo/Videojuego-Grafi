@@ -6,7 +6,7 @@ from Acciones import boceto2 as b
 from Acciones.boceto2 import PersonajesDeTodos
 import os
 from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
-from Sonidos.ruta import ruta_actual as ruta_audio
+from PeleaDeAbacos.Sonidos.controla_mp3 import ruta_actual as ruta_audio
 
 
 

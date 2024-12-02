@@ -13,7 +13,7 @@ import Acciones.boceto2 as b
 from Acciones.colisionRectangular import RectangularCollision3D
 from Acciones.texto import textos as tx
 from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
-from Sonidos.ruta import ruta_actual as ruta_audio
+from PeleaDeAbacos.Sonidos.controla_mp3 import ruta_carpeta_audios as ruta_audio
 
 
 class Nivel2:
