@@ -17,7 +17,7 @@ class ArbolOperaciones:
  
     }
 
-    def __init__(self, profundidad_max=3, rango_numeros=(-20, 20)):
+    def __init__(self, profundidad_max=4, rango_numeros=(-11, 11)):
         self.profundidad_max = profundidad_max
         self.rango_numeros = rango_numeros
 
