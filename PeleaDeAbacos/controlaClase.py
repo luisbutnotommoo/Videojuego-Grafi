@@ -82,7 +82,7 @@ class controlaClase:
                                     self.personajeCorrer = instanciaLuis
                                 elif menu.guardado[i] == 2:
                                     self.personajesJugables.append(z + menu.guardado[i])
-                                    personajeCorrer=PersonajeLin()
+                                    self.personajeCorrer=PersonajeLin()
                                 elif menu.guardado[i] == 3:
                                     #personajeCorrer=PersonajeStarenka()
                                     self.personajesJugables.append(z + menu.guardado[i])
