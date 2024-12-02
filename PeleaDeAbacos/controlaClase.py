@@ -28,7 +28,6 @@ class controlaClase:
         self.personajesJugables = []
         self.banderaSeleccion=True
         self.banderaNivel=True
-        pygame.init()  
         self.mp3.reproducir_sonido_fondo("menu_principal.mp3")
 
         

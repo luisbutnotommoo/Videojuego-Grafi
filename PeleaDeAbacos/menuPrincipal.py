@@ -10,7 +10,7 @@ class MenuPrincipal:
         self.WINDOW_WIDTH = 800
         self.WINDOW_HEIGHT = 600
         self.surface = pygame.display.set_mode((self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
-        pygame.display.set_caption('Mi Juego')
+        pygame.display.set_caption('Duelo de abacos')
 
         # Carga de imagen de fondo
         try:
