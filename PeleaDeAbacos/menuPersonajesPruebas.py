@@ -5,8 +5,8 @@ from pygame.locals import *
 from Acciones import boceto2 as b
 from Acciones.boceto2 import PersonajesDeTodos
 import os
-from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
-from PeleaDeAbacos.Sonidos.controla_mp3 import ruta_actual as ruta_audio
+from Imagenes.controla_img import ruta_carpeta_imagenes as ruta_img
+from Sonidos.controla_mp3 import ruta_carpeta_audios as ruta_audio
 
 class SeleccionPersonaje:
     def __init__(self, display_size=(800, 600)):
