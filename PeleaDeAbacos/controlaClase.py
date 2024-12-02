@@ -8,7 +8,7 @@ import os
 from Acciones.boceto import PersonajesDeTodos
 from menuPersonajesPruebas import SeleccionPersonaje
 from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
-#from PersonajeLuis.clasePrincipalLuis import PersonajeLuis
+from PersonajeLuis2.claseMainLuis import PersonajeLuis
 from PersonajeEmma.claseEmma import PersonajeEmmanuel
 from PersonajeLin.blue_multiverso.machote.main import PersonajeLin
 
@@ -21,6 +21,8 @@ from menuNivel import MenuNivel
 import Sonidos.controla_mp3 as cmp3
 import subprocess
 
+instanciaLuis = PersonajeLuis()
+
 directorio_script = os.path.dirname(os.path.abspath(__file__))
 
 class controlaClase:
@@ -29,6 +31,7 @@ class controlaClase:
         self.personajesJugables = []
         self.banderaSeleccion=True
         self.banderaNivel=True
+        self.personajeCorrer = None
         pygame.init()  
         pygame.mixer.init()
         pygame.mixer.music.load("Sonidos/menu_principal.mp3")
@@ -73,17 +76,18 @@ class controlaClase:
                                     z = 4
                                 if menu.guardado[i] == 0:
                                     self.personajesJugables.append(z + menu.guardado[i])
-                                    #personajeCorrer = PersonajeEmmanuel()
+                                    
                                 elif menu.guardado[i] == 1:
                                     self.personajesJugables.append(z + menu.guardado[i])
+                                    self.personajeCorrer = instanciaLuis
                                 elif menu.guardado[i] == 2:
                                     self.personajesJugables.append(z + menu.guardado[i])
-                                    personajeCorrer=PersonajeLin()
+                                    self.personajeCorrer=PersonajeLin()
                                 elif menu.guardado[i] == 3:
-                                    #personajeCorrer=PersonajeStarenka()
+                                 
                                     self.personajesJugables.append(z + menu.guardado[i])
 
-                                personajeCorrer.run()
+                                self.personajeCorrer.run()
                             
                             eleccion = Propiedades(self.personajesJugables)
 
@@ -124,13 +128,14 @@ class controlaClase:
                             if(menuNivel.nivel==3):
                                 nivel3 = Nivel3(personajesJugables=eleccion.personajesJugables)
                                 nivel3.run()
-                                if nivel2.banderaSiguienteNivel==False:
+                                if nivel3.banderaSiguienteNivel==False:
+                       
                                     menuNivel.nivel=3
 
-                                if nivel2.banderaMenuNivel==False:
+                                if nivel3.banderaMenuNivel==False:
                                     self.banderaSeleccion=False
                                     menuNivel.reset()
-                                if nivel2.banderaMenuPrincipal==False:
+                                if nivel3.banderaMenuPrincipal==False:
                                     self.banderaSeleccion=False
                                     self.banderaNivel=False
                                     menuNivel.reset()
