@@ -8,8 +8,6 @@ import os
 from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
 from PeleaDeAbacos.Sonidos.controla_mp3 import ruta_actual as ruta_audio
 
-
-
 class SeleccionPersonaje:
     def __init__(self, display_size=(800, 600)):
         self.bandera=0
