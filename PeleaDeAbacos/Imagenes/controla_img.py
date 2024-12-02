@@ -23,7 +23,7 @@ def cargar_textura(nombre_archivo):
         """
         Carga una textura y retorna su ID
         """            
-        ruta_textura=os.path.join(ruta_carpeta_imagenes,nombre_archivo)
+        ruta_textura=cargar_imagen(nombre_archivo)
         imagen = Image.open(ruta_textura)
         datos_imagen = imagen.convert("RGBA").tobytes()
         

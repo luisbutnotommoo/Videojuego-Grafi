@@ -12,8 +12,8 @@ from Acciones.boceto2 import  PersonajesDeTodos
 import Acciones.boceto2 as b
 from Acciones.colisionRectangular import RectangularCollision3D
 from Acciones.texto import textos as tx
-from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
-from PeleaDeAbacos.Sonidos.controla_mp3 import ruta_carpeta_audios as ruta_audio
+from Imagenes.controla_img import *
+from Sonidos.controla_mp3 import MP3
 
 
 class Nivel2:
@@ -40,20 +40,21 @@ class Nivel2:
 
         self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
-        self.sonido_seleccion = pygame.mixer.Sound(os.path.join(ruta_audio, "click.mp3"))
-        self.sonido_ganar = pygame.mixer.Sound(os.path.join(ruta_audio,"win.mp3"))
-        pygame.mixer.music.load(os.path.join(ruta_audio,"nivel1.mp3"))
-        pygame.mixer.music.play(loops=-1)
+
+        self.mp3=MP3()
+        self.sonido_seleccion = 'click.mp3'
+        self.sonido_ganar = 'win.mp3'
+        self.mp3.reproducir_sonido_fondo('nivel1.mp3')
 
         self.bandera_instrucciones = True
         self.bandera_pausa = False
         self.bandera_control_instrucciones = True
         self.bandera_ganador=0
         self.puntaje_ganador = 10
-        self.texturaBola=obj.load_texture(os.path.join(ruta_img,"aguaOrg.jpg"))
-        self.texturaPocima=obj.load_texture(os.path.join(ruta_img,"moradoPocimaOrg.jpg"))
-        self.texturaTorre=obj.load_texture(os.path.join(ruta_img,"torreOrg.jpg"))
-        self.objEscenario = esc.escenario(os.path.join(ruta_img,"piso3.jpg"),os.path.join(ruta_img, "castillo2.jpg"))
+        self.texturaBola=cargar_textura("aguaOrg.jpg")
+        self.texturaPocima=cargar_textura("moradoPocimaOrg.jpg")
+        self.texturaTorre=cargar_textura("torreOrg.jpg")
+        self.objEscenario = esc.escenario(cargar_imagen("piso3.jpg"),cargar_imagen( "castillo2.jpg"))
         self.iteraPregunta=0
         self.objetoBanco = bp.BancoPreguntas(5,2)
         self.cuestionario=self.objetoBanco.generar_banco_preguntas()

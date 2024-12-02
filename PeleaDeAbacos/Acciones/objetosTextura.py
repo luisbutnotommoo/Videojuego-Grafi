@@ -4,7 +4,7 @@ from OpenGL.GLU import *
 import math
 from PIL import Image
 
-
+from Imagenes.controla_img import cargar_textura
 
 def load_texture(file_path):
     image = Image.open(file_path).transpose(Image.FLIP_TOP_BOTTOM)
