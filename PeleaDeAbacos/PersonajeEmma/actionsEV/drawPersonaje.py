@@ -10,7 +10,7 @@ def convertColor(r, g, b, a=255):
 def personaje(estado, pos_inicial_x, pos_inicial_y):
     if estado == 0:
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/fondo1.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -32,7 +32,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
 
     if estado == 11: # SORPRESA
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/estadio.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/estadio.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -55,7 +55,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
         #Expresiones 1-5
     if estado == 1: #Enojado
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/callejon.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/callejon.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -77,7 +77,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
 
     if estado == 2: #TRISTE
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/Ciudad Oscura.jpeg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/Ciudad Oscura.jpeg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -99,7 +99,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
 
     if estado == 3: #SOSPECHOSO
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/crimen.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/crimen.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -123,7 +123,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
             
     if estado == 4: #INDIFERENTE
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/indiferencia.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/indiferencia.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -145,7 +145,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
 
     if estado == 5: #LEVANTANDO CEJA
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/pregunta.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/pregunta.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -168,7 +168,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
 
     if estado == 12: # SONRIENTE
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/playa.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/playa.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -191,7 +191,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
     #Movimientos 6-0
     if estado == 6: #Levantar brazo derecho
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/fondo1.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -213,7 +213,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
             
     if estado == 7: #Levantar brazo izquierdo
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/fondo1.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -234,7 +234,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
 
     if estado == 8: #T-Pose
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/fondo1.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -255,7 +255,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
             
     if estado == 9: #Sentado
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/fondo1.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -276,7 +276,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
             
     if estado == 10: #Saltando
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/fondo1.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -298,7 +298,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
 
     if estado == 13: #SEÑALANDO
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/fondo1.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
         esc.draw_techo()
 
         glPushMatrix()
@@ -320,7 +320,7 @@ def personaje(estado, pos_inicial_x, pos_inicial_y):
 
     if estado == 14: # CELEBRACIÖN
 
-        esc.draw_paredes("PeleaDeAbacos/PersonajeEmma/imagenesEV/fondo1.jpg")
+        esc.draw_paredes("PersonajeEmma/imagenesEV/fondo1.jpg")
         esc.draw_techo()
 
         glPushMatrix()

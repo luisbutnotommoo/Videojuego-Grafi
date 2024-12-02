@@ -26,7 +26,7 @@ class controlaClase:
         self.banderaNivel=True
         pygame.init()  
         pygame.mixer.init()
-        pygame.mixer.music.load("PeleaDeAbacos/Sonidos/menu_principal.mp3")
+        pygame.mixer.music.load("Sonidos/menu_principal.mp3")
         pygame.mixer.music.play(loops=-1)
         
     def main(self):
@@ -53,7 +53,6 @@ class controlaClase:
                 
 
                 if(menuNivel.jugar==False):
-                    pygame.mixer.music.stop()
                     while(self.banderaSeleccion):
                             self.personajesJugables=[]
                             menu = SeleccionPersonaje()

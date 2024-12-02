@@ -80,7 +80,7 @@ class PersonajeEmmanuel:
                     if event.key == pygame.K_i:
                         self.acercade = "\nDesarrollado por Emmanuel Vallejo"
                     elif event.key == pygame.K_n:
-                        snd.sonido("PeleaDeAbacos/PersonajeEmma/soundsEV/choir.mp3")
+                        snd.sonido("PersonajeEmma/soundsEV/choir.mp3")
                     elif event.key == pygame.K_m:
                         snd.stopsonido()
 
@@ -97,7 +97,7 @@ class PersonajeEmmanuel:
                     if event.key in estado_keys:
                         self.estado = estado_keys[event.key]
                         if event.key in teclas_sonido:
-                            snd.sonido(f"PeleaDeAbacos/PersonajeEmma/soundsEV/sound{self.estado}.mp3")
+                            snd.sonido(f"PersonajeEmma/soundsEV/sound{self.estado}.mp3")
 
 
                 # Movimiento de cámara con el ratón
