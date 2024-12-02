@@ -238,7 +238,7 @@ class SeleccionPersonaje:
             glTexCoord2f(0, 1); glVertex2f(x, y + text_height - i * line_height)
             glEnd()
             
-            glDeleteTextures(int(texture_id))
+          #  glDeleteTextures(int(texture_id))
             glPopMatrix()
             glMatrixMode(GL_PROJECTION)
             glPopMatrix()

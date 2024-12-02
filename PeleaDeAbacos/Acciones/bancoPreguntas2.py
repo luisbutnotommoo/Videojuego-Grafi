@@ -1,5 +1,6 @@
 import random
 import operator
+import math
 
 class NodoOperacion:
     def __init__(self, valor=None, izquierda=None, derecha=None):
@@ -12,7 +13,8 @@ class ArbolOperaciones:
         '+': operator.add,
         '-': operator.sub,
         '*': operator.mul,
-        '/': operator.truediv
+        '/': operator.truediv,
+ 
     }
 
     def __init__(self, profundidad_max=3, rango_numeros=(-20, 20)):
@@ -49,8 +51,15 @@ class ArbolOperaciones:
         
         # Aplicar operación
         try:
-            return self.OPERADORES[nodo.valor](izq, der)
-        except (ZeroDivisionError, OverflowError):
+            resultado = self.OPERADORES[nodo.valor](izq, der)
+            
+            # Manejo especial para división
+            if nodo.valor == '/' and isinstance(resultado, float):
+                # Redondear a 2 decimales si es necesario
+                return round(resultado, 2)
+            
+            return resultado
+        except (ZeroDivisionError, OverflowError, ValueError):
             return None
 
     def representacion_arbol(self, nodo):
@@ -76,7 +85,10 @@ class BancoPreguntas:
         
         :return: Diccionario con la pregunta generada
         """
-        while True:
+        intentos_max = 20  # Límite de intentos para evitar bucle infinito
+        intentos = 0
+
+        while intentos < intentos_max:
             # Generar árbol de operaciones
             arbol = self.generador_arboles.generar_arbol_operaciones()
             
@@ -85,19 +97,32 @@ class BancoPreguntas:
             
             # Omitir si no se puede evaluar o ya se ha usado
             if (resultado is None or 
-                not isinstance(resultado, (int, float)) or 
-                resultado in self.preguntas_usadas):
+                resultado in self.preguntas_usadas or
+                math.isnan(resultado) or 
+                math.isinf(resultado)):
+                intentos += 1
                 continue
             
-            # Redondear y convertir a entero
-            resultado = int(round(resultado))
+            # Formatear el resultado
+            if isinstance(resultado, float):
+                # Redondear a 2 decimales si es un flotante
+                resultado = round(resultado, 2)
+            
+            # Convertir a entero si es posible
+            if isinstance(resultado, float) and resultado.is_integer():
+                resultado = int(resultado)
             
             # Generar opciones de respuesta
             opciones = [resultado]
             while len(opciones) < 3:
-                opcion = resultado + random.randint(-20, 20)
-                if opcion not in opciones:
-                    opciones.append(opcion)
+                # Generar variaciones de la respuesta
+                if isinstance(resultado, int):
+                    variacion = resultado + random.randint(-10, 10)
+                else:
+                    variacion = round(resultado + random.uniform(-2, 2), 2)
+                
+                if variacion not in opciones:
+                    opciones.append(variacion)
             
             random.shuffle(opciones)
             
@@ -114,23 +139,11 @@ class BancoPreguntas:
             
             return pregunta
 
+        # Si no se puede generar una pregunta válida
+        raise ValueError("No se pudo generar una pregunta válida después de múltiples intentos")
+
     def reiniciar_preguntas(self):
         """
         Reinicia el conjunto de preguntas usadas
         """
         self.preguntas_usadas.clear()
-
-'''def main():
-    # Crear banco de preguntas con generación dinámica
-    banco = BancoPreguntas(dificultad=3)
-    
-    # Generar y mostrar 10 preguntas diferentes
-    for i in range(20):
-        pregunta = banco.generar_pregunta()
-        print(f"Pregunta {i+1}:")
-        print(pregunta['texto'])
-        print(f"Respuesta correcta: {pregunta['respuesta_correcta']}")
-        print(f"Resultado: {pregunta['resultado']}\n")
-
-if __name__ == "__main__":
-    main()'''
