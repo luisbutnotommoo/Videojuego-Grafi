@@ -8,7 +8,7 @@ import os
 from Acciones.boceto import PersonajesDeTodos
 from menuPersonajesPruebas import SeleccionPersonaje
 from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
-#from PersonajeLuis.clasePrincipalLuis import PersonajeLuis
+from PersonajeLuis2.claseMainLuis import PersonajeLuis
 from PersonajeEmma.claseEmma import PersonajeEmmanuel
 #from PersonajeLin.machote.main_sincolision import MainLin
 from Acciones.propiedadesPersonajes import Propiedades
@@ -20,6 +20,8 @@ from menuNivel import MenuNivel
 import Sonidos.controla_mp3 as cmp3
 import subprocess
 
+instanciaLuis = PersonajeLuis()
+
 directorio_script = os.path.dirname(os.path.abspath(__file__))
 
 class controlaClase:
@@ -28,6 +30,8 @@ class controlaClase:
         self.personajesJugables = []
         self.banderaSeleccion=True
         self.banderaNivel=True
+        self.personajeCorrer = None
+        pygame.init()  
         self.mp3.reproducir_sonido_fondo("menu_principal.mp3")
 
         
@@ -70,16 +74,17 @@ class controlaClase:
                                     z = 4
                                 if menu.guardado[i] == 0:
                                     self.personajesJugables.append(z + menu.guardado[i])
-                                    personajeCorrer = PersonajeEmmanuel()
+                                    self.personajeCorrer = PersonajeEmmanuel()
                                 elif menu.guardado[i] == 1:
                                     self.personajesJugables.append(z + menu.guardado[i])
+                                    self.personajeCorrer = instanciaLuis
                                 elif menu.guardado[i] == 2:
                                     self.personajesJugables.append(z + menu.guardado[i])
                                 elif menu.guardado[i] == 3:
-                                    personajeCorrer=PersonajeStarenka()
+                                    self.personajeCorrer=PersonajeStarenka()
                                     self.personajesJugables.append(z + menu.guardado[i])
 
-                                personajeCorrer.run()
+                                self.personajeCorrer.run()
                             
                             eleccion = Propiedades(self.personajesJugables)
 
