@@ -77,7 +77,7 @@ while run:
             if event.key == pygame.K_i:
                 acercade = "\nDesarrollado por Emmanuel Vallejo"
             if event.key == pygame.K_n:
-                snd.sonido("PersonajeEmma/sounds/choir.mp3")
+                snd.sonido("PeleaDeAbacos/PersonajeEmma/sounds/choir.mp3")
             if event.key == pygame.K_m:
                 snd.stopsonido()
 
@@ -85,19 +85,19 @@ while run:
                 estado = 0
             if event.key == pygame.K_1:
                 estado = 1
-                snd.sonido("PersonajeEmma/soundsEV/sound1.mp3")
+                snd.sonido("PeleaDeAbacos/PersonajeEmma/soundsEV/sound1.mp3")
             if event.key == pygame.K_2:
                 estado = 2
-                snd.sonido("PersonajeEmma/soundsEV/sound2.mp3")
+                snd.sonido("PeleaDeAbacos/PersonajeEmma/soundsEV/sound2.mp3")
             if event.key == pygame.K_3:
                 estado = 3
-                snd.sonido("PersonajeEmma/soundsEV/sound3.mp3")
+                snd.sonido("PeleaDeAbacos/PersonajeEmma/soundsEV/sound3.mp3")
             if event.key == pygame.K_4:
                 estado = 4
-                snd.sonido("PersonajeEmma/soundsEV/sound4.mp3")
+                snd.sonido("PeleaDeAbacos/PersonajeEmma/soundsEV/sound4.mp3")
             if event.key == pygame.K_5:
                 estado = 5
-                snd.sonido("PersonajeEmma/soundsEV/sound5.mp3")
+                snd.sonido("PeleaDeAbacos/PersonajeEmma/soundsEV/sound5.mp3")
             if event.key == pygame.K_6:
                 estado = 6
             if event.key == pygame.K_7:
@@ -110,10 +110,10 @@ while run:
                 estado = 10
             if event.key == pygame.K_e:
                 estado = 11
-                snd.sonido("PersonajeEmma/soundsEV/sound11.mp3")
+                snd.sonido("PeleaDeAbacos/PersonajeEmma/soundsEV/sound11.mp3")
             if event.key == pygame.K_r:
                 estado = 12
-                snd.sonido("PersonajeEmma/soundsEV/sound12.mp3")
+                snd.sonido("PeleaDeAbacos/PersonajeEmma/soundsEV/sound12.mp3")
             if event.key == pygame.K_t:
                 estado = 13
             if event.key == pygame.K_y:

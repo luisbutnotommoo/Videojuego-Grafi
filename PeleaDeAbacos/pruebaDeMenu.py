@@ -9,7 +9,7 @@ from Acciones.boceto import PersonajesDeTodos
 from menuPersonajesPruebas import SeleccionPersonaje
 from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
 #from PersonajeLuis.clasePrincipalLuis import PersonajeLuis
-from PersonajeEmma.claseEmma import PersonajeEmma
+from PersonajeEmma.claseEmma import PersonajeEmmanuel
 #from PersonajeLin.machote.main_sincolision import MainLin
 from Acciones.propiedadesPersonajes import Propiedades
 from nivel2 import Nivel2
