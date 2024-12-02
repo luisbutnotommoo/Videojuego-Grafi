@@ -16,18 +16,20 @@ from nivel2 import Nivel2
 from nivel import Nivel1
 from menuPrincipal import MenuPrincipal
 from menuNivel import MenuNivel
+import Sonidos.controla_mp3 as cmp3
 import subprocess
+
 directorio_script = os.path.dirname(os.path.abspath(__file__))
 
 class controlaClase:
     def __init__(self):
+        self.mp3=cmp3.MP3()
         self.personajesJugables = []
         self.banderaSeleccion=True
         self.banderaNivel=True
         pygame.init()  
-        pygame.mixer.init()
-        pygame.mixer.music.load("Sonidos/menu_principal.mp3")
-        pygame.mixer.music.play(loops=-1)
+        self.mp3.reproducir_sonido_fondo("menu_principal.mp3")
+
         
     def main(self):
         while True:

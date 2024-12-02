@@ -1,7 +1,7 @@
 import pygame
 import pygame_menu
 import os
-from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
+from Imagenes.controla_img import ruta_carpeta_imagenes as ruta_img
 
 class MenuPrincipal:
     def __init__(self):
