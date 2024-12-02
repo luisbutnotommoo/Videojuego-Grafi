@@ -30,7 +30,7 @@ class SeleccionPersonaje:
         self.asignar_posiciones_personajes()
 
         # Cargar texturas
-        floor=os.path.join(ruta_img,'pasto.jpeg')
+        floor=os.path.join(ruta_img,'pasto.jpg')
         wall=os.path.join(ruta_img,'pared.jpg')
         self.floor_texture = self.load_texture(floor)
         self.wall_texture = self.load_texture(wall)

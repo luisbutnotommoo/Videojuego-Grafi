@@ -14,6 +14,7 @@ from PersonajeEmma.claseEmma import PersonajeEmmanuel
 from Acciones.propiedadesPersonajes import Propiedades
 from nivel2 import Nivel2
 from nivel import Nivel1
+from nivel3 import Nivel3
 from menuPrincipal import MenuPrincipal
 from menuNivel import MenuNivel
 import Sonidos.controla_mp3 as cmp3
@@ -105,6 +106,21 @@ class controlaClase:
                             if(menuNivel.nivel==2):
                                 nivel2 = Nivel2(personajesJugables=eleccion.personajesJugables)
                                 nivel2.run()
+                                if nivel2.banderaSiguienteNivel==False:
+                                    menuNivel.nivel=3
+
+                                if nivel2.banderaMenuNivel==False:
+                                    self.banderaSeleccion=False
+                                    menuNivel.reset()
+                                if nivel2.banderaMenuPrincipal==False:
+                                    self.banderaSeleccion=False
+                                    self.banderaNivel=False
+                                    menuNivel.reset()
+                                    menuPrincipal.reset()
+
+                            if(menuNivel.nivel==3):
+                                nivel3 = Nivel3(personajesJugables=eleccion.personajesJugables)
+                                nivel3.run()
                                 if nivel2.banderaSiguienteNivel==False:
                                     menuNivel.nivel=3
 
