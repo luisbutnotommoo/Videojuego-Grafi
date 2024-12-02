@@ -110,7 +110,7 @@ class PersonajeLin:
                      self.ban2=7
                   #sonido_principal
                   if event.key == py.K_p:
-                     so.play('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/sonidos/guitarra.mp3')
+                     so.play('PersonajeLin/blue_multiverso/machote/sonidos/guitarra.mp3')
                   if event.key == py.K_q:
                      so.stop()
                   if event.key==py.K_ESCAPE:
@@ -134,19 +134,19 @@ class PersonajeLin:
                   #expresiones
                   if event.key==py.K_f: #feliz
                      self.ban2=1
-                     so.play('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/sonidos/risaHombre.wav')
+                     so.play('PersonajeLin/blue_multiverso/machote/sonidos/risaHombre.wav')
                   if event.key==py.K_n: #asco
                      self.ban2=2
-                     so.play('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/sonidos/yuck.wav')
+                     so.play('PersonajeLin/blue_multiverso/machote/sonidos/yuck.wav')
                   if event.key==py.K_o: #asombrado
                      self.ban2=3
-                     so.play('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/sonidos/wow.wav')
+                     so.play('PersonajeLin/blue_multiverso/machote/sonidos/wow.wav')
                   if event.key==py.K_t: #triste
                      self.ban2=4
-                     so.play('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/sonidos/llora.mp3')
+                     so.play('PersonajeLin/blue_multiverso/machote/sonidos/llora.mp3')
                   if event.key==py.K_e: #enojado
                      self.ban2=5
-                     so.play('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/sonidos/Enojado.wav')
+                     so.play('PersonajeLin/blue_multiverso/machote/sonidos/Enojado.wav')
                   if event.key==py.K_r: #original
                      self.ban2=6
                      self.ban3=6
@@ -214,9 +214,9 @@ class PersonajeLin:
                
          if(self.ban==0):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/paisaje.jpg', 
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/paisaje.jpg', 
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
             glEnable(GL_DEPTH_TEST)
             glPushMatrix()
             glRotate(180,0,1,0)
@@ -335,7 +335,7 @@ class PersonajeLin:
             draw_mov(0,0)
             glPopMatrix() 
 
-         if(ban==3):
+         if(self.ban==3):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
             es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/biblioteca.jpeg',
                   'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
@@ -344,28 +344,28 @@ class PersonajeLin:
             glPushMatrix()
             glRotate(180,0,1,0)
 
-            if ban4 == 1:
+            if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-            if ban4 == 2:
+            if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-            if ban4 == 3:
+            if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
 
             if keys[py.K_i]:
-            draw_mov(0,1)
+                draw_mov(0,1)
             if keys[py.K_k]:
-            draw_mov(0,-1)
+               draw_mov(0,-1)
             if keys[py.K_l]:
-            draw_mov(-1,0)
+               draw_mov(-1,0)
             if keys[py.K_j]:
-            draw_mov(1,0)
+               draw_mov(1,0)
             draw (0,0)
             draw2()
             draw_cone (12,5,2,2,7,50)
@@ -373,7 +373,7 @@ class PersonajeLin:
 
             glPopMatrix() 
 
-         if(ban==4):
+         if(self.ban==4):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
             es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/biblioteca.jpeg',
                   'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
@@ -382,28 +382,28 @@ class PersonajeLin:
             glPushMatrix()
             glRotate(180,0,1,0)
 
-            if ban4 == 1:
+            if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-            if ban4 == 2:
+            if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-            if ban4 == 3:
+            if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
 
             if keys[py.K_i]:
-            draw_mov(0,1)
+               draw_mov(0,1)
             if keys[py.K_k]:
-            draw_mov(0,-1)
+               draw_mov(0,-1)
             if keys[py.K_l]:
-            draw_mov(-1,0)
+               draw_mov(-1,0)
             if keys[py.K_j]:
-            draw_mov(1,0)
+               draw_mov(1,0)
 
             draw (0,0)
             draw2()
@@ -412,38 +412,38 @@ class PersonajeLin:
             glPopMatrix() 
          
          #feliz
-         if (ban2 == 1):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cabana.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machojjte/imagen/cieloCiudad.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         if ban4 == 1:
+         if (self.ban2 == 1):
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cabana.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -469,39 +469,39 @@ class PersonajeLin:
 
 
          #expresión_asco
-         if (ban2 == 2):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/asco.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/asco.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/asco.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/asco.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/asco.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         if (self.ban2 == 2):
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/asco.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
          
-         if ban4 == 1:
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -528,39 +528,39 @@ class PersonajeLin:
 
 
       #expresión_asombro
-         if (ban2 == 3):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloFuturista.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloFuturista.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloFuturista.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloFuturista.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso futurista.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+         if (self.ban2 == 3):
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso futurista.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloFuturista.jpg')
          
-         if ban4 == 1:
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -586,39 +586,39 @@ class PersonajeLin:
          glPopMatrix()
 
 
-         if (ban2 == 4):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerio.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+         if (self.ban2 == 4):
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerio.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg')
          
-         if ban4 == 1:
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -645,38 +645,38 @@ class PersonajeLin:
 
 
          #expresion de enojo
-         if (ban2 == 5):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/bcementerioLuna.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cementerioCielo.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso.jpg')
-         if ban4 == 1:
+         if (self.ban2 == 5):
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/cementerioLuna.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cementerioCielo.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso.jpg')
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -708,38 +708,38 @@ class PersonajeLin:
 
          #movimientos-----------------------------------------
          #brazo derecho
-         if (ban3 == 1):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         if ban4 == 1:
+         if (self.ban3 == 1):
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -761,38 +761,38 @@ class PersonajeLin:
          glDisable(GL_LIGHT0)
          glPopMatrix()
          #brazo izquierdo
-         if (ban3 == 2):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         if ban4 == 1:
+         if (self.ban3 == 2):
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -815,39 +815,39 @@ class PersonajeLin:
          glPopMatrix()
 
 
-         if (ban3 == 3):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/pista.jpg')
+         if (self.ban3 == 3):
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/pista.jpg')
          
-         if ban4 == 1:
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -869,40 +869,40 @@ class PersonajeLin:
          glDisable(GL_LIGHT0)
          glPopMatrix()
       
-         if (ban3 == 4):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         if (self.ban3 == 4):
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/naturalezaCabana2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloCiudad.jpg')
          
          
-         if ban4 == 1:
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -927,39 +927,39 @@ class PersonajeLin:
 
 
          #cuello
-         if (ban3 == 5):
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-         if ban == 0:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif ban == 1:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif ban == 2:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif ban == 3:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
-         elif ban == 4:
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/baile2.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         if (self.ban3 == 5):
+          glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+         if self.ban == 0:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         elif self.ban == 1:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         elif self.ban == 2:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         elif self.ban == 3:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
+         elif self.ban == 4:
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/baile.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/baile2.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/ascoCielo.jpg')
          
-         if ban4 == 1:
+         if self.ban4 == 1:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.phong(0.5,0.7,0.6)
                
-         if ban4 == 2:
+         if self.ban4 == 2:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.gouraud(0.8,1,0.5)
-         if ban4 == 3:
+         if self.ban4 == 3:
                glClearColor(0.0, 0.0, 0.0, 1.0)
                glEnable(GL_DEPTH_TEST)
                lc.interpolado(0.4,0.3,0.9)
@@ -983,9 +983,9 @@ class PersonajeLin:
          
 
       # Manejo del estado del menú o de otras interacciones fuera del bucle de transformaciones
-         if(ban2 == 7):
-         messagebox.showinfo("MENU", "EXPRESIONES: \n(e)->enojo\n(f)->feliz\n(t)->tristeza\n(o)->asombro\n(n)->asco\n\n\nCONTROL DE CAMARA:\n(W)->Adelante\n(S)->Atrás\n(A)->Izquierda\n(D)->Derecha\n(X)->Arriba\n(Z)->Abajo\n\n\n(0,1,2,3,4)->control de escenarios\n\n\nMOVIMIENTOS:\n(r)->original\n(I)->Arriba\n(K)->Abajo\n(J)->Izquierda\n(L)->Derecha\n(espacio)->Cuello\n('>')->Brazo derecho\n('<')->Brazo izquierdo\n(flecha hacia arriba)->pierna izquierda\n(flecha hacia abajo)->pierna derecha\n\n\nSONIDO:\n(P)->play\n(q)->stop\n\n\n(TAB)->info\n salir (ESC)")
-         ban2 = 0
+         if(self.ban2 == 7):
+            messagebox.showinfo("MENU", "EXPRESIONES: \n(e)->enojo\n(f)->feliz\n(t)->tristeza\n(o)->asombro\n(n)->asco\n\n\nCONTROL DE CAMARA:\n(W)->Adelante\n(S)->Atrás\n(A)->Izquierda\n(D)->Derecha\n(X)->Arriba\n(Z)->Abajo\n\n\n(0,1,2,3,4)->control de escenarios\n\n\nMOVIMIENTOS:\n(r)->original\n(I)->Arriba\n(K)->Abajo\n(J)->Izquierda\n(L)->Derecha\n(espacio)->Cuello\n('>')->Brazo derecho\n('<')->Brazo izquierdo\n(flecha hacia arriba)->pierna izquierda\n(flecha hacia abajo)->pierna derecha\n\n\nSONIDO:\n(P)->play\n(q)->stop\n\n\n(TAB)->info\n salir (ESC)")
+            self.ban2 = 0
 
       # Actualización de la pantalla
          py.display.flip()
