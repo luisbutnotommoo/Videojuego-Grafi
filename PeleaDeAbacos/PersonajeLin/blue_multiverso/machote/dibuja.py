@@ -3,8 +3,8 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from pygame.locals import *
 from PIL import *
-import objetos as ob
-import lucesNuev as lc
+import PersonajeLin.blue_multiverso.machote.objetos as ob
+import PersonajeLin.blue_multiverso.machote.lucesNuev as lc
 
 #-----------------------------------------------------------------------
 #-----figura blue---------

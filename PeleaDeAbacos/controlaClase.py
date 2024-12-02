@@ -10,7 +10,8 @@ from menuPersonajesPruebas import SeleccionPersonaje
 from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
 #from PersonajeLuis.clasePrincipalLuis import PersonajeLuis
 from PersonajeEmma.claseEmma import PersonajeEmmanuel
-#from PersonajeLin.machote.main_sincolision import MainLin
+from PersonajeLin.blue_multiverso.machote.main import PersonajeLin
+
 from Acciones.propiedadesPersonajes import Propiedades
 from nivel2 import Nivel2
 from nivel import Nivel1
@@ -26,7 +27,7 @@ class controlaClase:
         self.banderaNivel=True
         pygame.init()  
         pygame.mixer.init()
-        pygame.mixer.music.load("PeleaDeAbacos/Sonidos/menu_principal.mp3")
+        pygame.mixer.music.load("Sonidos/menu_principal.mp3")
         pygame.mixer.music.play(loops=-1)
         
     def main(self):
@@ -69,13 +70,14 @@ class controlaClase:
                                     z = 4
                                 if menu.guardado[i] == 0:
                                     self.personajesJugables.append(z + menu.guardado[i])
-                                    personajeCorrer = PersonajeEmmanuel()
+                                    #personajeCorrer = PersonajeEmmanuel()
                                 elif menu.guardado[i] == 1:
                                     self.personajesJugables.append(z + menu.guardado[i])
                                 elif menu.guardado[i] == 2:
                                     self.personajesJugables.append(z + menu.guardado[i])
+                                    personajeCorrer=PersonajeLin()
                                 elif menu.guardado[i] == 3:
-                                    personajeCorrer=PersonajeStarenka()
+                                    #personajeCorrer=PersonajeStarenka()
                                     self.personajesJugables.append(z + menu.guardado[i])
 
                                 personajeCorrer.run()

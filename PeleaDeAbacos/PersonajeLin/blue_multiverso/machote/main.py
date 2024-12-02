@@ -20,6 +20,7 @@ class PersonajeLin:
    def __init__(self):
     py.init()
     py.mixer.init()
+    self.running = True
 
     self.display = (800, 600)
     py.display.set_mode(self.display, DOUBLEBUF | OPENGL)
@@ -98,12 +99,11 @@ class PersonajeLin:
    
 
    
-   def main(self):
-      while True:
+   def run(self):
+      while self.running :
          for event in py.event.get():
             if event.type == py.QUIT:
-                  py.quit()
-                  quit()
+                  self.running = False
                   #menu
             if event.type == py.KEYDOWN:
                   if event.key==py.K_m:
@@ -114,8 +114,7 @@ class PersonajeLin:
                   if event.key == py.K_q:
                      so.stop()
                   if event.key==py.K_ESCAPE:
-                     py.quit()
-                     quit()    
+                     self.running = False
                   #escenarios
                   if event.key==py.K_0:
                      self.ban=0
@@ -173,7 +172,7 @@ class PersonajeLin:
                      self.ban4=3
                   if event.key==py.K_TAB:
                      messagebox.showinfo("Datos:", "Nombre: Lineth Hernández Torres\nNúmero de control: B22280605\nActividad: Personaje 3D\nNombre de personaje: BLUE")
-               
+             
          keys = py.key.get_pressed()
          if keys[py.K_s]:
             glTranslatef(0,0,3)
@@ -238,16 +237,16 @@ class PersonajeLin:
             
             #muevo el personaje
             if keys[py.K_i]:
-               draw(0,1)
+               self.draw(0,1)
             if keys[py.K_k]:
-               draw(0,-1)
+               self.draw(0,-1)
             if keys[py.K_l]:
-               draw(-1,0)
+               self.draw(-1,0)
             if keys[py.K_j]:
-               draw(1,0)
+               self.draw(1,0)
 
             
-            draw(0,0)
+            self.draw(0,0)
             if(rombo_collision(self.PosObj2_X, self.PosObj2_Y, self.PosObj2_Z,self.Obj2_width, self.Obj2_height,self.Obj2_depth,
             self.PosXob1, self.PosYob1, self.PosZob1,self.Obj1_height)):
                txt.draw_text("Colisión detectada",8,8,4,50,150,14,0,0,0,0)
@@ -265,9 +264,9 @@ class PersonajeLin:
       
          if(self.ban==1):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/esenario2.jpeg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cielo.webp')
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
             glEnable(GL_DEPTH_TEST)
             glPushMatrix()
             glRotate(180,0,1,0)
@@ -302,9 +301,9 @@ class PersonajeLin:
          
          if(self.ban==2):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/biblioteca.jpeg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
             glEnable(GL_DEPTH_TEST)
             glPushMatrix()
             glRotate(180,0,1,0)
@@ -337,9 +336,9 @@ class PersonajeLin:
 
          if(self.ban==3):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/biblioteca.jpeg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
             glEnable(GL_DEPTH_TEST)
             glPushMatrix()
             glRotate(180,0,1,0)
@@ -366,7 +365,6 @@ class PersonajeLin:
                draw_mov(-1,0)
             if keys[py.K_j]:
                draw_mov(1,0)
-            draw (0,0)
             draw2()
             draw_cone (12,5,2,2,7,50)
             draw_mov(0,0)
@@ -375,9 +373,9 @@ class PersonajeLin:
 
          if(self.ban==4):
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            es.draw_e5('C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/biblioteca.jpeg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/piso_cemento.jpg',
-                  'C:/Users/LuisGutierrez/Documents/Lyn/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
+            es.draw_e5('PersonajeLin/blue_multiverso/machote/imagen/biblioteca.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/piso_cemento.jpg',
+                  'PersonajeLin/blue_multiverso/machote/imagen/cieloBiblioteca.jpg')
             glEnable(GL_DEPTH_TEST)
             glPushMatrix()
             glRotate(180,0,1,0)
@@ -405,8 +403,8 @@ class PersonajeLin:
             if keys[py.K_j]:
                draw_mov(1,0)
 
-            draw (0,0)
-            draw2()
+            self.draw (0,0)
+            self.draw2()
             draw_cone (12,5,2,2,7,50)
             draw_mov(0,0)
             glPopMatrix() 
@@ -458,8 +456,8 @@ class PersonajeLin:
             draw_movhappy(-1,0)
          if keys[py.K_j]:
             draw_movhappy(1,0)
-         draw (0,0)
-         draw2()
+         self.draw (0,0)
+         self.draw2()
          draw_cone (12,5,2,2,7,50)
          draw_movhappy(0,0)
          glDisable(GL_LIGHTING)
@@ -517,8 +515,8 @@ class PersonajeLin:
             draw_movasco(-1,0)
          if keys[py.K_j]:
             draw_movasco(1,0)
-         draw (0,0)
-         draw2()
+         self.draw (0,0)
+         self.draw2()
          draw_cone (12,5,2,2,7,50)
          draw_movasco(0,0)
          glDisable(GL_LIGHTING)
@@ -576,8 +574,8 @@ class PersonajeLin:
             draw_movomg(-1,0)
          if keys[py.K_j]:
             draw_movomg(1,0)
-         draw (0,0)
-         draw2()
+         self.draw (0,0)
+         self.draw2()
          draw_cone (12,5,2,2,7,50)   
          draw_movomg(0,0)
          glDisable(GL_LIGHTING)
@@ -635,8 +633,8 @@ class PersonajeLin:
             draw_movsad(-1,0)
          if keys[py.K_j]:
             draw_movsad(1,0)
-         draw (0,0)
-         draw2()
+         self.draw (0,0)
+         self.draw2()
          draw_cone (12,5,2,2,7,50)  
          draw_movsad(0,0)
          glDisable(GL_LIGHTING)
@@ -693,8 +691,8 @@ class PersonajeLin:
          if keys[py.K_j]:
             draw_movEnojo(1,0)
 
-         draw (0,0)
-         draw2()
+         self.draw (0,0)
+         self.draw2()
          draw_cone (12,5,2,2,7,50)
          draw_movEnojo(0,0)
          glDisable(GL_LIGHTING)
@@ -990,4 +988,6 @@ class PersonajeLin:
       # Actualización de la pantalla
          py.display.flip()
          py.time.wait(100) 
+
+      pygame.quit() 
 
