@@ -6,6 +6,7 @@ import os
 
 class MenuNivel:
     def __init__(self):
+        
         pygame.init()  # Asegúrate de inicializar pygame
         self.jugar = True
         self.nivel = 0

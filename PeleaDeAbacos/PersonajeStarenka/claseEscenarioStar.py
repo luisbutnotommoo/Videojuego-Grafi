@@ -379,7 +379,13 @@ class PersonajeStarenka:
         self.finalizar()
 
     def finalizar(self):
-        pygame.quit()
+        glDisable(GL_LIGHT0)
+        glDisable(GL_LIGHT1)
+        glDisable(GL_LIGHT2)
+                
+                # Limpiar contexto de OpenGL
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        pygame.display.quit()
 
 if __name__ == "__main__":
     main=PersonajeStarenka()

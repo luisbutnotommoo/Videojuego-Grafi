@@ -989,5 +989,5 @@ class PersonajeLin:
          py.display.flip()
          py.time.wait(100) 
 
-      pygame.quit() 
+      pygame.display.quit() 
 

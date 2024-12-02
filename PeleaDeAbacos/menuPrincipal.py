@@ -6,7 +6,9 @@ from Imagenes.controla_img import ruta_carpeta_imagenes as ruta_img
 class MenuPrincipal:
     def __init__(self):
         pygame.init()
+        self.exit_game=False
         self.jugar = True
+        self.play_game=False
         self.WINDOW_WIDTH = 800
         self.WINDOW_HEIGHT = 600
         self.surface = pygame.display.set_mode((self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
@@ -62,7 +64,7 @@ class MenuPrincipal:
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.QUIT:
-                    pygame.quit()
+                    
                     return
             
             if self.menu.is_enabled():

@@ -105,7 +105,7 @@ class Nivel1:
 
     
     def init_pygame(self):
-        pygame.init()
+        pygame.display.init()
         self.screen = pygame.display.set_mode(self.display, DOUBLEBUF | OPENGL)
         pygame.event.set_grab(True)
 
@@ -545,7 +545,7 @@ class Nivel1:
                 break
             self.draw_scene()
             pygame.time.wait(10)
-           
+        self.cleanup()
 
     def cleanup(self):
         try:
@@ -566,6 +566,8 @@ class Nivel1:
                 # Reiniciar estado de Pygame
                 self.mp3=None
                 self.mp3=MP3()
+                pygame.display.update()
+                
         except Exception as e:
             print(f"Error en cleanup: {e}")
 

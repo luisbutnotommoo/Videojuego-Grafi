@@ -39,6 +39,8 @@ class controlaClase:
         
     def main(self):
         while True:
+            pygame.mixer.music.load("Sonidos/menu_principal.mp3")
+            pygame.mixer.music.play(loops=-1)
             print("Esta aqui")
             self.banderaSeleccion=True
             self.banderaNivel=True
@@ -61,6 +63,7 @@ class controlaClase:
                 
 
                 if(menuNivel.jugar==False):
+                    
                     while(self.banderaSeleccion):
                             self.personajesJugables=[]
                             menu = SeleccionPersonaje()
@@ -74,20 +77,23 @@ class controlaClase:
                             for i in range(2):
                                 if (i == 1):
                                     z = 4
+                                    
+                                    
                                 if menu.guardado[i] == 0:
                                     self.personajesJugables.append(z + menu.guardado[i])
-                                    #personajeCorrer = PersonajeEmmanuel()
+                                    self.personajeCorrer = PersonajeEmmanuel()
                                 elif menu.guardado[i] == 1:
                                     self.personajesJugables.append(z + menu.guardado[i])
                                     self.personajeCorrer = instanciaLuis
                                 elif menu.guardado[i] == 2:
                                     self.personajesJugables.append(z + menu.guardado[i])
-                                    personajeCorrer=PersonajeLin()
+                                    self.personajeCorrer=PersonajeLin()
                                 elif menu.guardado[i] == 3:
-                                    #personajeCorrer=PersonajeStarenka()
+                                    self.personajeCorrer=PersonajeStarenka()
                                     self.personajesJugables.append(z + menu.guardado[i])
 
                                 self.personajeCorrer.run()
+
                             
                             eleccion = Propiedades(self.personajesJugables)
 
@@ -96,17 +102,22 @@ class controlaClase:
                             if(menuNivel.nivel==1):
                                 nivel1 = Nivel1(personajesJugables=eleccion.personajesJugables)
                                 nivel1.run()
+                                
+
+                                self.mp3.detener_sonido(0)
                                 if nivel1.banderaSiguienteNivel==False:
                                     menuNivel.nivel=2
 
                                 if nivel1.banderaMenuNivel==False:
                                     self.banderaSeleccion=False
                                     menuNivel.reset()
+                                    
                                 if nivel1.banderaMenuPrincipal==False:
                                     self.banderaSeleccion=False
                                     self.banderaNivel=False
                                     menuNivel.reset()
                                     menuPrincipal.reset()
+                                  
                                     
                                 
 
@@ -140,6 +151,10 @@ class controlaClase:
                                     self.banderaNivel=False
                                     menuNivel.reset()
                                     menuPrincipal.reset()
+
+                            pygame.mixer.music.stop()
+                            pygame.mixer.music.load("Sonidos/menu_principal.mp3")
+                            pygame.mixer.music.play(loops=-1)
                             
 
 
