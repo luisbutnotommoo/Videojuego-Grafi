@@ -61,23 +61,32 @@ class ArbolOperaciones:
         return f"({self.representacion_arbol(nodo.izquierda)} {nodo.valor} {self.representacion_arbol(nodo.derecha)})"
 
 class BancoPreguntas:
-    def __init__(self, num_preguntas=5, dificultad=1):
-        self.generador_arboles = ArbolOperaciones(profundidad_max=dificultad)
-        self.num_preguntas = num_preguntas
-        self.preguntas = []
-
-    def generar_banco_preguntas(self):
-        self.preguntas = []
+    def __init__(self, dificultad=1):
+        """
+        Inicializa el banco de preguntas con generación dinámica
         
-        for _ in range(self.num_preguntas):
+        :param dificultad: Profundidad máxima del árbol de operaciones
+        """
+        self.generador_arboles = ArbolOperaciones(profundidad_max=dificultad)
+        self.preguntas_usadas = set()
+
+    def generar_pregunta(self):
+        """
+        Genera una pregunta única en tiempo real
+        
+        :return: Diccionario con la pregunta generada
+        """
+        while True:
             # Generar árbol de operaciones
             arbol = self.generador_arboles.generar_arbol_operaciones()
             
             # Evaluar resultado
             resultado = self.generador_arboles.evaluar_arbol(arbol)
             
-            # Omitir si no se puede evaluar
-            if resultado is None or not isinstance(resultado, (int, float)):
+            # Omitir si no se puede evaluar o ya se ha usado
+            if (resultado is None or 
+                not isinstance(resultado, (int, float)) or 
+                resultado in self.preguntas_usadas):
                 continue
             
             # Redondear y convertir a entero
@@ -100,26 +109,28 @@ class BancoPreguntas:
                 'resultado': resultado
             }
             
-            self.preguntas.append(pregunta)
-        
-        return self.preguntas
+            # Marcar resultado como usado para evitar repeticiones
+            self.preguntas_usadas.add(resultado)
+            
+            return pregunta
 
-    def obtener_pregunta_aleatoria(self):
-        return random.choice(self.preguntas) if self.preguntas else None
+    def reiniciar_preguntas(self):
+        """
+        Reinicia el conjunto de preguntas usadas
+        """
+        self.preguntas_usadas.clear()
 
-def main():
-    # Crear banco de preguntas con árboles binarios
-    banco = BancoPreguntas(num_preguntas=10, dificultad=1)
+'''def main():
+    # Crear banco de preguntas con generación dinámica
+    banco = BancoPreguntas(dificultad=3)
     
-    # Generar preguntas
-    preguntas = banco.generar_banco_preguntas()
-    
-    # Mostrar preguntas
-    for i, pregunta in enumerate(preguntas, 1):
-        print(f"Pregunta {i}:"+pregunta['texto'])
-        #print(pregunta['texto'])
-       # print(f"Respuesta correcta: {pregunta['respuesta_correcta']}")
-       # print(f"Resultado: {pregunta['resultado']}\n")
+    # Generar y mostrar 10 preguntas diferentes
+    for i in range(20):
+        pregunta = banco.generar_pregunta()
+        print(f"Pregunta {i+1}:")
+        print(pregunta['texto'])
+        print(f"Respuesta correcta: {pregunta['respuesta_correcta']}")
+        print(f"Resultado: {pregunta['resultado']}\n")
 
 if __name__ == "__main__":
-    main()
+    main()'''

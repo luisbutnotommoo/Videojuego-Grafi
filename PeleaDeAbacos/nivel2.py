@@ -18,7 +18,7 @@ from Sonidos.controla_mp3 import MP3
 
 class Nivel2:
 
-    def __init__(self, display_size=(800, 600), personajesJugables=[]):
+    def __init__(self, display_size=(800, 600), personajesJugables=[],dificultad=3):
         self.bandera = 0
         self.banderaJugador1 = False
         self.banderaJugador2 = False
@@ -56,9 +56,9 @@ class Nivel2:
         self.texturaTorre=cargar_textura("torreOrg.jpg")
         self.objEscenario = esc.escenario(cargar_imagen("piso3.jpg"),cargar_imagen( "castillo2.jpg"))
         self.iteraPregunta=0
-        self.objetoBanco = bp.BancoPreguntas(5,2)
-        self.cuestionario=self.objetoBanco.generar_banco_preguntas()
-        self.preguntaActual=self.cuestionario[self.iteraPregunta]
+        self.viewportPreguntas=view.ViewPortPreguntas(self.display)
+        self.objetoBanco = bp.BancoPreguntas(dificultad)
+        self.preguntaActual=None
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)
         self.texto_instrucciones = [
@@ -182,7 +182,9 @@ class Nivel2:
             glPopMatrix()  # Llamar al método dibujar del personaje
         
         if self.show_message:
-            view.viewPort(self.display).draw_viewport2(f"Pregunta {self.iteraPregunta}:"+self.preguntaActual['texto'])
+            if self.preguntaActual is None:
+                self.preguntaActual=self.objetoBanco.generar_pregunta()
+            self.viewportPreguntas.draw_viewport(self.preguntaActual['texto'])
         if self.bandera_control_instrucciones:
             tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,150,50,50)
         if self.bandera_pausa:
@@ -411,6 +413,7 @@ class Nivel2:
         self.banderaJugador1 = False
         self.banderaJugador2 = False
         self.iteraPregunta+=1
+        self.preguntaActual=None
         
 
     def eventoNoAcertaron(self):
@@ -419,6 +422,7 @@ class Nivel2:
         self.iteraPregunta+=1
         self.banderaJugador1 = False
         self.banderaJugador2 = False
+        self.preguntaActual=None
 
     def teclasJugador1(self):
         keys = pygame.key.get_pressed()
