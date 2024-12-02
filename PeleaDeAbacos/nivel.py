@@ -7,11 +7,13 @@ from PIL import*
 import Acciones.objetosTextura as obj
 import Acciones.escenario as esc
 import Acciones.viewPortPreguntas as view
-import Acciones.bancoPreguntas as bp
+import Acciones.bancoPreguntas2 as bp
 from Acciones.boceto2 import  PersonajesDeTodos
 import Acciones.boceto2 as b
 from Acciones.colisionRectangular import RectangularCollision3D
 from Acciones.texto import textos as tx
+from Imagenes.controla_img import *
+from Sonidos.controla_mp3 import MP3
 
 
 class Nivel1:
@@ -38,26 +40,29 @@ class Nivel1:
 
         self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
-        self.sonido_seleccion = pygame.mixer.Sound("Sonidos/click.mp3")
-        self.sonido_ganar = pygame.mixer.Sound("Sonidos/win.mp3")
-        pygame.mixer.music.load("Sonidos/nivel1.mp3")
-        pygame.mixer.music.play(loops=-1)
-        
+
+        self.mp3=MP3()
+        self.sonido_seleccion = 'click.mp3'
+        self.sonido_ganar = 'win.mp3'
+        self.mp3.reproducir_sonido_fondo('nivel1.mp3')
+
         self.bandera_instrucciones = True
         self.bandera_pausa = False
         self.bandera_control_instrucciones = True
         self.bandera_ganador=0
         self.puntaje_ganador = 10
-        self.texturaBola=obj.load_texture("Imagenes/aguaOrg.jpg")
-        self.texturaPocima=obj.load_texture("Imagenes/moradoPocimaOrg.jpg")
-        self.texturaTorre=obj.load_texture("Imagenes/torreOrg.jpg")
-        self.objEscenario = esc.escenario("Imagenes/pasto.jpeg", "Imagenes/castillo.jpg")
-        self.objetoPregunta = bp.bancoPreguntas()
-        self.objetoPregunta.elige_pregunta()
+        self.texturaBola=cargar_textura("aguaOrg.jpg")
+        self.texturaPocima=cargar_textura("moradoPocimaOrg.jpg")
+        self.texturaTorre=cargar_textura("torreOrg.jpg")
+        self.objEscenario = esc.escenario(cargar_imagen("pasto.jpg"),cargar_imagen( "castillo.jpg"))
+        self.iteraPregunta=0
+        self.viewportPreguntas=view.ViewPortPreguntas(self.display)
+        self.objetoBanco = bp.BancoPreguntas(1)
+        self.preguntaActual=None
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)
         self.texto_instrucciones = [
-            "                               D U E L O     D E   A B A C O S ",
+            "                               D U E L O    D E   A B A C O S ",
             "               _____________________________________________", "",
             "                  JUGADOR 1, contesta las preguntas con A,S,D",
             "         Contesta correctamente y ataca la torre rival con W,A,S,D",
@@ -87,6 +92,10 @@ class Nivel1:
             personaje["objeto"].render()
             glPopMatrix()
 
+    def reiniciar_valores(self):
+        self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
+        self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
+
     def actualizar_estado_emocional(self, nombre_personaje, emocion):
         # Actualiza la emoción de un personaje
         for personaje in self.personaje:
@@ -94,15 +103,9 @@ class Nivel1:
                 personaje["objeto"].set_emotion(emocion)  # Actualizar emoción del personaje
                 print(f"{nombre_personaje} tiene ahora la emoción {emocion}")
 
-
-    def reiniciar_valores(self):
-        self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
-        self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
-
     
     def init_pygame(self):
         pygame.init()
-        pygame.mixer.init()
         self.screen = pygame.display.set_mode(self.display, DOUBLEBUF | OPENGL)
         pygame.event.set_grab(True)
 
@@ -176,10 +179,12 @@ class Nivel1:
         for personaje in self.personaje:
             glPushMatrix()
             personaje["objeto"].render()
-            glPopMatrix()# Llamar al método dibujar del personaje
+            glPopMatrix()  # Llamar al método dibujar del personaje
         
         if self.show_message:
-            view.viewPort(self.display).draw_viewport(self.objetoPregunta)
+            if self.preguntaActual is None:
+                self.preguntaActual=self.objetoBanco.generar_pregunta()
+            self.viewportPreguntas.draw_viewport(self.preguntaActual['texto'])
         if self.bandera_control_instrucciones:
             tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,150,50,50)
         if self.bandera_pausa:
@@ -218,8 +223,8 @@ class Nivel1:
                 
                 print('Jugador1', self.jugador_1_score)
                 if self.jugador_1_score == self.puntaje_ganador:
-                    pygame.mixer.music.stop()
-                    self.sonido_ganar.play()
+                    self.mp3.detener_sonido(0)
+                    self.mp3.reproducir_sonido_personaje(self.sonido_ganar)
                     self.bandera_ganador=1
                     self.show_message=False
             if box1.check_collision(box3):
@@ -234,8 +239,8 @@ class Nivel1:
                 
                 print('Jugador1', self.jugador_1_score)
                 if self.jugador_1_score == self.puntaje_ganador:
-                    pygame.mixer.music.stop()
-                    self.sonido_ganar.play()
+                    self.mp3.detener_sonido(0)
+                    self.mp3.reproducir_sonido_personaje(self.sonido_ganar)
                     self.bandera_ganador=1
                     self.show_message=False
                     
@@ -254,14 +259,14 @@ class Nivel1:
                 print("¡Colisión detectada con la Torre 1!")
                 self.reiniciar_valores()
                 self.banderaColision=0
-                self.show_message=True
-                print('Jugador2:',self.jugador_2_score)
                 self.actualizar_estado_emocional(self.personaje[1]["nombre"], 0)
                 self.actualizar_estado_emocional(self.personaje[0]["nombre"], 0)
                 self.actualizarRender()
+                self.show_message=True
+                print('Jugador2:',self.jugador_2_score)
                 if self.jugador_2_score == self.puntaje_ganador:
-                    pygame.mixer.music.stop()
-                    self.sonido_ganar.play()
+                    self.mp3.detener_sonido(0)
+                    self.mp3.reproducir_sonido_personaje(self.sonido_ganar)
                     self.bandera_ganador=2
                     self.show_message=False
             if box1.check_collision(box3):
@@ -269,14 +274,14 @@ class Nivel1:
                 print("¡Colisión detectada con la Torre 2!")
                 self.reiniciar_valores()
                 self.banderaColision=0
-                self.show_message=True
-                print('Jugador2:',self.jugador_2_score)
                 self.actualizar_estado_emocional(self.personaje[1]["nombre"], 0)
                 self.actualizar_estado_emocional(self.personaje[0]["nombre"], 0)
                 self.actualizarRender()
+                self.show_message=True
+                print('Jugador2:',self.jugador_2_score)
                 if self.jugador_2_score == self.puntaje_ganador:
-                    pygame.mixer.music.stop()
-                    self.sonido_ganar.play()
+                    self.mp3.detener_sonido(0)
+                    self.mp3.reproducir_sonido_personaje(self.sonido_ganar)
                     self.bandera_ganador=2
                     self.show_message=False
                 
@@ -291,7 +296,6 @@ class Nivel1:
                 if event.key == pygame.K_ESCAPE:
                     self.bandera = 1
                     return False
-                
                  # Configurar pausa
                 if event.key == pygame.K_p:
                     if self.bandera_control_instrucciones:
@@ -299,8 +303,7 @@ class Nivel1:
                         self.bandera_control_instrucciones = not self.bandera_control_instrucciones
                     else:
                         self.bandera_pausa = not self.bandera_pausa
-                    self.sonido_seleccion.play()
-
+                    self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
 
                 # Opciones de pausa
                 if self.bandera_pausa:
@@ -312,8 +315,8 @@ class Nivel1:
                         if self.opc_sel == 1:
                             self.bandera_pausa = not self.bandera_pausa
                         elif self.opc_sel == 2:
-                            pygame.mixer.music.stop()
-                            pygame.mixer.music.play()
+                            self.mp3.detener_sonido(0)
+                            self.mp3.reproducir_sonido_fondo()
                             self.jugador_1_score=0
                             self.jugador_2_score=0
                             self.bandera_instrucciones=not self.bandera_instrucciones
@@ -323,7 +326,6 @@ class Nivel1:
                             self.bandera_pausa = not self.bandera_pausa
                             self.bandera_instrucciones =  not self.bandera_instrucciones
                             self.bandera_control_instrucciones = not self.bandera_control_instrucciones
-                        ##Seleccion de personajes
                         elif self.opc_sel == 4:
                             self.banderaMenu=False
                             return False
@@ -337,7 +339,7 @@ class Nivel1:
                             pygame.quit()  # Cierra Pygame
                             sys.exit()
                             return False
-                    self.sonido_seleccion.play()
+                    self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
                     # Opciones de siguiente nivel
                 if self.bandera_ganador != 0:
                     if event.key == pygame.K_UP:
@@ -349,8 +351,8 @@ class Nivel1:
                             self.banderaSiguienteNivel=False
                             return False
                         elif self.opc_sel == 2:
-                            pygame.mixer.music.stop()
-                            pygame.mixer.music.play()
+                            self.mp3.detener_sonido(0)
+                            self.mp3.reproducir_sonido_fondo()
                             self.jugador_1_score=0
                             self.jugador_2_score=0
                             self.bandera_instrucciones=not self.bandera_instrucciones
@@ -359,7 +361,8 @@ class Nivel1:
                         elif self.opc_sel == 3:
                             self.banderaMenuPrincipal=False
                             return False
-                    self.sonido_seleccion.play()
+                    self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
+                
                 
                 if self.show_message:  # Si la pregunta está en pantalla
                     # Verificar si ambos jugadores ya están bloqueados
@@ -376,6 +379,7 @@ class Nivel1:
                             self.actualizar_estado_emocional(self.personaje[1]["nombre"], 2)
                             self.actualizarRender()
 
+                           
                         else:
                             self.banderaJugador1 = True  # Bloquear teclas para Jugador 1
                     
@@ -408,15 +412,17 @@ class Nivel1:
         self.show_message = False  # Ocultar la pregunta 
         self.banderaJugador1 = False
         self.banderaJugador2 = False
-        self.objetoPregunta.elige_pregunta()
+        self.iteraPregunta+=1
+        self.preguntaActual=None
         
 
     def eventoNoAcertaron(self):
         print("Evento: Ambos jugadores fallaron")
         self.show_message = True  # Ocultar la pregunta
-        self.objetoPregunta.elige_pregunta()
+        self.iteraPregunta+=1
         self.banderaJugador1 = False
         self.banderaJugador2 = False
+        self.preguntaActual=None
 
     def teclasJugador1(self):
         keys = pygame.key.get_pressed()
@@ -449,7 +455,7 @@ class Nivel1:
             pygame.K_DOWN: "b",
             pygame.K_RIGHT: "c"  # Jugador 2 presiona 'UP'
         }
-        if key in key_answer_map and key_answer_map[key] == self.objetoPregunta.respuestaActual:
+        if key in key_answer_map and key_answer_map[key] == self.preguntaActual['respuesta_correcta']:
             return True
         return False
     
@@ -502,7 +508,6 @@ class Nivel1:
             self.opc_sel = 1
         if self.opc_sel < 1:
             self.opc_sel = 3
-
     def actualizar_opciones_sig_nivel(self,ganador):
         self.txopc1 = ""
         self.txopc2 = ""
@@ -522,7 +527,6 @@ class Nivel1:
             self.txopc2+" Reiniciar nivel",
             self.txopc3+" Volver al Menú",
         ]
-
     def run(self):
         running = True
         while running:
@@ -557,14 +561,14 @@ class Nivel1:
                 # Limpiar contexto de OpenGL
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
                
-                pygame.mixer.music.stop()
-                pygame.mixer.music.unload()
-                pygame.mixer.quit()
+                self.mp3.detener_sonido(0)
+                
                 # Reiniciar estado de Pygame
-                pygame.display.quit()
-                pygame.display.init()
+                self.mp3=None
+                self.mp3=MP3()
         except Exception as e:
             print(f"Error en cleanup: {e}")
+
 
 if __name__ == "__main__":
     sP = Nivel1()

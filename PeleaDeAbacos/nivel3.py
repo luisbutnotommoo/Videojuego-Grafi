@@ -16,7 +16,7 @@ from Imagenes.controla_img import *
 from Sonidos.controla_mp3 import MP3
 
 
-class Nivel2:
+class Nivel3:
 
     def __init__(self, display_size=(800, 600), personajesJugables=[]):
         self.bandera = 0
@@ -54,10 +54,10 @@ class Nivel2:
         self.texturaBola=cargar_textura("aguaOrg.jpg")
         self.texturaPocima=cargar_textura("moradoPocimaOrg.jpg")
         self.texturaTorre=cargar_textura("torreOrg.jpg")
-        self.objEscenario = esc.escenario(cargar_imagen("piso3.jpg"),cargar_imagen( "castillo2.jpg"))
+        self.objEscenario = esc.escenario(cargar_imagen("piso3.jpg"),cargar_imagen( "pared3.jpg"))
         self.iteraPregunta=0
         self.viewportPreguntas=view.ViewPortPreguntas(self.display)
-        self.objetoBanco = bp.BancoPreguntas(2)
+        self.objetoBanco = bp.BancoPreguntas(3)
         self.preguntaActual=None
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)
@@ -571,5 +571,5 @@ class Nivel2:
 
 
 if __name__ == "__main__":
-    sP = Nivel2()
+    sP = Nivel3()
     sP.run()

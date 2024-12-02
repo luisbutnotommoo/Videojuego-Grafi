@@ -15,13 +15,17 @@ from PersonajeLin.blue_multiverso.machote.main import PersonajeLin
 from Acciones.propiedadesPersonajes import Propiedades
 from nivel2 import Nivel2
 from nivel import Nivel1
+from nivel3 import Nivel3
 from menuPrincipal import MenuPrincipal
 from menuNivel import MenuNivel
+import Sonidos.controla_mp3 as cmp3
 import subprocess
+
 directorio_script = os.path.dirname(os.path.abspath(__file__))
 
 class controlaClase:
     def __init__(self):
+        self.mp3=cmp3.MP3()
         self.personajesJugables = []
         self.banderaSeleccion=True
         self.banderaNivel=True
@@ -54,7 +58,6 @@ class controlaClase:
                 
 
                 if(menuNivel.jugar==False):
-                    pygame.mixer.music.stop()
                     while(self.banderaSeleccion):
                             self.personajesJugables=[]
                             menu = SeleccionPersonaje()
@@ -106,6 +109,21 @@ class controlaClase:
                             if(menuNivel.nivel==2):
                                 nivel2 = Nivel2(personajesJugables=eleccion.personajesJugables)
                                 nivel2.run()
+                                if nivel2.banderaSiguienteNivel==False:
+                                    menuNivel.nivel=3
+
+                                if nivel2.banderaMenuNivel==False:
+                                    self.banderaSeleccion=False
+                                    menuNivel.reset()
+                                if nivel2.banderaMenuPrincipal==False:
+                                    self.banderaSeleccion=False
+                                    self.banderaNivel=False
+                                    menuNivel.reset()
+                                    menuPrincipal.reset()
+
+                            if(menuNivel.nivel==3):
+                                nivel3 = Nivel3(personajesJugables=eleccion.personajesJugables)
+                                nivel3.run()
                                 if nivel2.banderaSiguienteNivel==False:
                                     menuNivel.nivel=3
 

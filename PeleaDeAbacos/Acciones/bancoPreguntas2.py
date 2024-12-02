@@ -1,5 +1,6 @@
 import random
 import operator
+import math
 
 class NodoOperacion:
     def __init__(self, valor=None, izquierda=None, derecha=None):
@@ -12,7 +13,8 @@ class ArbolOperaciones:
         '+': operator.add,
         '-': operator.sub,
         '*': operator.mul,
-        '/': operator.truediv
+        '/': operator.truediv,
+ 
     }
 
     def __init__(self, profundidad_max=3, rango_numeros=(-20, 20)):
@@ -49,8 +51,15 @@ class ArbolOperaciones:
         
         # Aplicar operación
         try:
-            return self.OPERADORES[nodo.valor](izq, der)
-        except (ZeroDivisionError, OverflowError):
+            resultado = self.OPERADORES[nodo.valor](izq, der)
+            
+            # Manejo especial para división
+            if nodo.valor == '/' and isinstance(resultado, float):
+                # Redondear a 2 decimales si es necesario
+                return round(resultado, 2)
+            
+            return resultado
+        except (ZeroDivisionError, OverflowError, ValueError):
             return None
 
     def representacion_arbol(self, nodo):
@@ -61,34 +70,59 @@ class ArbolOperaciones:
         return f"({self.representacion_arbol(nodo.izquierda)} {nodo.valor} {self.representacion_arbol(nodo.derecha)})"
 
 class BancoPreguntas:
-    def __init__(self, num_preguntas=5, dificultad=1):
-        self.generador_arboles = ArbolOperaciones(profundidad_max=dificultad)
-        self.num_preguntas = num_preguntas
-        self.preguntas = []
-
-    def generar_banco_preguntas(self):
-        self.preguntas = []
+    def __init__(self, dificultad=1):
+        """
+        Inicializa el banco de preguntas con generación dinámica
         
-        for _ in range(self.num_preguntas):
+        :param dificultad: Profundidad máxima del árbol de operaciones
+        """
+        self.generador_arboles = ArbolOperaciones(profundidad_max=dificultad)
+        self.preguntas_usadas = set()
+
+    def generar_pregunta(self):
+        """
+        Genera una pregunta única en tiempo real
+        
+        :return: Diccionario con la pregunta generada
+        """
+        intentos_max = 20  # Límite de intentos para evitar bucle infinito
+        intentos = 0
+
+        while intentos < intentos_max:
             # Generar árbol de operaciones
             arbol = self.generador_arboles.generar_arbol_operaciones()
             
             # Evaluar resultado
             resultado = self.generador_arboles.evaluar_arbol(arbol)
             
-            # Omitir si no se puede evaluar
-            if resultado is None or not isinstance(resultado, (int, float)):
+            # Omitir si no se puede evaluar o ya se ha usado
+            if (resultado is None or 
+                resultado in self.preguntas_usadas or
+                math.isnan(resultado) or 
+                math.isinf(resultado)):
+                intentos += 1
                 continue
             
-            # Redondear y convertir a entero
-            resultado = int(round(resultado))
+            # Formatear el resultado
+            if isinstance(resultado, float):
+                # Redondear a 2 decimales si es un flotante
+                resultado = round(resultado, 2)
+            
+            # Convertir a entero si es posible
+            if isinstance(resultado, float) and resultado.is_integer():
+                resultado = int(resultado)
             
             # Generar opciones de respuesta
             opciones = [resultado]
             while len(opciones) < 3:
-                opcion = resultado + random.randint(-20, 20)
-                if opcion not in opciones:
-                    opciones.append(opcion)
+                # Generar variaciones de la respuesta
+                if isinstance(resultado, int):
+                    variacion = resultado + random.randint(-10, 10)
+                else:
+                    variacion = round(resultado + random.uniform(-2, 2), 2)
+                
+                if variacion not in opciones:
+                    opciones.append(variacion)
             
             random.shuffle(opciones)
             
@@ -100,26 +134,16 @@ class BancoPreguntas:
                 'resultado': resultado
             }
             
-            self.preguntas.append(pregunta)
-        
-        return self.preguntas
+            # Marcar resultado como usado para evitar repeticiones
+            self.preguntas_usadas.add(resultado)
+            
+            return pregunta
 
-    def obtener_pregunta_aleatoria(self):
-        return random.choice(self.preguntas) if self.preguntas else None
+        # Si no se puede generar una pregunta válida
+        raise ValueError("No se pudo generar una pregunta válida después de múltiples intentos")
 
-def main():
-    # Crear banco de preguntas con árboles binarios
-    banco = BancoPreguntas(num_preguntas=10, dificultad=1)
-    
-    # Generar preguntas
-    preguntas = banco.generar_banco_preguntas()
-    
-    # Mostrar preguntas
-    for i, pregunta in enumerate(preguntas, 1):
-        print(f"Pregunta {i}:"+pregunta['texto'])
-        #print(pregunta['texto'])
-       # print(f"Respuesta correcta: {pregunta['respuesta_correcta']}")
-       # print(f"Resultado: {pregunta['resultado']}\n")
-
-if __name__ == "__main__":
-    main()
+    def reiniciar_preguntas(self):
+        """
+        Reinicia el conjunto de preguntas usadas
+        """
+        self.preguntas_usadas.clear()

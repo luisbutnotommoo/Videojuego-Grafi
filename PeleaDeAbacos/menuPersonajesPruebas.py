@@ -5,10 +5,8 @@ from pygame.locals import *
 from Acciones import boceto2 as b
 from Acciones.boceto2 import PersonajesDeTodos
 import os
-from Imagenes.redimensionar_imagen import ruta_actual as ruta_img
-from Sonidos.ruta import ruta_actual as ruta_audio
-
-
+from Imagenes.controla_img import ruta_carpeta_imagenes as ruta_img
+from Sonidos.controla_mp3 import ruta_carpeta_audios as ruta_audio
 
 class SeleccionPersonaje:
     def __init__(self, display_size=(800, 600)):
@@ -32,7 +30,7 @@ class SeleccionPersonaje:
         self.asignar_posiciones_personajes()
 
         # Cargar texturas
-        floor=os.path.join(ruta_img,'pasto.jpeg')
+        floor=os.path.join(ruta_img,'pasto.jpg')
         wall=os.path.join(ruta_img,'pared.jpg')
         self.floor_texture = self.load_texture(floor)
         self.wall_texture = self.load_texture(wall)
@@ -240,7 +238,7 @@ class SeleccionPersonaje:
             glTexCoord2f(0, 1); glVertex2f(x, y + text_height - i * line_height)
             glEnd()
             
-            glDeleteTextures(int(texture_id))
+          #  glDeleteTextures(int(texture_id))
             glPopMatrix()
             glMatrixMode(GL_PROJECTION)
             glPopMatrix()

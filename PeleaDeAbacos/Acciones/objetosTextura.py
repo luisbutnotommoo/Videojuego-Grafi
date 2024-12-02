@@ -5,8 +5,7 @@ import math
 from PIL import Image
 
 
-
-def load_texture(file_path):
+'''def load_texture(file_path):
     image = Image.open(file_path).transpose(Image.FLIP_TOP_BOTTOM)
     img_data = image.convert("RGBA").tobytes()
     width, height = image.size
@@ -15,7 +14,7 @@ def load_texture(file_path):
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img_data)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
-    return textura_id
+    return textura_id'''
 
 
 

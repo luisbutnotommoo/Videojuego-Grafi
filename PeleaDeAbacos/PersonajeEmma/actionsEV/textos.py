@@ -50,7 +50,7 @@ def render_text_2d(display, text, x, y, font, line_height=18):
         glEnd()
         
         # Limpiar la textura
-        glDeleteTextures(int(texture_id))
+     #   glDeleteTextures(int(texture_id))
         
         # Restaurar la proyección
         glPopMatrix()
