@@ -106,7 +106,6 @@ class Nivel2:
     
     def init_pygame(self):
         pygame.init()
-        pygame.mixer.init()
         self.screen = pygame.display.set_mode(self.display, DOUBLEBUF | OPENGL)
         pygame.event.set_grab(True)
 
@@ -222,8 +221,8 @@ class Nivel2:
                 
                 print('Jugador1', self.jugador_1_score)
                 if self.jugador_1_score == self.puntaje_ganador:
-                    pygame.mixer.music.stop()
-                    self.sonido_ganar.play()
+                    self.mp3.detener_sonido(0)
+                    self.mp3.reproducir_sonido_personaje(self.sonido_ganar)
                     self.bandera_ganador=1
                     self.show_message=False
             if box1.check_collision(box3):
@@ -238,8 +237,8 @@ class Nivel2:
                 
                 print('Jugador1', self.jugador_1_score)
                 if self.jugador_1_score == self.puntaje_ganador:
-                    pygame.mixer.music.stop()
-                    self.sonido_ganar.play()
+                    self.mp3.detener_sonido(0)
+                    self.mp3.reproducir_sonido_personaje(self.sonido_ganar)
                     self.bandera_ganador=1
                     self.show_message=False
                     
@@ -264,8 +263,8 @@ class Nivel2:
                 self.show_message=True
                 print('Jugador2:',self.jugador_2_score)
                 if self.jugador_2_score == self.puntaje_ganador:
-                    pygame.mixer.music.stop()
-                    self.sonido_ganar.play()
+                    self.mp3.detener_sonido(0)
+                    self.mp3.reproducir_sonido_personaje(self.sonido_ganar)
                     self.bandera_ganador=2
                     self.show_message=False
             if box1.check_collision(box3):
@@ -279,8 +278,8 @@ class Nivel2:
                 self.show_message=True
                 print('Jugador2:',self.jugador_2_score)
                 if self.jugador_2_score == self.puntaje_ganador:
-                    pygame.mixer.music.stop()
-                    self.sonido_ganar.play()
+                    self.mp3.detener_sonido(0)
+                    self.mp3.reproducir_sonido_personaje(self.sonido_ganar)
                     self.bandera_ganador=2
                     self.show_message=False
                 
@@ -302,7 +301,7 @@ class Nivel2:
                         self.bandera_control_instrucciones = not self.bandera_control_instrucciones
                     else:
                         self.bandera_pausa = not self.bandera_pausa
-                    self.sonido_seleccion.play()
+                    self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
 
                 # Opciones de pausa
                 if self.bandera_pausa:
@@ -314,8 +313,8 @@ class Nivel2:
                         if self.opc_sel == 1:
                             self.bandera_pausa = not self.bandera_pausa
                         elif self.opc_sel == 2:
-                            pygame.mixer.music.stop()
-                            pygame.mixer.music.play()
+                            self.mp3.detener_sonido(0)
+                            self.mp3.reproducir_sonido_fondo()
                             self.jugador_1_score=0
                             self.jugador_2_score=0
                             self.bandera_instrucciones=not self.bandera_instrucciones
@@ -338,7 +337,7 @@ class Nivel2:
                             pygame.quit()  # Cierra Pygame
                             sys.exit()
                             return False
-                    self.sonido_seleccion.play()
+                    self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
                     # Opciones de siguiente nivel
                 if self.bandera_ganador != 0:
                     if event.key == pygame.K_UP:
@@ -350,8 +349,8 @@ class Nivel2:
                             self.banderaSiguienteNivel=False
                             return False
                         elif self.opc_sel == 2:
-                            pygame.mixer.music.stop()
-                            pygame.mixer.music.play()
+                            self.mp3.detener_sonido(0)
+                            self.mp3.reproducir_sonido_fondo()
                             self.jugador_1_score=0
                             self.jugador_2_score=0
                             self.bandera_instrucciones=not self.bandera_instrucciones
@@ -360,7 +359,7 @@ class Nivel2:
                         elif self.opc_sel == 3:
                             self.banderaMenuPrincipal=False
                             return False
-                    self.sonido_seleccion.play()
+                    self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
                 
                 
                 if self.show_message:  # Si la pregunta está en pantalla
@@ -558,12 +557,11 @@ class Nivel2:
                 # Limpiar contexto de OpenGL
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
                
-                pygame.mixer.music.stop()
-                pygame.mixer.music.unload()
-                pygame.mixer.quit()
+                self.mp3.detener_sonido(0)
+                
                 # Reiniciar estado de Pygame
-                pygame.display.quit()
-                pygame.display.init()
+                self.mp3=None
+                self.mp3=MP3()
         except Exception as e:
             print(f"Error en cleanup: {e}")
 

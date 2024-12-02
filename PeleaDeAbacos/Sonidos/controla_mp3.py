@@ -32,7 +32,8 @@ class MP3:
             self.canal_personaje.stop()
     
     def reproducir_sonido_fondo(self,nombre_sonido):
-        self.__set_archivo__(nombre_sonido,0)
+        if nombre_sonido is not None:
+            self.__set_archivo__(nombre_sonido,0)
         if not self.canal_ambiente.get_busy():
              self.canal_ambiente.play(self.sonido_ambiente,loops=-1)
         
