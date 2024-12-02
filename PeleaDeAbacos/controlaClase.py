@@ -121,13 +121,14 @@ class controlaClase:
                             if(menuNivel.nivel==3):
                                 nivel3 = Nivel3(personajesJugables=eleccion.personajesJugables)
                                 nivel3.run()
-                                if nivel2.banderaSiguienteNivel==False:
+                                if nivel3.banderaSiguienteNivel==False:
+                       
                                     menuNivel.nivel=3
 
-                                if nivel2.banderaMenuNivel==False:
+                                if nivel3.banderaMenuNivel==False:
                                     self.banderaSeleccion=False
                                     menuNivel.reset()
-                                if nivel2.banderaMenuPrincipal==False:
+                                if nivel3.banderaMenuPrincipal==False:
                                     self.banderaSeleccion=False
                                     self.banderaNivel=False
                                     menuNivel.reset()
