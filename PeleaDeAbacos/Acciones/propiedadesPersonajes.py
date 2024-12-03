@@ -11,7 +11,7 @@ import Acciones.bancoPreguntas as bp
 from Acciones.boceto2 import  PersonajesDeTodos
 import Acciones.boceto2 as b
 from Acciones.colisionRectangular import RectangularCollision3D
-from Acciones.texto import textos as tx
+from Acciones.textos import textos as tx
 
 class Propiedades:
     def __init__(self, personajes=[]):

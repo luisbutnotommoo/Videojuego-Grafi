@@ -3,7 +3,7 @@ from OpenGL.GLU import *
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from pygame.locals import *
-import Acciones.texto as txt
+import Acciones.textos as txt
 
 class ViewPortPreguntas:
     def __init__(self, display_inicial):
