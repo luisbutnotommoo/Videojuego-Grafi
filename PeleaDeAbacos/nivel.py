@@ -43,9 +43,6 @@ class Nivel1:
         self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
 
-        self.mp3=MP3()
-        self.sonido_seleccion = 'click.mp3'
-        self.sonido_ganar = 'win.mp3'
         self.snd_seleccion = pygame.mixer.Sound("Sonidos/click.mp3")
         self.snd_ganar = pygame.mixer.Sound("Sonidos/win.mp3")
         pygame.mixer.music.load("Sonidos/nivel1.mp3")
@@ -67,14 +64,14 @@ class Nivel1:
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)
         self.texto_instrucciones = [
-            "                                   M E N U   P E R S O N A J E S      ",
+            "                               D U E L O    D E   A B A C O S ",
             "               _____________________________________________", "",
-            "                     Para visualizar más de cerca un personaje ",
-            "                       Presiona un número(1, 2, 3, 4) y después M ",
-            "                     Para salir del modo visualizar, presiona ESC",
-            "              Cuando quieras elegir un personaje, presiona ENTER",
-            "                Recuerda, se haran DOS elecciones de personajes",
-            "                                     Jugador 1 y Jugador 2",
+            "                  JUGADOR 1, contesta las preguntas con A,S,D",
+            "         Contesta correctamente y ataca la torre rival con W,A,S,D",
+            "        JUGADOR 2, contesta las preguntas con las FLECHAS <,v,>",
+            "Contesta correctamente y ataca la torre rival con las FLECHAS ^,<,v,>",
+            "                     Las respuestas incorrectas no dan puntos",
+            "                             ¡Se más rápido que tu adversario!",
             "               _____________________________________________", "",
             "                                - Presiona P para continuar -"
         ]
@@ -185,26 +182,6 @@ class Nivel1:
             personaje["objeto"].render()
             glPopMatrix()  # Llamar al método dibujar del personaje
         
-        if self.show_message:
-            if self.preguntaActual is None:
-                self.preguntaActual=self.objetoBanco.generar_pregunta()
-            self.viewportPreguntas.draw_viewport(self.preguntaActual['texto'])
-        if self.bandera_control_instrucciones:
-            tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,150,50,50)
-        if self.bandera_pausa:
-            self.actualizar_opciones()
-            tx.draw_text2(self.texto_pausa,self.fuente_pausa,150,50,50)
-        if not self.bandera_control_instrucciones and not self.bandera_pausa:
-            tx.draw_text2(["Presiona SPACE para mostrar la pregunta","Presiona P para pausar el juego"],self.fuente_instrucciones,0,20,500)
-            tx.draw_text2([f"Puntuación jugador 1= {self.jugador_1_score}"],self.fuente_instrucciones,0,50,20)
-            tx.draw_text2([f"Puntuación jugador 2= {self.jugador_2_score}"],self.fuente_instrucciones,0,500,20)
-        if self.bandera_ganador==1:
-            self.actualizar_opciones_sig_nivel(1)
-            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
-        if self.bandera_ganador==2:
-            self.actualizar_opciones_sig_nivel(2)
-            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
-        
         # Detectar la colisión cuando está activada
         if self.banderaColision==1:
             self.pocima(0, 0)
@@ -289,6 +266,25 @@ class Nivel1:
                     self.bandera_ganador=2
                     self.show_message=False
                 
+        if self.show_message:
+            if self.preguntaActual is None:
+                self.preguntaActual=self.objetoBanco.generar_pregunta()
+            self.viewportPreguntas.draw_viewport(self.preguntaActual['texto'])
+        if self.bandera_control_instrucciones:
+            tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,150,50,50)
+        if self.bandera_pausa:
+            self.actualizar_opciones()
+            tx.draw_text2(self.texto_pausa,self.fuente_pausa,150,50,50)
+        if not self.bandera_control_instrucciones and not self.bandera_pausa:
+            tx.draw_text2(["Presiona SPACE para mostrar la pregunta","Presiona P para pausar el juego"],self.fuente_instrucciones,0,20,500)
+            tx.draw_text2([f"Puntuación jugador 1= {self.jugador_1_score}"],self.fuente_instrucciones,0,50,20)
+            tx.draw_text2([f"Puntuación jugador 2= {self.jugador_2_score}"],self.fuente_instrucciones,0,500,20)
+        if self.bandera_ganador==1:
+            self.actualizar_opciones_sig_nivel(1)
+            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
+        if self.bandera_ganador==2:
+            self.actualizar_opciones_sig_nivel(2)
+            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
 
         pygame.display.flip()
 
@@ -340,18 +336,18 @@ class Nivel1:
                         elif self.opc_sel == 4:
                             self.banderaMenu=False
                             self.estado_general = "personaje1"
-                            self.mp3.detener_sonido(0)
+                            pygame.mixer.music.stop()
                             return False
                         #volver a menu principal
                         elif self.opc_sel == 5:
                             self.banderaMenuPrincipal=False
                             self.estado_general = "menuPrincipal"
-                            self.mp3.detener_sonido(0)
+                            pygame.mixer.music.stop()
                             return False
                         #Salir
                         elif self.opc_sel == 6:
                             self.estado_general = "salir"
-                            self.mp3.detener_sonido(0)
+                            pygame.mixer.music.stop()
                             return False
                         
                     # Opciones de siguiente nivel
@@ -369,8 +365,8 @@ class Nivel1:
                             self.estado_general = "nivel2"
                             return False
                         elif self.opc_sel == 2:
-                            self.mp3.detener_sonido(0)
-                            self.mp3.reproducir_sonido_fondo('nivel1.mp3')
+                            pygame.mixer.music.stop()
+                            pygame.mixer.music.play(loops=-1)
                             self.jugador_1_score=0
                             self.jugador_2_score=0
                             self.bandera_instrucciones=not self.bandera_instrucciones
@@ -378,7 +374,8 @@ class Nivel1:
                             self.bandera_ganador=0
                         elif self.opc_sel == 3:
                             self.banderaMenuPrincipal=False
-                            self.estado_general = "salir"
+                            self.estado_general = "menuPrincipal"
+                            pygame.mixer.music.stop()
                             return False
                 
                 
@@ -578,11 +575,9 @@ class Nivel1:
                 # Limpiar contexto de OpenGL
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
                
-                self.mp3.detener_sonido(0)
+                pygame.mixer.music.stop()
                 
                 # Reiniciar estado de Pygame
-                self.mp3=None
-                self.mp3=MP3()
                 pygame.display.update()
                 
         except Exception as e:

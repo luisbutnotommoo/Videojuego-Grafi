@@ -47,8 +47,6 @@ class Menus:
                     self.snd_seleccion.play()
                 elif event.key == pygame.K_RETURN:
                     self.snd_seleccion.play()
-                    #print(f"Seleccionado: {self.texto_actual[self.selected_index]}")
-
                     if self.texto_actual == self.texto_menuPrincipal:
                         if self.texto_actual[self.selected_index] == "Jugar":
                             self.update(False)
