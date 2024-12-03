@@ -27,12 +27,12 @@ class Main:
         while self.running:
             print(f"Iteracion {self.index} del bucle principal")
             if self.estado_general == "menuPrincipal":
-                ventana_actual = Menus()
                 print("Entro a menus")
+                ventana_actual = Menus()
             if self.estado_general == "personaje1" or self.estado_general == "personaje2" or self.estado_general == "personaje3":
+                print ("Entro a seleccion de personaje")
                 self.personajesJugables=[]
                 ventana_actual = SeleccionPersonaje()
-                print ("Entro a seleccion de personaje")
                 ventana_actual.run()
 
                 z = 0
@@ -62,20 +62,21 @@ class Main:
                         self.estado_general = f"nivel{i}"
             else: 
                 self.estado_general = ventana_actual.run()
-                print(f"Ejecuto {self.estado_general}")
+                print(f"Terminó de ejecutar {self.estado_general}")
 
             if self.estado_general == "nivel1":
-                ventana_actual = Nivel1(personajesJugables=eleccion.personajesJugables)
                 print("Entro a nivel 1")
+                ventana_actual = Nivel1(personajesJugables = eleccion.personajesJugables)
 
 
             self.clock.tick(60)
 
             if self.estado_general == "salir":
-                print("Salio del programa")
+                print("Entro a salir")
                 self.running = False
                 
             self.index += 1
+        print("Salio del programa")
 
 
 
