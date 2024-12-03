@@ -383,31 +383,7 @@ class SeleccionPersonaje:
         except Exception as e:
             print(f"Error en cleanup: {e}")
     
-    def abrir_ventana_personaje(self,personaje):
-        # Inicializa una nueva ventana de Pygame
-        pygame.display.set_mode((400, 400), DOUBLEBUF | OPENGL)
-        pygame.display.set_caption(f"Ventana de {personaje.nombre}")
-
-        glClearColor(0.2, 0.2, 0.2, 1.0)  # Fondo oscuro
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
-        while True:
-            for event in pygame.event.get():
-                if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-                    return  # Cierra la ventana al presionar ESC
-
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-            glLoadIdentity()
-            gluPerspective(60, (400 / 400), 0.1, 100.0)
-            glTranslatef(0.0, 0.0, -5.0)
-            
-            # Renderiza al personaje seleccionado
-            personaje.render()
-
-            pygame.display.flip()
-            pygame.time.wait(10)
-
-
+ 
     def load_texture(self, path):
         texture_surface = pygame.image.load(path)
         texture_data = pygame.image.tostring(texture_surface, "RGB", 1)
