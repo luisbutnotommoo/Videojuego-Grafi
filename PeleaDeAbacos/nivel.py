@@ -19,6 +19,8 @@ from Sonidos.controla_mp3 import MP3
 class Nivel1:
 
     def __init__(self, display_size=(800, 600), personajesJugables=[]):
+        self.estado_general = "sin seleccionar"
+
         self.bandera = 0
         self.banderaJugador1 = False
         self.banderaJugador2 = False
@@ -312,8 +314,10 @@ class Nivel1:
                     if event.key == pygame.K_DOWN:
                         self.opciones_pausa(1)
                     if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
+                        # Reanudar
                         if self.opc_sel == 1:
                             self.bandera_pausa = not self.bandera_pausa
+                        #Reiniciar
                         elif self.opc_sel == 2:
                             self.mp3.detener_sonido(0)
                             self.mp3.reproducir_sonido_fondo()
@@ -322,23 +326,31 @@ class Nivel1:
                             self.bandera_instrucciones=not self.bandera_instrucciones
                             self.bandera_control_instrucciones=not self.bandera_control_instrucciones
                             self.bandera_pausa=not self.bandera_pausa
+                        #Mostrar instrucciones
                         elif self.opc_sel == 3:
                             self.bandera_pausa = not self.bandera_pausa
                             self.bandera_instrucciones =  not self.bandera_instrucciones
                             self.bandera_control_instrucciones = not self.bandera_control_instrucciones
+                        #Volver a seleccionar personajes
                         elif self.opc_sel == 4:
                             self.banderaMenu=False
+                            self.estado_general = "personaje1"
                             return False
+                        #Volver a seleccionar niveles
                         elif self.opc_sel == 5:
                             self.banderaMenuNivel=False
+                            self.estado_general = "menuNiveles"
                             return False
+                        #volver a menu principal
                         elif self.opc_sel == 6:
                             self.banderaMenuPrincipal=False
+                            self.estado_general = "menuPrincipal"
                             return False
+                        #Salir
                         elif self.opc_sel == 7:
-                            pygame.quit()  # Cierra Pygame
-                            sys.exit()
+                            self.estado_general = "salir"
                             return False
+                        
                     self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
                     # Opciones de siguiente nivel
                 if self.bandera_ganador != 0:
@@ -546,6 +558,9 @@ class Nivel1:
             self.draw_scene()
             pygame.time.wait(10)
         self.cleanup()
+        
+        pygame.quit()
+        return self.estado_general
 
     def cleanup(self):
         try:
