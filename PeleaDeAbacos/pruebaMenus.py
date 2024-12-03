@@ -41,28 +41,28 @@ class Menus:
                 elif event.key == pygame.K_UP:
                     self.selected_index = (self.selected_index - 1) % len(self.texto_actual)
                 elif event.key == pygame.K_RETURN:
-                    print(f"Seleccionado: {self.texto_actual[self.selected_index]}")
+                    #print(f"Seleccionado: {self.texto_actual[self.selected_index]}")
 
                     if self.texto_actual == self.texto_menuPrincipal:
                         if self.texto_actual[self.selected_index] == "Jugar":
                             self.update(False)
                         elif self.texto_actual[self.selected_index] == "Salir":
-                            self.estado_general = "salir menu principal"
+                            self.estado_general = "salir"
                             self.running = False
                     elif self.texto_actual == self.texto_niveles:
                         if self.texto_actual[self.selected_index] == "Nivel 1":
-                            self.estado_general = "Selecciono nivel 1"
+                            self.estado_general = "personaje1"
                             self.running = False
                         if self.texto_actual[self.selected_index] == "Nivel 2":
-                            self.estado_general = "Selecciono nivel 2"
+                            self.estado_general = "personaje2"
                             self.running = False
                         if self.texto_actual[self.selected_index] == "Nivel 3":
-                            self.estado_general = "Selecciono nivel 3"
+                            self.estado_general = "personaje3"
                             self.running = False
                         if self.texto_actual[self.selected_index] == "Volver":
                             self.update()
                         elif self.texto_actual[self.selected_index] == "Salir":
-                            self.estado_general = "salir menu niveles"
+                            self.estado_general = "salir"
                             self.running = False
 
 
