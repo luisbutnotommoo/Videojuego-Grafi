@@ -14,7 +14,6 @@ from PersonajeEmma.actionsEV import objetos as obj
 class PersonajeEmmanuel:
     def __init__(self):
         pygame.init()
-        pygame.mixer.init()
         self.display = (600, 600)
         self.screen = pygame.display.set_mode(self.display, DOUBLEBUF | OPENGL)
 
@@ -148,7 +147,8 @@ class PersonajeEmmanuel:
 
                 pygame.display.flip()
                 pygame.time.wait(10)
-        pygame.display.quit()
+        pygame.quit()
+        
 
     def _mover_personaje(self, dx, dy):
         self.pos_inicial_x += dx

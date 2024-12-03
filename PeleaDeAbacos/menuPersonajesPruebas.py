@@ -357,6 +357,8 @@ class SeleccionPersonaje:
             if (self.contador==2):
                 running=False
                 self.cleanup()
+
+        pygame.display.quit()
                 
      
 

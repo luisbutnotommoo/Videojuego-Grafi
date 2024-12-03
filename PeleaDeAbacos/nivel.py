@@ -20,7 +20,7 @@ class Nivel1:
 
     def __init__(self, display_size=(800, 600), personajesJugables=[]):
         self.estado_general = "sin seleccionar"
-
+        
         self.bandera = 0
         self.banderaJugador1 = False
         self.banderaJugador2 = False
@@ -96,6 +96,8 @@ class Nivel1:
     def reiniciar_valores(self):
         self.pocimaX, self.pocimaY, self.pocimaZ = -2, 5, -20
         self.esferaX, self.esferaY, self.esferaZ=-2, 5, -20
+
+            
 
     def actualizar_estado_emocional(self, nombre_personaje, emocion):
         # Actualiza la emoción de un personaje
@@ -186,21 +188,7 @@ class Nivel1:
             if self.preguntaActual is None:
                 self.preguntaActual=self.objetoBanco.generar_pregunta()
             self.viewportPreguntas.draw_viewport(self.preguntaActual['texto'])
-        if self.bandera_control_instrucciones:
-            tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,150,50,50)
-        if self.bandera_pausa:
-            self.actualizar_opciones()
-            tx.draw_text2(self.texto_pausa,self.fuente_pausa,150,50,50)
-        if not self.bandera_control_instrucciones and not self.bandera_pausa:
-            tx.draw_text2(["Presiona SPACE para mostrar la pregunta","Presiona P para pausar el juego"],self.fuente_instrucciones,0,20,500)
-            tx.draw_text2([f"Puntuación jugador 1= {self.jugador_1_score}"],self.fuente_instrucciones,0,50,20)
-            tx.draw_text2([f"Puntuación jugador 2= {self.jugador_2_score}"],self.fuente_instrucciones,0,500,20)
-        if self.bandera_ganador==1:
-            self.actualizar_opciones_sig_nivel(1)
-            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
-        if self.bandera_ganador==2:
-            self.actualizar_opciones_sig_nivel(2)
-            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
+        
         
         # Detectar la colisión cuando está activada
         if self.banderaColision==1:
@@ -285,7 +273,21 @@ class Nivel1:
                     self.mp3.reproducir_sonido_personaje(self.sonido_ganar)
                     self.bandera_ganador=2
                     self.show_message=False
-                
+        if self.bandera_control_instrucciones:
+            tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,150,50,50)
+        if self.bandera_pausa:
+            self.actualizar_opciones()
+            tx.draw_text2(self.texto_pausa,self.fuente_pausa,150,50,50)
+        if not self.bandera_control_instrucciones and not self.bandera_pausa:
+            tx.draw_text2(["Presiona SPACE para mostrar la pregunta","Presiona P para pausar el juego"],self.fuente_instrucciones,0,20,500)
+            tx.draw_text2([f"Puntuación jugador 1= {self.jugador_1_score}"],self.fuente_instrucciones,0,50,20)
+            tx.draw_text2([f"Puntuación jugador 2= {self.jugador_2_score}"],self.fuente_instrucciones,0,500,20)
+        if self.bandera_ganador==1:
+            self.actualizar_opciones_sig_nivel(1)
+            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
+        if self.bandera_ganador==2:
+            self.actualizar_opciones_sig_nivel(2)
+            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
 
         pygame.display.flip()
 
@@ -318,13 +320,7 @@ class Nivel1:
                             self.bandera_pausa = not self.bandera_pausa
                         #Reiniciar
                         elif self.opc_sel == 2:
-                            self.mp3.detener_sonido(0)
-                            self.mp3.reproducir_sonido_fondo()
-                            self.jugador_1_score=0
-                            self.jugador_2_score=0
-                            self.bandera_instrucciones=not self.bandera_instrucciones
-                            self.bandera_control_instrucciones=not self.bandera_control_instrucciones
-                            self.bandera_pausa=not self.bandera_pausa
+                            self.reinicioJuego()
                         #Mostrar instrucciones
                         elif self.opc_sel == 3:
                             self.bandera_pausa = not self.bandera_pausa
@@ -378,32 +374,33 @@ class Nivel1:
                     if self.banderaJugador1 and self.banderaJugador2:
                         return True  # No permitir más respuestas
                     
-                    # Jugador 1 responde
-                    if event.key in [pygame.K_a, pygame.K_s, pygame.K_d] and not self.banderaJugador1:
-                        if self.respuesta(event.key, player=1):
-                            self.jugador_1_score += 1  # Jugador 1 gana un punto
-                            self.eventoParaGanar()
-                            self.banderaColision = 1
-                            self.actualizar_estado_emocional(self.personaje[0]["nombre"],1 )
-                            self.actualizar_estado_emocional(self.personaje[1]["nombre"], 2)
-                            self.actualizarRender()
+                    if not self.bandera_pausa:
+                        # Jugador 1 responde
+                        if event.key in [pygame.K_a, pygame.K_s, pygame.K_d] and not self.banderaJugador1:
+                            if self.respuesta(event.key, player=1):
+                                self.jugador_1_score += 1  # Jugador 1 gana un punto
+                                self.eventoParaGanar()
+                                self.banderaColision = 1
+                                self.actualizar_estado_emocional(self.personaje[0]["nombre"],1 )
+                                self.actualizar_estado_emocional(self.personaje[1]["nombre"], 2)
+                                self.actualizarRender()
 
-                           
-                        else:
-                            self.banderaJugador1 = True  # Bloquear teclas para Jugador 1
-                    
-                    # Jugador 2 responde
-                    elif event.key in [pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT] and not self.banderaJugador2:
-                        if self.respuesta(event.key, player=2):
-                            self.jugador_2_score += 1  # Jugador 2 gana un punto
-                            self.banderaColision=2
-                            self.actualizar_estado_emocional(self.personaje[0]["nombre"], 2)
-                            self.actualizar_estado_emocional(self.personaje[1]["nombre"], 1)
-                            self.actualizarRender()
-                            self.eventoParaGanar()
                             
-                        else:
-                            self.banderaJugador2 = True  # Bloquear teclas para Jugador 2
+                            else:
+                                self.banderaJugador1 = True  # Bloquear teclas para Jugador 1
+                        
+                        # Jugador 2 responde
+                        elif event.key in [pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT] and not self.banderaJugador2:
+                            if self.respuesta(event.key, player=2):
+                                self.jugador_2_score += 1  # Jugador 2 gana un punto
+                                self.banderaColision=2
+                                self.actualizar_estado_emocional(self.personaje[0]["nombre"], 2)
+                                self.actualizar_estado_emocional(self.personaje[1]["nombre"], 1)
+                                self.actualizarRender()
+                                self.eventoParaGanar()
+                                
+                            else:
+                                self.banderaJugador2 = True  # Bloquear teclas para Jugador 2
                     
                     # Verificar si ambos jugadores están bloqueados
                     if self.banderaJugador1 and self.banderaJugador2:
@@ -434,26 +431,28 @@ class Nivel1:
         self.preguntaActual=None
 
     def teclasJugador1(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_w]:
-            self.pocima(0, 1)
-        if keys[pygame.K_s]:
-            self.pocima(0, -1)
-        if keys[pygame.K_a]:
-            self.pocima(-1, 0)
-        if keys[pygame.K_d]:
-            self.pocima(1, 0)
+        if not self.bandera_pausa:
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_w]:
+                self.pocima(0, 1)
+            if keys[pygame.K_s]:
+                self.pocima(0, -1)
+            if keys[pygame.K_a]:
+                self.pocima(-1, 0)
+            if keys[pygame.K_d]:
+                self.pocima(1, 0)
     
     def teclasJugador2(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP]:
-            self.esferaMagia(0, 1)
-        if keys[pygame.K_DOWN]:
-            self.esferaMagia(0, -1)
-        if keys[pygame.K_LEFT]:
-            self.esferaMagia(-1, 0)
-        if keys[pygame.K_RIGHT]:
-            self.esferaMagia(1, 0)
+        if not self.bandera_pausa:
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_UP]:
+                self.esferaMagia(0, 1)
+            if keys[pygame.K_DOWN]:
+                self.esferaMagia(0, -1)
+            if keys[pygame.K_LEFT]:
+                self.esferaMagia(-1, 0)
+            if keys[pygame.K_RIGHT]:
+                self.esferaMagia(1, 0)
 
     def respuesta(self, key, player):
         key_answer_map = {
@@ -579,6 +578,28 @@ class Nivel1:
         except Exception as e:
             print(f"Error en cleanup: {e}")
 
+    def reinicioJuego(self):
+        self.mp3.detener_sonido(0)
+        self.mp3.reproducir_sonido_fondo('nivel1.mp3')
+        glPushMatrix()
+        glColor3f(1, 1, 1)
+        self.torre2()
+        glPopMatrix()
+        glPushMatrix()
+        glColor3f(1, 1, 1)
+        self.torre1()
+        glPopMatrix()
+        self.banderaColision=0
+        self.reduc1=40
+        self.reduc2=40
+        self.jugador_1_score=0
+        self.jugador_2_score=0
+        self.bandera_instrucciones=not self.bandera_instrucciones
+        self.bandera_control_instrucciones=not self.bandera_control_instrucciones
+        self.bandera_pausa=not self.bandera_pausa
+        self.actualizar_estado_emocional(self.personaje[0]["nombre"], 0)
+        self.actualizar_estado_emocional(self.personaje[1]["nombre"], 0)
+        
 
 if __name__ == "__main__":
     sP = Nivel1()
