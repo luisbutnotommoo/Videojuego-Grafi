@@ -5,8 +5,15 @@ from pygame.locals import *
 from Acciones import boceto2 as b
 from Acciones.boceto2 import PersonajesDeTodos
 import os
+from Acciones.textos import textos as tx
 from Imagenes.controla_img import ruta_carpeta_imagenes as ruta_img
 from Sonidos.controla_mp3 import ruta_carpeta_audios as ruta_audio
+from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
+from PersonajeLuis2.claseMainLuis import PersonajeLuis
+from PersonajeEmma.claseEmma import PersonajeEmmanuel
+from PersonajeLin.blue_multiverso.machote.main import PersonajeLin
+
+instanciaLuis = PersonajeLuis()
 
 class SeleccionPersonaje:
     def __init__(self, display_size=(800, 600)):
@@ -22,6 +29,21 @@ class SeleccionPersonaje:
             PersonajesDeTodos("Personaje de Luis", b.figuraLuis(0), escala=(1.4, 1.4, 1.4)),
             PersonajesDeTodos("Personaje de Lin",b.figuraLin(0), rotacion=0, escala=(0.4, 0.4, 0.4)),
             PersonajesDeTodos("Personaje de Star",  b.figuraStar(0),rotacion=190, escala=(0.25, 0.25, 0.25))
+        ]
+        self.bandera_control_instrucciones = True
+        self.bandera_instrucciones = True
+        self.fuente_instrucciones = pygame.font.SysFont(None, 30)
+        self.texto_instrucciones = [
+            "                                   M E N U   P E R S O N A J E S      ",
+            "               _____________________________________________", "",
+            "                     Para visualizar más de cerca un personaje ",
+            "                       Presiona un número(1, 2, 3, 4) y después M ",
+            "                     Para salir del modo visualizar, presiona ESC",
+            "              Cuando quieras elegir un personaje, presiona ENTER",
+            "                Recuerda, se haran DOS elecciones de personajes",
+            "                                     Jugador 1 y Jugador 2",
+            "               _____________________________________________", "",
+            "                                - Presiona P para continuar -"
         ]
 
         self.contador=0
@@ -53,7 +75,7 @@ class SeleccionPersonaje:
         posiciones = [
             (-4.5, -1.5, 0),  # Posición para personaje 1
             (-1.5, -1.5, 0),  # Posición para personaje 2
-            (5.6, -1.5, 0),   # Posición para personaje 3
+            (5.6, -1.5, -1),   # Posición para personaje 3
             (4.5, -1.5, 0)    # Posición para personaje 4
         ]
         for personaje, (x, y, z) in zip(self.personaje, posiciones):
@@ -126,9 +148,10 @@ class SeleccionPersonaje:
         self.render_text_2d(self.display,"Menú de selección",195,490,self.font_menu)
         self.render_text_2d(self.display,"Dr. Newt",70,200,self.font_personajes)
         self.render_text_2d(self.display,"Heisenpurr",250,200,self.font_personajes)
-        self.render_text_2d(self.display,"Blue",470,200,self.font_personajes)
+        self.render_text_2d(self.display,"Blue",460,198,self.font_personajes)
         self.render_text_2d(self.display,"Amargando",580,200,self.font_personajes)
-        self.render_text_2d(self.display,"Teclas |1||2||3||4| - Selección de personaje\n|Enter| - Confirma selección",10,40,self.font_instrucciones)
+        self.render_text_2d(self.display,"Teclas |1||2||3||4| - Selección de personaje\n|Enter| - Confirma selección\n|M| - Visualizar personaje",10,40,self.font_instrucciones)
+        self.render_text_2d(self.display,"Teclas de modo visualizar personaje:\n|ESC| - Salir",460,40,self.font_instrucciones)
 
 
     def dibujar_piso_pared(self):
@@ -263,6 +286,9 @@ class SeleccionPersonaje:
             self.dibujar_personaje(character, is_selected)
 
         self.dibuja_textos()
+        if self.bandera_control_instrucciones:
+            tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,200,50,50)
+
 
         pygame.display.flip()
 
@@ -274,9 +300,26 @@ class SeleccionPersonaje:
                 if event.key == pygame.K_ESCAPE:
                     self.bandera=1
                     return False
+                if event.key == pygame.K_p:
+                    if self.bandera_control_instrucciones:
+                        self.bandera_instrucciones =  not self.bandera_instrucciones
+                        self.bandera_control_instrucciones = not self.bandera_control_instrucciones
+                    
                 elif event.key in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4):
                     self.selected_character = event.key - pygame.K_1
                     self.sonido_seleccion.play()
+                elif event.key==pygame.K_m:
+                    if self.selected_character>=0:
+                        if self.selected_character == 0:
+                            self.personajeCorrer = PersonajeEmmanuel()
+                        elif self.selected_character == 1:
+                            self.personajeCorrer = instanciaLuis
+                        elif self.selected_character == 2:
+                            self.personajeCorrer=PersonajeLin()
+                        elif self.selected_character == 3:
+                            self.personajeCorrer=PersonajeStarenka()
+                
+                        self.personajeCorrer.run()
                 elif event.key == pygame.K_RETURN:
                     if self.selected_character >= 0:
                         if(self.contador<2):
@@ -339,6 +382,31 @@ class SeleccionPersonaje:
                 #pygame.display.init()
         except Exception as e:
             print(f"Error en cleanup: {e}")
+    
+    def abrir_ventana_personaje(self,personaje):
+        # Inicializa una nueva ventana de Pygame
+        pygame.display.set_mode((400, 400), DOUBLEBUF | OPENGL)
+        pygame.display.set_caption(f"Ventana de {personaje.nombre}")
+
+        glClearColor(0.2, 0.2, 0.2, 1.0)  # Fondo oscuro
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+                    return  # Cierra la ventana al presionar ESC
+
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+            glLoadIdentity()
+            gluPerspective(60, (400 / 400), 0.1, 100.0)
+            glTranslatef(0.0, 0.0, -5.0)
+            
+            # Renderiza al personaje seleccionado
+            personaje.render()
+
+            pygame.display.flip()
+            pygame.time.wait(10)
+
 
     def load_texture(self, path):
         texture_surface = pygame.image.load(path)

@@ -26,9 +26,9 @@ class PersonajeLin:
     py.display.set_mode(self.display, DOUBLEBUF | OPENGL)
 
     gluPerspective(90, (self.display[0]/self.display[1]), 0.1, 50.0)
-    glTranslatef(-2, 0, -2)
+    glTranslatef(-1, -1, -5)
     glOrtho(0, 15, 0, 15, 0, 6)
-
+    self.font_instrucciones = pygame.font.SysFont('Imprint MT Shadow', 25)
     self.camara_speed = 0.1
     self.rotacion_speed = 0.2
     self.mouse_sensivity = 0.1
@@ -98,9 +98,51 @@ class PersonajeLin:
       glPopMatrix()
    
 
-   
+   def dibuja_textos(self):
+        glColor4f(2, 2, 2, 1)
+        self.render_text_2d(self.display,"Teclas |M| - Acciones del Personaje\n|Esc| - Salir",10,40,self.font_instrucciones)
+        
+
+   def render_text_2d(self, display, text, x, y, font, line_height=18):
+        lines = text.split('\n')  # Dividir el texto en líneas donde haya saltos de línea (\n)
+        
+        for i, line in enumerate(lines):
+            text_surface = font.render(line, True, (0, 0, 0), None)  # Fondo transparente
+            text_data = pygame.image.tostring(text_surface, "RGBA", True)
+            text_width, text_height = text_surface.get_size()
+            glEnable(GL_TEXTURE_2D)
+            texture_id = glGenTextures(1)
+            glBindTexture(GL_TEXTURE_2D, texture_id)
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, text_width, text_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, text_data)
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+            glEnable(GL_BLEND)
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+            glMatrixMode(GL_PROJECTION)
+            glPushMatrix()
+            glLoadIdentity()
+            glOrtho(0, display[0], 0, display[1], -1, 1)
+            glMatrixMode(GL_MODELVIEW)
+            glPushMatrix()
+            glLoadIdentity()
+            glBindTexture(GL_TEXTURE_2D, texture_id)
+            glBegin(GL_QUADS)
+            glTexCoord2f(0, 0); glVertex2f(x, y - i * line_height)  
+            glTexCoord2f(1, 0); glVertex2f(x + text_width, y - i * line_height)
+            glTexCoord2f(1, 1); glVertex2f(x + text_width, y + text_height - i * line_height)
+            glTexCoord2f(0, 1); glVertex2f(x, y + text_height - i * line_height)
+            glEnd()
+            
+          #  glDeleteTextures(int(texture_id))
+            glPopMatrix()
+            glMatrixMode(GL_PROJECTION)
+            glPopMatrix()
+            glMatrixMode(GL_MODELVIEW)
+            glDisable(GL_BLEND)
+            glDisable(GL_TEXTURE_2D)
    def run(self):
       while self.running :
+         
          for event in py.event.get():
             if event.type == py.QUIT:
                   self.running = False
@@ -984,7 +1026,7 @@ class PersonajeLin:
          if(self.ban2 == 7):
             messagebox.showinfo("MENU", "EXPRESIONES: \n(e)->enojo\n(f)->feliz\n(t)->tristeza\n(o)->asombro\n(n)->asco\n\n\nCONTROL DE CAMARA:\n(W)->Adelante\n(S)->Atrás\n(A)->Izquierda\n(D)->Derecha\n(X)->Arriba\n(Z)->Abajo\n\n\n(0,1,2,3,4)->control de escenarios\n\n\nMOVIMIENTOS:\n(r)->original\n(I)->Arriba\n(K)->Abajo\n(J)->Izquierda\n(L)->Derecha\n(espacio)->Cuello\n('>')->Brazo derecho\n('<')->Brazo izquierdo\n(flecha hacia arriba)->pierna izquierda\n(flecha hacia abajo)->pierna derecha\n\n\nSONIDO:\n(P)->play\n(q)->stop\n\n\n(TAB)->info\n salir (ESC)")
             self.ban2 = 0
-
+         self.dibuja_textos()
       # Actualización de la pantalla
          py.display.flip()
          py.time.wait(100) 

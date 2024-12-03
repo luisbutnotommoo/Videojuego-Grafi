@@ -64,14 +64,14 @@ class Nivel1:
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)
         self.texto_instrucciones = [
-            "                               D U E L O    D E   A B A C O S ",
+            "                                   M E N U   P E R S O N A J E S      ",
             "               _____________________________________________", "",
-            "                  JUGADOR 1, contesta las preguntas con A,S,D",
-            "         Contesta correctamente y ataca la torre rival con W,A,S,D",
-            "        JUGADOR 2, contesta las preguntas con las FLECHAS <,v,>",
-            "Contesta correctamente y ataca la torre rival con las FLECHAS ^,<,v,>",
-            "                     Las respuestas incorrectas no dan puntos",
-            "                             ¡Se más rápido que tu adversario!",
+            "                     Para visualizar más de cerca un personaje ",
+            "                       Presiona un número(1, 2, 3, 4) y después M ",
+            "                     Para salir del modo visualizar, presiona ESC",
+            "              Cuando quieras elegir un personaje, presiona ENTER",
+            "                Recuerda, se haran DOS elecciones de personajes",
+            "                                     Jugador 1 y Jugador 2",
             "               _____________________________________________", "",
             "                                - Presiona P para continuar -"
         ]

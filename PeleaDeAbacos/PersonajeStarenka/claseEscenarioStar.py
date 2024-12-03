@@ -171,7 +171,7 @@ class PersonajeStarenka:
                     if event.key==pygame.K_b:
                         self.bandera=14
                     #Colisiones
-                    if event.key==pygame.K_n:
+                    if event.key==pygame.K_n :
                         self.bandera=15
                         self.activarColi=not self.activarColi
                     #Instrucciones
@@ -301,7 +301,7 @@ class PersonajeStarenka:
                     es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
                 if self.bandera==14:
                     b.animaCaida()
-                    es.draw_e('IPersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
                 if self.bandera==15:
                     txt.draw_text("Usar flechas del teclado para mover los objetos", -40, 40, -1, 25, 255, 255, 255, 0, 0, 0)
                     if(self.bandera1==0 and self.activarColi==True):
@@ -363,7 +363,7 @@ class PersonajeStarenka:
                     txt.draw_text("1:Original  2:Escenario1  3:Escenario2  4:Escenario3 5:Escenario4 ", -40, -10, -1, 25, 255, 255, 255, 0, 0, 0)
                     txt.draw_text("6:Escenario5  7:Escenario6  8:Escenario7  9:Mov1  0:Mov2", -40, -15, -1, 25, 255, 255, 255, 0, 0, 0)
                     txt.draw_text("z:Mov3  x:Mov4  c:Mov5  v:Mov6  b:Mov7  p:Sonido  o:ApagarSonido", -40, -20, -1, 25, 255, 255, 255, 0, 0, 0)
-                    txt.draw_text("n:Activar colisiones h:phong j:Gouraud k:Interpolado" ,-40,40,-1,25,255,255,255,0,0,0)
+                    txt.draw_text("n:Activar colisiones h:phong j:Gouraud k:Interpolado ESC:Salir" ,-40,40,-1,25,255,255,255,0,0,0)
                     txt.draw_text("s:Cam(Zo)  w:Cam(Zi)  a:Cam(izq)  d:Cam(der)  q:Cam(Arriba)   ", -40, -25, -1, 25, 255, 255, 255, 0, 0, 0)
                     txt.draw_text("e:Cam(Abajo)  r:Cam(Orginal)  i:Instruccion(On/Of)  u:Acerca de:", -40, -30, -1, 25, 255, 255, 255, 0, 0, 0)
                 if self.acercaDe:
