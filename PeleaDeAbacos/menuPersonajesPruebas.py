@@ -405,7 +405,7 @@ class SeleccionPersonaje:
             personaje.render()
 
             pygame.display.flip()
-            pygame.time.wait(10)
+            pygame.time.wait(30)
 
 
     def load_texture(self, path):

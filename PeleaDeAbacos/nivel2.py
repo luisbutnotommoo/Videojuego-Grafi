@@ -80,7 +80,6 @@ class Nivel2:
         self.txopc4 = ""
         self.txopc5 = ""
         self.txopc6 = ""
-        self.txopc7 = ""
         self.texto_pausa = [
             ""
         ]
@@ -105,7 +104,7 @@ class Nivel2:
 
     
     def init_pygame(self):
-        pygame.init()
+        #pygame.init()
         self.screen = pygame.display.set_mode(self.display, DOUBLEBUF | OPENGL)
         pygame.event.set_grab(True)
 
@@ -304,7 +303,7 @@ class Nivel2:
                     else:
                         self.bandera_pausa = not self.bandera_pausa
                     self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
-
+                
                 # Opciones de pausa
                 if self.bandera_pausa:
                     if event.key == pygame.K_UP:
@@ -312,8 +311,10 @@ class Nivel2:
                     if event.key == pygame.K_DOWN:
                         self.opciones_pausa(1)
                     if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
+                        # Reanudar
                         if self.opc_sel == 1:
                             self.bandera_pausa = not self.bandera_pausa
+                        #Reiniciar
                         elif self.opc_sel == 2:
                             self.mp3.detener_sonido(0)
                             self.mp3.reproducir_sonido_fondo()
@@ -322,23 +323,29 @@ class Nivel2:
                             self.bandera_instrucciones=not self.bandera_instrucciones
                             self.bandera_control_instrucciones=not self.bandera_control_instrucciones
                             self.bandera_pausa=not self.bandera_pausa
+                        #Mostrar instrucciones
                         elif self.opc_sel == 3:
                             self.bandera_pausa = not self.bandera_pausa
                             self.bandera_instrucciones =  not self.bandera_instrucciones
                             self.bandera_control_instrucciones = not self.bandera_control_instrucciones
+                        #Volver a seleccionar personajes
                         elif self.opc_sel == 4:
                             self.banderaMenu=False
+                            self.estado_general = "personaje1"
+                            self.mp3.detener_sonido(0)
                             return False
+                        #volver a menu principal
                         elif self.opc_sel == 5:
-                            self.banderaMenuNivel=False
-                            return False
-                        elif self.opc_sel == 6:
                             self.banderaMenuPrincipal=False
+                            self.estado_general = "menuPrincipal"
+                            self.mp3.detener_sonido(0)
                             return False
-                        elif self.opc_sel == 7:
-                            pygame.quit()  # Cierra Pygame
-                            sys.exit()
+                        #Salir
+                        elif self.opc_sel == 6:
+                            self.estado_general = "salir"
+                            self.mp3.detener_sonido(0)
                             return False
+                        
                     self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
                     # Opciones de siguiente nivel
                 if self.bandera_ganador != 0:
@@ -349,6 +356,7 @@ class Nivel2:
                     if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         if self.opc_sel == 1:
                             self.banderaSiguienteNivel=False
+                            self.estado_general = "nivel2"
                             return False
                         elif self.opc_sel == 2:
                             self.mp3.detener_sonido(0)
@@ -360,6 +368,7 @@ class Nivel2:
                             self.bandera_ganador=0
                         elif self.opc_sel == 3:
                             self.banderaMenuPrincipal=False
+                            self.estado_general = "salir"
                             return False
                     self.mp3.reproducir_sonido_personaje(self.sonido_seleccion)
                 
@@ -461,10 +470,10 @@ class Nivel2:
     
     def opciones_pausa(self,opcion):
         self.opc_sel += opcion
-        if self.opc_sel > 7:
+        if self.opc_sel > 6:
             self.opc_sel = 1
         if self.opc_sel < 1:
-            self.opc_sel = 7
+            self.opc_sel = 6
 
     def actualizar_opciones(self):
         self.txopc1 = ""
@@ -473,7 +482,6 @@ class Nivel2:
         self.txopc4 = ""
         self.txopc5 = ""
         self.txopc6 = ""
-        self.txopc7 = ""
 
         if self.opc_sel == 1:
             self.txopc1 = ">"
@@ -487,8 +495,6 @@ class Nivel2:
             self.txopc5 = ">"
         elif self.opc_sel == 6:
             self.txopc6 = ">"
-        elif self.opc_sel == 7:
-            self.txopc7 = ">"
         
         
         self.texto_pausa = [
@@ -498,9 +504,8 @@ class Nivel2:
             self.txopc2+" Reiniciar",
             self.txopc3+" Mostrar instrucciones",
             self.txopc4+" Volver a seleccionar personajes",
-            self.txopc5+" Volver a seleccionar un nivel",
-            self.txopc6+" Volver al menu principal",
-            self.txopc7+" Salir"
+            self.txopc5+" Volver al menu principal",
+            self.txopc6+" Salir"
         ]
     def opciones_sig_nivel(self,opcion):
         self.opc_sel += opcion
@@ -545,6 +550,7 @@ class Nivel2:
                 break
             self.draw_scene()
             pygame.time.wait(10)
+        return self.estado_general
            
 
     def cleanup(self):

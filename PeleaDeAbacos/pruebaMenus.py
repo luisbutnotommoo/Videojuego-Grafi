@@ -13,6 +13,7 @@ class Menus:
             self.bg_menuNiveles = pygame.image.load("Imagenes/pared2.jpg")
             self.bg_menuNiveles = pygame.transform.scale(self.bg_menuNiveles, (800, 600))
             
+            self.snd_seleccion = pygame.mixer.Sound("Sonidos/click.mp3")
             pygame.mixer.music.load("Sonidos/menu_principal.mp3")
             pygame.mixer.music.play(loops=-1)
         except pygame.error:
@@ -40,9 +41,12 @@ class Menus:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
                     self.selected_index = (self.selected_index + 1) % len(self.texto_actual)
+                    self.snd_seleccion.play()
                 elif event.key == pygame.K_UP:
                     self.selected_index = (self.selected_index - 1) % len(self.texto_actual)
+                    self.snd_seleccion.play()
                 elif event.key == pygame.K_RETURN:
+                    self.snd_seleccion.play()
                     #print(f"Seleccionado: {self.texto_actual[self.selected_index]}")
 
                     if self.texto_actual == self.texto_menuPrincipal:
