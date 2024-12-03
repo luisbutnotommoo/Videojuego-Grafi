@@ -188,21 +188,7 @@ class Nivel1:
             if self.preguntaActual is None:
                 self.preguntaActual=self.objetoBanco.generar_pregunta()
             self.viewportPreguntas.draw_viewport(self.preguntaActual['texto'])
-        if self.bandera_control_instrucciones:
-            tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,150,50,50)
-        if self.bandera_pausa:
-            self.actualizar_opciones()
-            tx.draw_text2(self.texto_pausa,self.fuente_pausa,150,50,50)
-        if not self.bandera_control_instrucciones and not self.bandera_pausa:
-            tx.draw_text2(["Presiona SPACE para mostrar la pregunta","Presiona P para pausar el juego"],self.fuente_instrucciones,0,20,500)
-            tx.draw_text2([f"Puntuación jugador 1= {self.jugador_1_score}"],self.fuente_instrucciones,0,50,20)
-            tx.draw_text2([f"Puntuación jugador 2= {self.jugador_2_score}"],self.fuente_instrucciones,0,500,20)
-        if self.bandera_ganador==1:
-            self.actualizar_opciones_sig_nivel(1)
-            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
-        if self.bandera_ganador==2:
-            self.actualizar_opciones_sig_nivel(2)
-            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
+        
         
         # Detectar la colisión cuando está activada
         if self.banderaColision==1:
@@ -287,7 +273,22 @@ class Nivel1:
                     self.snd_ganar.play()
                     self.bandera_ganador=2
                     self.show_message=False
-                
+        if self.bandera_control_instrucciones:
+            tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,150,50,50)
+        if self.bandera_pausa:
+            self.actualizar_opciones()
+            tx.draw_text2(self.texto_pausa,self.fuente_pausa,150,50,50)
+        if not self.bandera_control_instrucciones and not self.bandera_pausa:
+            tx.draw_text2(["Presiona SPACE para mostrar la pregunta","Presiona P para pausar el juego"],self.fuente_instrucciones,0,20,500)
+            tx.draw_text2([f"Puntuación jugador 1= {self.jugador_1_score}"],self.fuente_instrucciones,0,50,20)
+            tx.draw_text2([f"Puntuación jugador 2= {self.jugador_2_score}"],self.fuente_instrucciones,0,500,20)
+        if self.bandera_ganador==1:
+            self.actualizar_opciones_sig_nivel(1)
+            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
+        if self.bandera_ganador==2:
+            self.actualizar_opciones_sig_nivel(2)
+            tx.draw_text2(self.texto_sig_nivel,self.fuente_pausa,150,270,170)
+                    
 
         pygame.display.flip()
 
@@ -323,13 +324,7 @@ class Nivel1:
                             self.bandera_pausa = not self.bandera_pausa
                         #Reiniciar
                         elif self.opc_sel == 2:
-                            self.mp3.detener_sonido(0)
-                            self.mp3.reproducir_sonido_fondo()
-                            self.jugador_1_score=0
-                            self.jugador_2_score=0
-                            self.bandera_instrucciones=not self.bandera_instrucciones
-                            self.bandera_control_instrucciones=not self.bandera_control_instrucciones
-                            self.bandera_pausa=not self.bandera_pausa
+                            self.reinicioJuego()
                         #Mostrar instrucciones
                         elif self.opc_sel == 3:
                             self.bandera_pausa = not self.bandera_pausa
@@ -368,13 +363,7 @@ class Nivel1:
                             self.estado_general = "nivel2"
                             return False
                         elif self.opc_sel == 2:
-                            pygame.mixer.music.stop()
-                            pygame.mixer.music.play(loops=-1)
-                            self.jugador_1_score=0
-                            self.jugador_2_score=0
-                            self.bandera_instrucciones=not self.bandera_instrucciones
-                            self.bandera_control_instrucciones=not self.bandera_control_instrucciones
-                            self.bandera_ganador=0
+                            self.reinicioJuego()
                         elif self.opc_sel == 3:
                             self.banderaMenuPrincipal=False
                             self.estado_general = "menuPrincipal"
@@ -590,8 +579,8 @@ class Nivel1:
             print(f"Error en cleanup: {e}")
 
     def reinicioJuego(self):
-        self.mp3.detener_sonido(0)
-        self.mp3.reproducir_sonido_fondo('nivel1.mp3')
+        pygame.mixer.music.stop()
+        pygame.mixer.music.play(loops=-1)
         glPushMatrix()
         glColor3f(1, 1, 1)
         self.torre2()
