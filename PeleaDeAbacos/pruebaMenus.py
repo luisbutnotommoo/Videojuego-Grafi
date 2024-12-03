@@ -19,6 +19,7 @@ class Menus:
             self.bg_menuNiveles = None
         
         self.estado_general = "sin seleccionar"
+
         self.fondo_en_pantalla = self.bg_menuPrincipal
         self.font_titulo = pygame.font.Font(None, 45)
         self.font_opciones = pygame.font.Font(None, 36)
