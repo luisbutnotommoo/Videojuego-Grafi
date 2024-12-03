@@ -383,6 +383,7 @@ class SeleccionPersonaje:
         except Exception as e:
             print(f"Error en cleanup: {e}")
     
+<<<<<<< HEAD
     def abrir_ventana_personaje(self,personaje):
         # Inicializa una nueva ventana de Pygame
         pygame.display.set_mode((400, 400), DOUBLEBUF | OPENGL)
@@ -408,6 +409,9 @@ class SeleccionPersonaje:
             pygame.time.wait(30)
 
 
+=======
+ 
+>>>>>>> 8e174dcc613f04f18583e5c91a4a8eba51416e47
     def load_texture(self, path):
         texture_surface = pygame.image.load(path)
         texture_data = pygame.image.tostring(texture_surface, "RGB", 1)
