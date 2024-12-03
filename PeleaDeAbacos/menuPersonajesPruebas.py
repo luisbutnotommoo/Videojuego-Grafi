@@ -60,8 +60,8 @@ class SeleccionPersonaje:
             personaje.set_position(x, y, z)
 
     def init_pygame(self):
-        pygame.init()
-        pygame.mixer.init()
+        #pygame.init()
+        #pygame.mixer.init()
         self.screen = pygame.display.set_mode(self.display, DOUBLEBUF | OPENGL)
         pygame.event.set_grab(True)
 
@@ -333,10 +333,10 @@ class SeleccionPersonaje:
                
                 pygame.mixer.music.stop()
                 pygame.mixer.music.unload()
-                pygame.mixer.quit()
+                #pygame.mixer.quit()
                 # Reiniciar estado de Pygame
-                pygame.display.quit()
-                pygame.display.init()
+                #pygame.display.quit()
+                #pygame.display.init()
         except Exception as e:
             print(f"Error en cleanup: {e}")
 

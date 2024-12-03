@@ -2,7 +2,6 @@ import pygame
 
 class Menus:
     def __init__(self):
-        pygame.init()
         self.screen = pygame.display.set_mode((800, 600))
         pygame.display.set_caption("Duelo de abacos")
         self.clock = pygame.time.Clock() 
@@ -13,6 +12,9 @@ class Menus:
             self.bg_menuPrincipal = pygame.transform.scale(self.bg_menuPrincipal, (800, 600))
             self.bg_menuNiveles = pygame.image.load("Imagenes/pared2.jpg")
             self.bg_menuNiveles = pygame.transform.scale(self.bg_menuNiveles, (800, 600))
+            
+            pygame.mixer.music.load("Sonidos/menu_principal.mp3")
+            pygame.mixer.music.play(loops=-1)
         except pygame.error:
             print("No se pudo cargar la imagen de fondo. Usando un fondo negro predeterminado.")
             self.bg_menuPrincipal = None
@@ -46,23 +48,30 @@ class Menus:
                     if self.texto_actual == self.texto_menuPrincipal:
                         if self.texto_actual[self.selected_index] == "Jugar":
                             self.update(False)
+                        elif self.texto_actual[self.selected_index] == "Acerca de":
+                            pass
                         elif self.texto_actual[self.selected_index] == "Salir":
                             self.estado_general = "salir"
+                            pygame.mixer.music.stop()
                             self.running = False
                     elif self.texto_actual == self.texto_niveles:
                         if self.texto_actual[self.selected_index] == "Nivel 1":
                             self.estado_general = "personaje1"
+                            pygame.mixer.music.stop()
                             self.running = False
                         if self.texto_actual[self.selected_index] == "Nivel 2":
                             self.estado_general = "personaje2"
+                            pygame.mixer.music.stop()
                             self.running = False
                         if self.texto_actual[self.selected_index] == "Nivel 3":
                             self.estado_general = "personaje3"
+                            pygame.mixer.music.stop()
                             self.running = False
                         if self.texto_actual[self.selected_index] == "Volver":
                             self.update()
                         elif self.texto_actual[self.selected_index] == "Salir":
                             self.estado_general = "salir"
+                            pygame.mixer.music.stop()
                             self.running = False
 
 
@@ -124,7 +133,7 @@ class Menus:
             self.draw() 
             self.clock.tick(60) 
         
-        self.quit_game()  # Llamar a quit_game después de que el bucle termine
+        #self.quit_game()
         return self.estado_general  # Retornar el valor deseado (ej. "game over", "exit", etc.)
 
     def quit_game(self):

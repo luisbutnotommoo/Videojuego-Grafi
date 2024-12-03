@@ -13,6 +13,8 @@ instanciaLuis = PersonajeLuis()
 
 class Main:
     def __init__(self):
+        pygame.init()
+        pygame.mixer.init()
         self.running = True
         self.clock = pygame.time.Clock() 
 
@@ -68,7 +70,6 @@ class Main:
                 print("Entro a nivel 1")
                 ventana_actual = Nivel1(personajesJugables = eleccion.personajesJugables)
 
-
             self.clock.tick(60)
 
             if self.estado_general == "salir":
@@ -77,8 +78,6 @@ class Main:
                 
             self.index += 1
         print("Salio del programa")
-
-
 
 if __name__ == "__main__":
     game = Main()
