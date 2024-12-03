@@ -1,5 +1,4 @@
 import pygame
-import sys
 
 class Menus:
     def __init__(self):
@@ -19,8 +18,7 @@ class Menus:
             self.bg_menuPrincipal = None
             self.bg_menuNiveles = None
         
-        self.esta_jugando = False
-        self.estado_menu = "inicio"
+        self.estado_general = "sin seleccionar"
         self.fondo_en_pantalla = self.bg_menuPrincipal
         self.font_titulo = pygame.font.Font(None, 45)
         self.font_opciones = pygame.font.Font(None, 36)
@@ -37,24 +35,34 @@ class Menus:
             if event.type == pygame.QUIT:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_DOWN:  # Flecha abajo
+                if event.key == pygame.K_DOWN:
                     self.selected_index = (self.selected_index + 1) % len(self.texto_actual)
-                elif event.key == pygame.K_UP:  # Flecha arriba
+                elif event.key == pygame.K_UP:
                     self.selected_index = (self.selected_index - 1) % len(self.texto_actual)
-                elif event.key == pygame.K_RETURN:  # Enter (seleccionar opción)
+                elif event.key == pygame.K_RETURN:
                     print(f"Seleccionado: {self.texto_actual[self.selected_index]}")
-                    # Aquí puedes agregar la lógica para lo que sucede cuando se selecciona una opción
 
                     if self.texto_actual == self.texto_menuPrincipal:
                         if self.texto_actual[self.selected_index] == "Jugar":
                             self.update(False)
                         elif self.texto_actual[self.selected_index] == "Salir":
-                            self.running = False  # Cerrar el juego al seleccionar "Salir"
+                            self.estado_general = "salir menu principal"
+                            self.running = False
                     elif self.texto_actual == self.texto_niveles:
+                        if self.texto_actual[self.selected_index] == "Nivel 1":
+                            self.estado_general = "Selecciono nivel 1"
+                            self.running = False
+                        if self.texto_actual[self.selected_index] == "Nivel 2":
+                            self.estado_general = "Selecciono nivel 2"
+                            self.running = False
+                        if self.texto_actual[self.selected_index] == "Nivel 3":
+                            self.estado_general = "Selecciono nivel 3"
+                            self.running = False
                         if self.texto_actual[self.selected_index] == "Volver":
                             self.update()
                         elif self.texto_actual[self.selected_index] == "Salir":
-                            self.running = False  # Cerrar el juego al seleccionar "Salir"
+                            self.estado_general = "salir menu niveles"
+                            self.running = False
 
 
     def update(self, estado=True):
@@ -69,7 +77,6 @@ class Menus:
             self.salto_actual = 40
             self.fondo_en_pantalla = self.bg_menuNiveles
         self.selected_index = 0
-
 
     def draw(self):
         """Dibuja en la pantalla."""
@@ -103,30 +110,24 @@ class Menus:
             if i == self.selected_index:
                 text_surface = self.font_opciones.render(option, True, (0, 255, 0))  # Color de selección
             else:
-                text_surface = self.font_opciones.render(option, True, (255, 255, 255))  # Blanco para otras opciones
+                text_surface = self.font_opciones.render(option, True, (255, 255, 255))
 
-            surface.blit(text_surface, (x, y))  # Dibujar la opción
-            y += salto  # Aumentar el desplazamiento vertical para la siguiente línea
+            surface.blit(text_surface, (x, y)) 
+            y += salto 
 
-    def texto_con_salto(self, surface, text_lines, x, y, salto=30):
-        for line in text_lines:
-            text_surface = self.font_opciones.render(line, True, (255, 255, 255))
-            surface.blit(text_surface, (x, y))  # Posicionar cada línea
-            y += salto  # Aumentar la posición Y para la siguiente línea
 
     def run(self):
         """Bucle principal del juego."""
         while self.running:
-            self.handle_events()  # Manejar eventos
-            self.draw()  # Dibujar en pantalla
-            self.clock.tick(30)  # Limitar a 60 FPS
-
-        self.quit_game()  # Asegurar cierre al salir del bucle
+            self.handle_events()
+            self.draw() 
+            self.clock.tick(60) 
+        
+        self.quit_game()  # Llamar a quit_game después de que el bucle termine
+        return self.estado_general  # Retornar el valor deseado (ej. "game over", "exit", etc.)
 
     def quit_game(self):
-        """Cierra Pygame y termina el programa."""
         pygame.quit()
-        sys.exit()
 
 if __name__ == "__main__":
     game = Menus()
