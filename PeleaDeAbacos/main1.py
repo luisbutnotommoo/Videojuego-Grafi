@@ -6,6 +6,7 @@ from pruebaMenus import Menus
 from menuPersonajesPruebas import SeleccionPersonaje
 from Acciones.propiedadesPersonajes import Propiedades
 
+
 from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
 from PersonajeLuis2.claseMainLuis import PersonajeLuis
 from PersonajeEmma.claseEmma import PersonajeEmmanuel
@@ -19,7 +20,9 @@ class Main:
         pygame.mixer.init()
         self.running = True
         self.clock = pygame.time.Clock() 
-
+        self.personajeSelec=True
+        self.guardadoPersonaje=[]
+        self.personajeCorrer=None
         self.estado_general = "menuPrincipal" #menuPrincipal, menuNiveles, personajes1, personajes2, personajes3 (seleccion de personajes que guarda el nivel),
                                         #nivel1, nivel2, nivel3, salir
         self.personajesJugables=[]
@@ -37,12 +40,33 @@ class Main:
                 print ("Entro a seleccion de personaje")
                 self.personajesJugables=[]
                 ventana_actual = SeleccionPersonaje()
-                ventana_actual.run()
+                while(ventana_actual.contador<2):
+                    
+
+                    ventana_actual.run()
+
+                    if ventana_actual.menuBan==True:
+                        if ventana_actual.selected_character == 0:
+                            self.personajeCorrer = PersonajeEmmanuel()
+                        elif ventana_actual.selected_character == 1:
+                            self.personajeCorrer = instanciaLuis
+                        elif ventana_actual.selected_character == 2:
+                            self.personajeCorrer=PersonajeLin()
+                        elif ventana_actual.selected_character == 3:
+                            self.personajeCorrer=PersonajeStarenka()
+                    
+                        self.personajeCorrer.run()
+                        ventana_actual.menuBan=False
+                        ventana_actual.running=True
+                        ventana_actual.resetMenu()
+                   
+
+
                 z = 0
+
                 for i in range(2):
                     if (i == 1):
-                        z = 4
-                        
+                         z = 4
                     if ventana_actual.guardado[i] == 0:
                         self.personajesJugables.append(z + ventana_actual.guardado[i])
                         #self.personajeCorrer = PersonajeEmmanuel()

@@ -147,7 +147,7 @@ class PersonajeEmmanuel:
 
                 pygame.display.flip()
                 pygame.time.wait(10)
-        pygame.quit()
+        pygame.display.quit()
         
 
     def _mover_personaje(self, dx, dy):
