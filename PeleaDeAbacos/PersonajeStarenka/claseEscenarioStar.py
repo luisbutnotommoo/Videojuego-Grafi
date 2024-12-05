@@ -33,6 +33,14 @@ class PersonajeStarenka:
         self.lcFin=iluminacion()
         self.inicializarCosas()
         self.ventanaInicial()
+        self.textura1=es.load_texture('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+        self.textura2=es.load_texture('PersonajeStarenka/Imagenes2S/fondo5.jpg')
+        self.textura3=es.load_texture('PersonajeStarenka/Imagenes2S/fondo4.jpg')
+        self.textura4=es.load_texture('PersonajeStarenka/Imagenes2S/fondo2.jpg')
+        self.textura5=es.load_texture('PersonajeStarenka/Imagenes2S/fondo3.jpg')
+        self.textura6=es.load_texture('PersonajeStarenka/Imagenes2S/fondo6.jpg')
+        self.textura7=es.load_texture('PersonajeStarenka/Imagenes2S/fondo7.jpg')
+        self.textura8=es.load_texture('PersonajeStarenka/Imagenes2S/fondo8.jpg')
 
     def inicializarCosas(self):
         pygame.init()
@@ -250,7 +258,7 @@ class PersonajeStarenka:
 
                 if self.bandera==0:
                     b.original()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')   
+                    es.draw_e(self.textura1)   
                     if self.bandera2==1:
                         self.lcFin.iluminacionPhong()
                     elif self.bandera2==2:
@@ -262,63 +270,63 @@ class PersonajeStarenka:
                     
                 if self.bandera==1:
                     b.asustado()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo5.jpg')
+                    es.draw_e(self.textura2)
                 if self.bandera==2:
                     b.molesto()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo4.jpg')
+                    es.draw_e(self.textura3)
                 if self.bandera==3:
                     b.preocupado()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo2.jpg')
+                    es.draw_e(self.textura4)
                 if self.bandera==4:
                     b.drawIndiferencia()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo3.jpg')
+                    es.draw_e(self.textura5)
                 if self.bandera==5:
                     b.sorprendido()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo6.jpg')
+                    es.draw_e(self.textura6)
                 if self.bandera==6:
                     b.felicidad()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo7.jpg')
+                    es.draw_e(self.textura7)
                 if self.bandera==7:
                     b.triste()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo5.jpg')
+                    es.draw_e(self.textura8)
                 if self.bandera==8:
                     b.animaLevantar()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e(self.textura1)
                 if self.bandera==9:
                     b.animaCaminar()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e(self.textura1)
                 if self.bandera==10:
                     b.animaBrazo2()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e(self.textura1)
                 if self.bandera==11:
                     b.animaCabeza()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e(self.textura1)
                 if self.bandera==12:
                     b.animaBrincar()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e(self.textura1)
                 if self.bandera==13:
                     b.animaBrincarSplit()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e(self.textura1)
                 if self.bandera==14:
                     b.animaCaida()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e(self.textura1)
                 if self.bandera==15:
                     txt.draw_text("Usar flechas del teclado para mover los objetos", -40, 40, -1, 25, 255, 255, 255, 0, 0, 0)
                     if(self.bandera1==0 and self.activarColi==True):
                         b.animaCaminar()
-                        es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')  
+                        es.draw_e(self.textura1)  
                         self.pelota(0,0)
                     if(self.bandera1==1):
                         b.triste()
-                        es.draw_e('PersonajeStarenka/Imagenes2S/fondo8.jpg')
+                        es.draw_e(self.textura8)
                         self.corazon(0,0)
                     if(self.bandera1==2):
                         b.animaBrincarSplit()
-                        es.draw_e('PersonajeStarenka/Imagenes2S/fondo7.jpg')
+                        es.draw_e(self.textura7)
                         self.Hamburguesa(0,0)
                     if(self.bandera1==3):
                         b.preocupado()
-                        es.draw_e('PersonajeStarenka/Imagenes2S/fondo2.jpg')
+                        es.draw_e(self.textura4)
                         self.bolaDisco(0,0)
                     
                 if self.activarColi:

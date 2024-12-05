@@ -21,7 +21,7 @@ class PersonajesDeTodos:
         self.jump_height = 5.0
         self.jump_speed = 0.5
         self.initial_y = self.posicion[1]
-        self.estado_emocion = emocion  # Agregar un atributo para el estado de la emoción
+        self.estado_emocion = emocion  
 
     def set_position(self, x, y, z):
         self.posicion = (x, y, z)
@@ -38,7 +38,7 @@ class PersonajesDeTodos:
         
          
         for i, funcion in enumerate(self.funciones_dibujo):
-            funcion(self.estado_emocion)  # Pass the current emotion state
+            funcion(self.estado_emocion)  
         glPopMatrix()
 
     def jump(self):
@@ -62,21 +62,21 @@ class PersonajesDeTodos:
         self.estado_emocion = emocion  # Cambiar el estado de la emoción
 
 
-# Función para generar los personajes con lambdas para manejar emociones
 def figuraLuis(emocion):
     temp = Personaje(emocion)
-    return [lambda emocion=emocion: temp.render_personaje(emocion)]  # Capture emotion correctly
+    #Lambda captura la emocion
+    return [lambda emocion=emocion: temp.render_personaje(emocion)]  
 
 def figuraEmma(emocion):
     temp2 = NewtJuego(emocion)
-    return [lambda emocion=emocion: temp2.personaje(emocion)]  # Capture emotion correctly
+    return [lambda emocion=emocion: temp2.personaje(emocion)] 
 
 def figuraLin(emocion):
     temp3 = PersonajeLin(emocion)
-    return [lambda emocion=emocion: temp3.personaje(emocion)]  # Capture emotion correctly
+    return [lambda emocion=emocion: temp3.personaje(emocion)]  
 
 def figuraStar(emocion):
     temp4 = PintarPersonajeStar(emocion)
-    return [lambda emocion=emocion: temp4.Personaje(emocion)]  # Capture emotion correctly
+    return [lambda emocion=emocion: temp4.Personaje(emocion)]  
 
 

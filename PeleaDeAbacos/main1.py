@@ -7,7 +7,7 @@ from menuPersonajesPruebas import SeleccionPersonaje
 from Acciones.propiedadesPersonajes import Propiedades
 
 
-from PersonajeStarenka.claseEscenarioStar import PersonajeStarenka
+from PersonajeStarenka.claseOpt import PersonajeStarenka
 from PersonajeLuis2.claseMainLuis import PersonajeLuis
 from PersonajeEmma.claseEmma import PersonajeEmmanuel
 from PersonajeLin.blue_multiverso.machote.main import PersonajeLin
@@ -69,18 +69,13 @@ class Main:
                          z = 4
                     if ventana_actual.guardado[i] == 0:
                         self.personajesJugables.append(z + ventana_actual.guardado[i])
-                        #self.personajeCorrer = PersonajeEmmanuel()
                     elif ventana_actual.guardado[i] == 1:
                         self.personajesJugables.append(z + ventana_actual.guardado[i])
-                        #self.personajeCorrer = instanciaLuis
                     elif ventana_actual.guardado[i] == 2:
                         self.personajesJugables.append(z + ventana_actual.guardado[i])
-                        #self.personajeCorrer=PersonajeLin()
                     elif ventana_actual.guardado[i] == 3:
-                        #self.personajeCorrer=PersonajeStarenka()
                         self.personajesJugables.append(z + ventana_actual.guardado[i])
                     
-                    #self.personajeCorrer.run()
 
                 eleccion = Propiedades(self.personajesJugables)
 
