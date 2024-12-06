@@ -235,7 +235,6 @@ class PersonajeLuis:
             sonido.stop()
             sonido.play()
              
-           
             
             
         if key == glfw.KEY_P and action==glfw.PRESS:
