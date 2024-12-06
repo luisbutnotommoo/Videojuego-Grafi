@@ -7,7 +7,7 @@ from PIL import*
 import Acciones.objetosTextura as obj
 import Acciones.escenario as esc
 import Acciones.viewPortPreguntas as view
-import Acciones.bancoPreguntas2 as bp
+import PeleaDeAbacos.Acciones.bancoPreguntas as bp
 from Acciones.boceto2 import  PersonajesDeTodos
 import Acciones.boceto2 as b
 from Acciones.colisionRectangular import RectangularCollision3D
