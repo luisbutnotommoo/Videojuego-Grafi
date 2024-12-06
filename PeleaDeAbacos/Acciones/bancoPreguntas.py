@@ -21,11 +21,10 @@ class ArbolOperaciones:
         self.rango_numeros = rango_numeros
 
     def generar_arbol_operaciones(self, profundidad_actual=0):
-        # Condición de parada basada en profundidad máxima
+        
         if profundidad_actual >= self.profundidad_max:
             return NodoOperacion(random.randint(*self.rango_numeros))
 
-        # Si es la primera llamada o no ha alcanzado la profundidad máxima
         if profundidad_actual == 0 or profundidad_actual < self.profundidad_max - 1:
             # Generar nodo de operación
             operador = random.choice(list(self.OPERADORES.keys()))
@@ -41,7 +40,6 @@ class ArbolOperaciones:
         return NodoOperacion(random.randint(*self.rango_numeros))
 
     def evaluar_arbol(self, nodo):
-        # Evalúa recursivamente el árbol de operaciones
         if not isinstance(nodo.valor, str):
             return nodo.valor
         
