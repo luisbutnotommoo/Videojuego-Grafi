@@ -28,14 +28,16 @@ def load_texture(FileName):
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
 
+    print("Se cargo la textura")
+
     return texture_id
 
 
-def draw_e(fileImage):
+def draw_e(texture_id):
     #Habilita el uso de texturas 2D en OpenGL
     glEnable(GL_TEXTURE_2D)
     #Vincula la textura la imagen que mandamos
-    glBindTexture(GL_TEXTURE_2D, load_texture(fileImage))
+    glBindTexture(GL_TEXTURE_2D,texture_id)
     
     #Inicia el dibujo-
     #GL_QUADS(indica que sera compuesto por cuadrilateros)

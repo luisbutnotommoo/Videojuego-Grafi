@@ -147,7 +147,7 @@ class PersonajeEmmanuel:
 
                 pygame.display.flip()
                 pygame.time.wait(10)
-        pygame.quit()
+        pygame.display.quit()
         
 
     def _mover_personaje(self, dx, dy):
@@ -210,7 +210,7 @@ class PersonajeEmmanuel:
     def _renderizar_texto(self):
         glColor4f(1, 1, 1, 1)
         txt.render_text_2d(self.display,
-                           "W,A,S,D,Z,X - Mover cámara\nFLECHAS - Mover personaje\no-Original\n1-Enojado\n2-Triste\n3-Sospechoso\n4-Indiferente\n5-Levantar ceja\nE-Sorprendido\nR-Sonriente\n6-Levantar brazo IZQ\n7-Levantar brazo DER\n8-T-Pose\n9-Sentado\n0-Saltando\nT-Señalando\nY-Celebrando\nn-Sonido ON\nm-Sonido OFF\np-Pausa\ni-Acerca de" + self.acercade,
+                           "W,A,S,D,Z,X - Mover cámara\nFLECHAS - Mover personaje\no-Original\n1-Enojado\n2-Triste\n3-Sospechoso\n4-Indiferente\n5-Levantar ceja\nE-Sorprendido\nR-Sonriente\n6-Levantar brazo IZQ\n7-Levantar brazo DER\n8-T-Pose\n9-Sentado\n0-Saltando\nT-Señalando\nY-Celebrando\nn-Sonido ON\nm-Sonido OFF\np-Pausa\ni-Acerca de" + self.acercade+"\nESC- S A L I R",
                             10, self.display[1] - 40, self.font)  # Esquina inferior izquierda
 
 # Ejecutar el juego

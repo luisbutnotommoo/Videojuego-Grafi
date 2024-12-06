@@ -22,13 +22,18 @@ class SeleccionPersonaje:
         self.init_pygame()
         self.init_opengl()
         self.guardado=[]
+        self.nom1=" "
+        self.nom2=" "
+        self.menuBan=False
+        self.banderaAcomula=False
+        self.running=True
         # Estados de selección de personajes
         self.selected_character = -1
         self.personaje = [
-            PersonajesDeTodos("Personaje de Emma", b.figuraEmma(0),rotacion=190, escala=(0.22, 0.22, 0.22)),
-            PersonajesDeTodos("Personaje de Luis", b.figuraLuis(0), escala=(1.4, 1.4, 1.4)),
-            PersonajesDeTodos("Personaje de Lin",b.figuraLin(0), rotacion=0, escala=(0.4, 0.4, 0.4)),
-            PersonajesDeTodos("Personaje de Star",  b.figuraStar(0),rotacion=190, escala=(0.25, 0.25, 0.25))
+            PersonajesDeTodos("Dr. Newt", b.figuraEmma(0),rotacion=190, escala=(0.22, 0.22, 0.22)),
+            PersonajesDeTodos("Heinsenpurr", b.figuraLuis(0), escala=(1.4, 1.4, 1.4)),
+            PersonajesDeTodos("Blue",b.figuraLin(0), rotacion=0, escala=(0.4, 0.4, 0.4)),
+            PersonajesDeTodos("Amargando",  b.figuraStar(0),rotacion=190, escala=(0.25, 0.25, 0.25))
         ]
         self.bandera_control_instrucciones = True
         self.bandera_instrucciones = True
@@ -47,13 +52,13 @@ class SeleccionPersonaje:
         ]
 
         self.contador=0
-
+        
         # Posiciones
         self.asignar_posiciones_personajes()
 
         # Cargar texturas
-        floor=os.path.join(ruta_img,'pasto.jpg')
-        wall=os.path.join(ruta_img,'pared.jpg')
+        floor=os.path.join(ruta_img,'pisoCast.jpg')
+        wall=os.path.join(ruta_img,'castillo4.jpg')
         self.floor_texture = self.load_texture(floor)
         self.wall_texture = self.load_texture(wall)
 
@@ -64,13 +69,24 @@ class SeleccionPersonaje:
         self.font_titulo = pygame.font.SysFont('Algerian', 60)
         self.font_menu = pygame.font.SysFont('Imprint MT Shadow', 65)
         self.font_personajes = pygame.font.SysFont('Imprint MT Shadow', 35)
+        self.font_personajes2 = pygame.font.SysFont('Imprint MT Shadow', 30)
         self.font_instrucciones = pygame.font.SysFont('Imprint MT Shadow', 25)
         
         self.sonido_seleccion = pygame.mixer.Sound(os.path.join(ruta_audio,"seleccion_personaje_espada.mp3"))
         pygame.mixer.music.load(os.path.join(ruta_audio,"menu_medieval.mp3"))
         pygame.mixer.music.play(loops=-1) 
 
-
+    def resetMenu(self):
+        pygame.init()
+        self.init_pygame()
+        self.init_opengl()
+        floor=os.path.join(ruta_img,'pasto.jpg')
+        wall=os.path.join(ruta_img,'pared.jpg')
+        self.floor_texture = self.load_texture(floor)
+        self.wall_texture = self.load_texture(wall)
+        self.sonido_seleccion = pygame.mixer.Sound(os.path.join(ruta_audio,"seleccion_personaje_espada.mp3"))
+        pygame.mixer.music.load(os.path.join(ruta_audio,"menu_medieval.mp3"))
+        pygame.mixer.music.play(loops=-1) 
     def asignar_posiciones_personajes(self):
         posiciones = [
             (-4.5, -1.5, 0),  # Posición para personaje 1
@@ -151,8 +167,21 @@ class SeleccionPersonaje:
         self.render_text_2d(self.display,"Blue",460,198,self.font_personajes)
         self.render_text_2d(self.display,"Amargando",580,200,self.font_personajes)
         self.render_text_2d(self.display,"Teclas |1||2||3||4| - Selección de personaje\n|Enter| - Confirma selección\n|M| - Visualizar personaje",10,40,self.font_instrucciones)
-        self.render_text_2d(self.display,"Teclas de modo visualizar personaje:\n|ESC| - Salir",460,40,self.font_instrucciones)
-
+        self.render_text_2d(self.display,"Teclas de modo visualizar personaje:\n|ESC| - Salir De Visualizar",460,40,self.font_instrucciones)
+        if(self.selected_character!=-1) and self.contador==0:
+            self.render_text_2d(self.display, f"Personaje jugador 1:{self.personaje[self.selected_character].nombre}", 60, 450, self.font_personajes2)
+            self.nom1=self.personaje[self.selected_character].nombre
+            self.render_text_2d(self.display, "Personaje jugador 2:", 450, 450, self.font_personajes2)
+        elif(self.selected_character!=-1) and self.contador==1:
+            self.render_text_2d(self.display, f"Personaje jugador 1:{self.nom1}", 60, 450, self.font_personajes2)
+            self.render_text_2d(self.display, f"Personaje jugador 2:{self.personaje[self.selected_character].nombre}", 450, 450, self.font_personajes2)
+            self.nom2=self.personaje[self.selected_character].nombre
+        elif(self.selected_character!=-1) and self.contador==2:
+            self.render_text_2d(self.display, f"Personaje jugador 1:{self.nom1}", 60, 450, self.font_personajes2)
+            self.render_text_2d(self.display, f"Personaje jugador 2:{self.nom2}", 450, 450, self.font_personajes2)
+        elif self.selected_character==-1:
+            self.render_text_2d(self.display,"Personaje jugador 1: "+self.nom1,60 ,450,self.font_personajes2)
+            self.render_text_2d(self.display, "Personaje jugador 2:", 450, 450, self.font_personajes2)
 
     def dibujar_piso_pared(self):
        
@@ -272,7 +301,6 @@ class SeleccionPersonaje:
 
     def draw_scene(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
         # Dibujar escenario
         self.dibujar_piso_pared()
         self.update_jump()
@@ -288,49 +316,42 @@ class SeleccionPersonaje:
         self.dibuja_textos()
         if self.bandera_control_instrucciones:
             tx.draw_text2(self.texto_instrucciones,self.fuente_instrucciones,200,50,50)
-
-
         pygame.display.flip()
 
     def handle_input(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.bandera=1
+        try:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     return False
-                if event.key == pygame.K_p:
-                    if self.bandera_control_instrucciones:
-                        self.bandera_instrucciones =  not self.bandera_instrucciones
-                        self.bandera_control_instrucciones = not self.bandera_control_instrucciones
-                    
-                elif event.key in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4):
-                    self.selected_character = event.key - pygame.K_1
-                    self.sonido_seleccion.play()
-                elif event.key==pygame.K_m:
-                    if self.selected_character>=0:
-                        if self.selected_character == 0:
-                            self.personajeCorrer = PersonajeEmmanuel()
-                        elif self.selected_character == 1:
-                            self.personajeCorrer = instanciaLuis
-                        elif self.selected_character == 2:
-                            self.personajeCorrer=PersonajeLin()
-                        elif self.selected_character == 3:
-                            self.personajeCorrer=PersonajeStarenka()
-                
-                        self.personajeCorrer.run()
-                elif event.key == pygame.K_RETURN:
-                    if self.selected_character >= 0:
-                        if(self.contador<2):
-                            print(f"Personaje seleccionado: {self.selected_character + 1}")
-                            self.personaje[self.selected_character].start_jump()  # Iniciar el salto
-                            self.saltar()
-                            self.contador=self.contador+1
-                            self.guardado.append(self.selected_character)
-                    else:
-                        print("No se ha seleccionado ningún personaje.")
-        return True
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.bandera=1
+                        return False
+                    if event.key == pygame.K_p:
+                        if self.bandera_control_instrucciones:
+                            self.bandera_instrucciones =  not self.bandera_instrucciones
+                            self.bandera_control_instrucciones = not self.bandera_control_instrucciones       
+                    elif event.key in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4):
+                        self.selected_character = event.key - pygame.K_1
+                        self.sonido_seleccion.play()
+                    elif event.key==pygame.K_m and self.selected_character!=-1:
+                        self.menuBan=True
+                        self.running=False
+                    elif event.key == pygame.K_RETURN:
+                        if self.selected_character >= 0:
+                            if(self.contador<2):
+                                print(f"Personaje seleccionado: {self.selected_character + 1}")
+                                self.personaje[self.selected_character].start_jump()  # Iniciar el salto
+                                self.saltar()
+                                self.contador=self.contador+1
+                                self.guardado.append(self.selected_character)
+                        else:
+                            print("No se ha seleccionado ningún personaje.")
+            return True
+        except pygame.error as e:
+         print(f"Error al manejar eventos: {e}")
+
+
 
     def saltar(self):
         # Iniciar el salto
@@ -349,14 +370,14 @@ class SeleccionPersonaje:
                 self.jump_height -= self.jump_speed
 
     def run(self):
-        running = True
-        while running:
-            running = self.handle_input()
+
+        while self.running:
+            self.handle_input()
             self.draw_scene()
             pygame.time.wait(10)
             if (self.contador==2):
-                running=False
                 self.cleanup()
+                self.running=False
 
         pygame.display.quit()
                 
@@ -380,7 +401,7 @@ class SeleccionPersonaje:
                 pygame.mixer.music.unload()
                 #pygame.mixer.quit()
                 # Reiniciar estado de Pygame
-                #pygame.display.quit()
+                pygame.display.quit()
                 #pygame.display.init()
         except Exception as e:
             print(f"Error en cleanup: {e}")
