@@ -1,159 +1,149 @@
-import random as ran
-from random import choice
+import random
+import operator
+import math
 
-class bancoPreguntas:
-    def __init__(self):
-        self.numUno = 0
-        self.numDos = 0
-        self.numTres = 0
-        self.respuesta = 0
-        self.preguntaActual = None
-        self.preguntas = []
-        self.respuestaActual = None
-        self.operacion1 = 0
-        self.respuestaMala = 0
-        self.respuestaMala2 = 0
-        self.operacion2 = 0
-        self.operacion3 = 0
-        self.operacion4=0
-        self.operacion5=0
-        # Genera las preguntas al inicio
-        ##self.elige_pregunta()
-    
-    def generar_numeros(self):
-        self.numUno = ran.randint(-11, 11)
-        self.numDos = ran.randint(-11, 11)
-        self.numTres = ran.randint(-11, 11)
+class NodoOperacion:
+    def __init__(self, valor=None, izquierda=None, derecha=None):
+        self.valor = valor
+        self.izquierda = izquierda
+        self.derecha = derecha
 
-    def comprobarIgual(self):
-        if(self.operacion1==self.respuestaMala):#
-            self.respuestaMala=ran.randint(-51,50)
-        if(self.operacion1==self.respuestaMala2):#
-            self.respuestaMala2=ran.randint(-51,50)
-        if(self.operacion2==self.respuestaMala):#
-            self.respuestaMala=ran.randint(-51,50)
-        if(self.operacion2==self.respuestaMala2):#
-            self.respuestaMala2=ran.randint(-51,50)
-        if(self.operacion3==self.respuestaMala):
-            self.respuestaMala=ran.randint(-51,50)
-        if(self.operacion3==self.respuestaMala2):
-            self.respuestaMala2=ran.randint(-51,50)
-        if(self.operacion4==self.respuestaMala):
-            self.respuestaMala=ran.randint(-51,50)
-        if(self.operacion4==self.respuestaMala2):
-            self.respuestaMala2=ran.randint(-51,50)
-        if(self.operacion5==self.respuestaMala):
-            self.respuestaMala=ran.randint(-51,50)
-        if(self.operacion5==self.respuestaMala2):
-            self.respuestaMala2=ran.randint(-51,50)
-        
-        if(self.operacion1==self.respuestaMala or self.operacion1==self.respuestaMala2 or
-            self.operacion2==self.respuestaMala or self.operacion2==self.respuestaMala2 or 
-            self.operacion3==self.respuestaMala or self.operacion3==self.respuestaMala2 or
-            self.operacion4==self.respuestaMala or self.operacion4==self.respuestaMala2 or
-            self.operacion5==self.respuestaMala or self.operacion5==self.respuestaMala2 ):
-                self.comprobarIgual()
+class ArbolOperaciones:
+    OPERADORES = {
+        '+': operator.add,
+        '-': operator.sub,
+        '*': operator.mul,
+        '/': operator.truediv,
+    }
+
+    def __init__(self, profundidad_max=4, rango_numeros=(-11, 11)):
+        self.profundidad_max = profundidad_max
+        self.rango_numeros = rango_numeros
+
+    def generar_arbol_operaciones(self, profundidad_actual=0):
+        # Condición de parada basada en profundidad máxima
+        if profundidad_actual >= self.profundidad_max:
+            return NodoOperacion(random.randint(*self.rango_numeros))
+
+        # Si es la primera llamada o no ha alcanzado la profundidad máxima
+        if profundidad_actual == 0 or profundidad_actual < self.profundidad_max - 1:
+            # Generar nodo de operación
+            operador = random.choice(list(self.OPERADORES.keys()))
+            nodo = NodoOperacion(operador)
             
+            # Generar subárboles izquierdo y derecho
+            nodo.izquierda = self.generar_arbol_operaciones(profundidad_actual + 1)
+            nodo.derecha = self.generar_arbol_operaciones(profundidad_actual + 1)
 
-    def generar_preguntasNivel1(self):
-        # Genera nuevos números antes de cada pregunta
-        self.comprobarIgual()
-        self.operacion1 = self.numUno + self.numDos 
-        self.respuestaMala = ran.randint(-51, 50)
-        self.respuestaMala2 = ran.randint(-51, 50)
-        self.operacion2 = self.numUno * self.numDos 
-        self.operacion3 = self.numUno - self.numDos
-        self.operacion4=self.numUno+self.numDos
-        self.operacion5=self.numUno*self.numDos
+            return nodo
         
-        self.preguntas = [
-            {"pregunta": f"¿Cuánto es ({self.numUno}) + ({self.numDos}) ?\n"
-                         f"a) {self.operacion1}\n"
-                         f"b) {self.respuestaMala}\n"
-                         f"c) {self.respuestaMala2}", 
-             "respuesta": "a"},
+        # En los últimos niveles, generar solo números
+        return NodoOperacion(random.randint(*self.rango_numeros))
 
-            {"pregunta": f"¿Cuánto es ({self.numUno}) * ({self.numDos})?\n"
-                         f"a) {self.respuestaMala2}\n"
-                         f"b) {self.operacion2}\n"
-                         f"c) {self.respuestaMala}",
-             "respuesta": "b"},
-
-            {"pregunta": f"¿Cuánto es ({self.numUno}) - ({self.numDos})?\n"
-                         f"a) {self.respuestaMala}\n"
-                         f"b) {self.respuestaMala2}\n"
-                         f"c) {self.operacion3}",
-             "respuesta": "c"},
-
-            {"pregunta": f"¿Cuánto es ({self.numUno}) + ({self.numDos}) ?\n"
-                         f"a) {self.respuestaMala}\n"
-                         f"b) {self.respuestaMala2}\n"
-                         f"c) {self.operacion4}",
-             "respuesta": "c"},
-            
-            {"pregunta": f"¿Cuánto es ({self.numUno}) * ({self.numDos}) ?\n"
-                         f"a) {self.respuestaMala2}\n"
-                         f"b) {self.operacion5}\n"
-                         f"c) {self.respuestaMala}",
-             "respuesta": "b"},
-
-        ]
-    
-    def elige_pregunta(self):
-        # Generar nuevas preguntas cada vez que se elige una pregunta
-        self.generar_numeros()
-        self.generar_preguntasNivel1()
-        seleccionado = choice(self.preguntas)
-        self.preguntaActual = seleccionado["pregunta"]
-        self.respuestaActual = seleccionado["respuesta"]
-
-    def generar_preguntasNivel2(self):
-        # Genera nuevos números antes de cada pregunta
-        self.comprobarIgual()
-        self.operacion1 = self.numUno + self.numDos + self.numTres
-        self.respuestaMala = ran.randint(-51, 50)
-        self.respuestaMala2 = ran.randint(-51, 50)
-        self.operacion2 = self.numUno * self.numDos -self.numTres
-        self.operacion3 = self.numUno - self.numDos + self.numTres
-        self.operacion4=self.numUno+self.numDos * self.numTres
-        self.operacion5=self.numUno*self.numDos - self.numTres
+    def evaluar_arbol(self, nodo):
+        # Evalúa recursivamente el árbol de operaciones
+        if not isinstance(nodo.valor, str):
+            return nodo.valor
         
-        self.preguntas = [
-            {"pregunta": f"¿Cuánto es ({self.numUno}) + ({self.numDos}) + ({self.numTres})?\n"
-                         f"a) {self.operacion1}\n"
-                         f"b) {self.respuestaMala}\n"
-                         f"c) {self.respuestaMala2}", 
-             "respuesta": "a"},
-
-            {"pregunta": f"¿Cuánto es ({self.numUno}) * ({self.numDos}) - ({self.numTres})?\n"
-                         f"a) {self.respuestaMala2}\n"
-                         f"b) {self.operacion2}\n"
-                         f"c) {self.respuestaMala}",
-             "respuesta": "b"},
-
-            {"pregunta": f"¿Cuánto es ({self.numUno}) - ({self.numDos}) + ({self.numTres})?\n"
-                         f"a) {self.respuestaMala}\n"
-                         f"b) {self.respuestaMala2}\n"
-                         f"c) {self.operacion3}",
-             "respuesta": "c"},
-
-            {"pregunta": f"¿Cuánto es ({self.numUno}) + ({self.numDos}) * ({self.numTres})?\n"
-                         f"a) {self.respuestaMala}\n"
-                         f"b) {self.respuestaMala2}\n"
-                         f"c) {self.operacion4}",
-             "respuesta": "c"},
+        # Obtener valores de los subárboles
+        izq = self.evaluar_arbol(nodo.izquierda)
+        der = self.evaluar_arbol(nodo.derecha)
+        
+        # Aplicar operación
+        try:
+            resultado = self.OPERADORES[nodo.valor](izq, der)
             
-            {"pregunta": f"¿Cuánto es ({self.numUno}) * ({self.numDos}) - ({self.numTres})?\n"
-                         f"a) {self.respuestaMala2}\n"
-                         f"b) {self.operacion5}\n"
-                         f"c) {self.respuestaMala}",
-             "respuesta": "b"},
+            # Manejo especial para división
+            if nodo.valor == '/' and isinstance(resultado, float):
+                # Redondear a 2 decimales si es necesario
+                return round(resultado, 2)
+            
+            return resultado
+        except (ZeroDivisionError, OverflowError, ValueError):
+            return None
 
-        ]
-    def elige_pregunta2(self):
-        # Generar nuevas preguntas cada vez que se elige una pregunta
-            self.generar_numeros()
-            self.generar_preguntasNivel2()
-            seleccionado = choice(self.preguntas)
-            self.preguntaActual = seleccionado["pregunta"]
-            self.respuestaActual = seleccionado["respuesta"]
+    def representacion_arbol(self, nodo):
+        # Genera representación en cadena del árbol
+        if not isinstance(nodo.valor, str):
+            return str(nodo.valor)
+        
+        return f"({self.representacion_arbol(nodo.izquierda)} {nodo.valor} {self.representacion_arbol(nodo.derecha)})"
+
+class BancoPreguntas:
+    def __init__(self, dificultad=1):
+        """
+        Inicializa el banco de preguntas con generación dinámica
+        
+        :param dificultad: Profundidad máxima del árbol de operaciones
+        """
+        self.generador_arboles = ArbolOperaciones(profundidad_max=dificultad + 1)
+        self.preguntas_usadas = set()
+
+    def generar_pregunta(self):
+        """
+        Genera una pregunta única en tiempo real
+        
+        :return: Diccionario con la pregunta generada
+        """
+        intentos_max = 20  # Límite de intentos para evitar bucle infinito
+        intentos = 0
+
+        while intentos < intentos_max:
+            # Generar árbol de operaciones
+            arbol = self.generador_arboles.generar_arbol_operaciones()
+            
+            # Evaluar resultado
+            resultado = self.generador_arboles.evaluar_arbol(arbol)
+            
+            # Omitir si no se puede evaluar o ya se ha usado
+            if (resultado is None or 
+                resultado in self.preguntas_usadas or
+                math.isnan(resultado) or 
+                math.isinf(resultado)):
+                intentos += 1
+                continue
+            
+            # Formatear el resultado
+            if isinstance(resultado, float):
+                # Redondear a 2 decimales si es un flotante
+                resultado = round(resultado, 2)
+            
+            # Convertir a entero si es posible
+            if isinstance(resultado, float) and resultado.is_integer():
+                resultado = int(resultado)
+            
+            # Generar opciones de respuesta
+            opciones = [resultado]
+            while len(opciones) < 4:
+                # Generar variaciones de la respuesta
+                if isinstance(resultado, int):
+                    variacion = resultado + random.randint(-10, 10)
+                else:
+                    variacion = round(resultado + random.uniform(-2, 2), 2)
+                
+                if variacion not in opciones:
+                    opciones.append(variacion)
+            
+            random.shuffle(opciones)
+            
+            # Crear pregunta
+            pregunta = {
+                'texto': f"¿Cuánto es {self.generador_arboles.representacion_arbol(arbol)}?\n" + 
+                         "\n".join([f"{chr(97+i)}) {opcion}" for i, opcion in enumerate(opciones)]),
+                'respuesta_correcta': chr(97 + opciones.index(resultado)),
+                'resultado': resultado
+            }
+            
+            # Marcar resultado como usado para evitar repeticiones
+            self.preguntas_usadas.add(resultado)
+            
+            return pregunta
+
+        # Si no se puede generar una pregunta válida
+        raise ValueError("No se pudo generar una pregunta válida después de múltiples intentos")
+
+    def reiniciar_preguntas(self):
+        """
+        Reinicia el conjunto de preguntas usadas
+        """
+        self.preguntas_usadas.clear()
