@@ -59,7 +59,7 @@ class Nivel1:
         self.objEscenario = esc.escenario(cargar_imagen("pasto.jpg"),cargar_imagen( "castillo.jpg"))
         self.iteraPregunta=0
         self.viewportPreguntas=view.ViewPortPreguntas(self.display)
-        self.objetoBanco = bp.BancoPreguntas(0)
+        self.objetoBanco = bp.BancoPreguntas(1)
         self.preguntaActual=None
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)
