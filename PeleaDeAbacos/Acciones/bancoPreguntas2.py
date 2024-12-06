@@ -14,7 +14,6 @@ class ArbolOperaciones:
         '-': operator.sub,
         '*': operator.mul,
         '/': operator.truediv,
- 
     }
 
     def __init__(self, profundidad_max=4, rango_numeros=(-11, 11)):
@@ -22,23 +21,24 @@ class ArbolOperaciones:
         self.rango_numeros = rango_numeros
 
     def generar_arbol_operaciones(self, profundidad_actual=0):
-        # Condición de parada
+        # Condición de parada basada en profundidad máxima
         if profundidad_actual >= self.profundidad_max:
             return NodoOperacion(random.randint(*self.rango_numeros))
 
-        # Decidir si es un nodo hoja (número) o un nodo de operación
-        if random.random() < 0.5 and profundidad_actual > 0:
-            return NodoOperacion(random.randint(*self.rango_numeros))
+        # Si es la primera llamada o no ha alcanzado la profundidad máxima
+        if profundidad_actual == 0 or profundidad_actual < self.profundidad_max - 1:
+            # Generar nodo de operación
+            operador = random.choice(list(self.OPERADORES.keys()))
+            nodo = NodoOperacion(operador)
+            
+            # Generar subárboles izquierdo y derecho
+            nodo.izquierda = self.generar_arbol_operaciones(profundidad_actual + 1)
+            nodo.derecha = self.generar_arbol_operaciones(profundidad_actual + 1)
 
-        # Generar nodo de operación
-        operador = random.choice(list(self.OPERADORES.keys()))
-        nodo = NodoOperacion(operador)
+            return nodo
         
-        # Generar subárboles izquierdo y derecho
-        nodo.izquierda = self.generar_arbol_operaciones(profundidad_actual + 1)
-        nodo.derecha = self.generar_arbol_operaciones(profundidad_actual + 1)
-
-        return nodo
+        # En los últimos niveles, generar solo números
+        return NodoOperacion(random.randint(*self.rango_numeros))
 
     def evaluar_arbol(self, nodo):
         # Evalúa recursivamente el árbol de operaciones
@@ -76,7 +76,7 @@ class BancoPreguntas:
         
         :param dificultad: Profundidad máxima del árbol de operaciones
         """
-        self.generador_arboles = ArbolOperaciones(profundidad_max=dificultad)
+        self.generador_arboles = ArbolOperaciones(profundidad_max=dificultad + 1)
         self.preguntas_usadas = set()
 
     def generar_pregunta(self):
@@ -114,7 +114,7 @@ class BancoPreguntas:
             
             # Generar opciones de respuesta
             opciones = [resultado]
-            while len(opciones) < 3:
+            while len(opciones) < 4:
                 # Generar variaciones de la respuesta
                 if isinstance(resultado, int):
                     variacion = resultado + random.randint(-10, 10)
