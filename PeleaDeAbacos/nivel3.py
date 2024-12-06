@@ -7,7 +7,7 @@ from PIL import*
 import Acciones.objetosTextura as obj
 import Acciones.escenario as esc
 import Acciones.viewPortPreguntas as view
-import PeleaDeAbacos.Acciones.bancoPreguntas as bp
+import Acciones.bancoPreguntas as bp
 from Acciones.boceto2 import  PersonajesDeTodos
 import Acciones.boceto2 as b
 from Acciones.colisionRectangular import RectangularCollision3D
@@ -57,7 +57,7 @@ class Nivel3:
         self.objEscenario = esc.escenario(cargar_imagen("piso3.jpg"),cargar_imagen( "pared3.jpg"))
         self.iteraPregunta=0
         self.viewportPreguntas=view.ViewPortPreguntas(self.display)
-        self.objetoBanco = bp.BancoPreguntas(3)
+        self.objetoBanco = bp.BancoPreguntas(2)
         self.preguntaActual=None
         self.fuente_instrucciones = pygame.font.SysFont(None, 30)
         self.fuente_pausa = pygame.font.SysFont(None, 40)

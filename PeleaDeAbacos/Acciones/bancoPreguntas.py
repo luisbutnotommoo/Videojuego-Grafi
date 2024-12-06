@@ -114,7 +114,7 @@ class BancoPreguntas:
             
             # Generar opciones de respuesta
             opciones = [resultado]
-            while len(opciones) < 4:
+            while len(opciones) < 3:
                 # Generar variaciones de la respuesta
                 if isinstance(resultado, int):
                     variacion = resultado + random.randint(-10, 10)
