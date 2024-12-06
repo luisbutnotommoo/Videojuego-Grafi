@@ -73,7 +73,7 @@ class PersonajeStarenka:
         glPushMatrix()
         glTranslatef(self.PosXPelota,self.PosYPelota,self.PosZPelota)
         lc.iluminacion()
-        oC.BolaDisco('PersonajeStarenka/Imagenes2S/pelota.jpg',2,40,40)
+        oC.BolaDisco('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/pelota.jpg',2,40,40)
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)
         glPopMatrix()
@@ -84,7 +84,7 @@ class PersonajeStarenka:
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
         glTranslatef(self.PosXHamburguesa,self.PosYHamburguesa,self.PosZHamburguesa)
-        oC.BolaDisco('PersonajeStarenka/Imagenes2S/hamburguesa.png',2,40,40)
+        oC.BolaDisco('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/hamburguesa.png',2,40,40)
         glPopMatrix()
 
     def bolaDisco(self,movX,movY): 
@@ -93,7 +93,7 @@ class PersonajeStarenka:
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
         glTranslatef(self.PosXBola,self.PosYBola,self.PosZBola)
-        oC.BolaDisco('PersonajeStarenka/Imagenes2S/disco.jpg',2,40,40)
+        oC.BolaDisco('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/disco.jpg',2,40,40)
         glPopMatrix()
 
     def corazon(self,movX2, movY2):
@@ -118,7 +118,7 @@ class PersonajeStarenka:
                     quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:  
-                     son.sonido('PersonajeStarenka/Sonido2S/sonidoFijo.wav')
+                     son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonidoFijo.wav')
 
                     if event.key == pygame.K_o:
                         son.stopsonido()
@@ -128,35 +128,35 @@ class PersonajeStarenka:
                     if event.key==pygame.K_2:
                         son.stopsonido()
                         self.bandera=1
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido1.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido1.wav')
                     if event.key==pygame.K_1:
                         self.bandera=0
                     if event.key==pygame.K_3:
                         son.stopsonido()
                         self.bandera=2
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido2.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido2.wav')
                     if event.key==pygame.K_4:
                         son.stopsonido()
                         self.bandera=3
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido3.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido3.wav')
                     if event.key==pygame.K_5:
                         son.stopsonido()
                         self.bandera=4
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido4.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido4.wav')
                     if event.key==pygame.K_6:
                         son.stopsonido()
                         self.bandera=5
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido5.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido5.wav')
                     ##Feliz
                     if event.key==pygame.K_7:
                         son.stopsonido()
                         self.bandera=6
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido6.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido6.wav')
                     #Triste
                     if event.key==pygame.K_8:
                         son.stopsonido()
                         self.bandera=7
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido7.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido7.wav')
                     #Mover brazos
                     if event.key==pygame.K_9:
                         self.bandera=8

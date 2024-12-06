@@ -6,12 +6,18 @@ from PersonajeLuis2.AccionesL import recursos
 
 menu = recursos.menu
 creditos = recursos.creditos
+mensaje = recursos.mensaje
+instrucciones = recursos.instrucciones
 
 def mostrar_imagen(ruta):
     if ruta == 0:
         dibujar_imagen(cargar_textura(menu))
     if ruta == 1:
         dibujar_imagen(cargar_textura(creditos))
+    if ruta == 2:
+        dibujar_imagen(cargar_textura(mensaje))
+    if ruta == 3:
+        dibujar_imagen(cargar_textura(instrucciones))
 
 def cargar_textura(filename):
     im = Image.open(filename)

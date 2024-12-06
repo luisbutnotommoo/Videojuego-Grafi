@@ -34,13 +34,11 @@ class controlaClase:
         self.personajeCorrer = None
         pygame.init()  
         pygame.mixer.init()
-        pygame.mixer.music.load("Sonidos/menu_principal.mp3")
-        pygame.mixer.music.play(loops=-1)
+        self.mp3.reproducir_sonido_fondo("menu_principal.mp3")
         
     def main(self):
         while True:
-            pygame.mixer.music.load("Sonidos/menu_principal.mp3")
-            pygame.mixer.music.play(loops=-1)
+            self.mp3.reproducir_sonido_fondo("menu_principal.mp3")
             print("Esta aqui")
             self.banderaSeleccion=True
             self.banderaNivel=True

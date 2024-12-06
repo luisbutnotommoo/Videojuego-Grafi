@@ -6,18 +6,17 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 import numpy as np
 from PersonajeLuis2.AccionesL import personaje as perso
-from PersonajeLuis2.AccionesL import escenario as escena
+
 from PersonajeLuis2.AccionesL import sonido
-import tkinter.messagebox as mbox
+
 from PersonajeLuis2.AccionesL import mensajes
-#import escenario2 as esc
+
 from PersonajeLuis2.AccionesL.escenario3 import Escenario
 from PersonajeLuis2.AccionesL.pez import Pez
-from PersonajeLuis2.AccionesL.enemigo import Enemigo
 
 class PersonajeLuis:
     def __init__(self):
-        self.bandera_pop_up, self.mensaje_pop_up = False,0
+        self.bandera_pop_up, self.mensaje_pop_up = True,2
 
         # configuraciones personaje
         self.heisenpurr = perso.Personaje()
@@ -51,6 +50,7 @@ class PersonajeLuis:
 
         pygame.init()
         pygame.mixer.init()
+        
 
     def inicializar_ventana(self):
         if not glfw.init():
@@ -126,7 +126,6 @@ class PersonajeLuis:
         self.esc.render_escenario()
         self.heisenpurr.render_personaje()
 
-
         if self.pecesito is not None:
             self.pecesito.render_pez()
             if self.pecesito.verificar_colision(2, 3.13, 7,0.01):
@@ -134,8 +133,6 @@ class PersonajeLuis:
             if not self.pecesito.render_pez():
                 self.pecesito = None
 
-        if self.enemigo is not None:
-            self.enemigo.render_enemigo()
 
 
     def movimiento_mouse(self, window, xpos, ypos):
@@ -207,14 +204,10 @@ class PersonajeLuis:
         if key == glfw.KEY_E and action== glfw.PRESS:
             self.index_esc+=1
 
-            if self.index_esc==2:
-                self.enemigo=Enemigo()
-
-            if self.index_esc>=7:
+            if self.index_esc>4:
                 self.index_esc=0   
 
             sonido.stop()
-            #escena.set_escenario(self.index_esc)
             self.esc.set_escenario(self.index_esc)
             sonido.set_archivo(self.index_esc)
             sonido.play()
@@ -229,13 +222,20 @@ class PersonajeLuis:
             self.reiniciar_camara()
 
         if key == glfw.KEY_M and action== glfw.PRESS:
-            self.mensaje_pop_up=0 
+            self.mensaje_pop_up=0 #Pulsa Esc para quitar el demo de heisenpurr e ir al nivel o pulsa M para quitar este pop up
             self.bandera_pop_up = not self.bandera_pop_up
             
 
         if key == glfw.KEY_W and action== glfw.PRESS:
-            self.mensaje_pop_up=1
+            self.mensaje_pop_up=1 
             self.bandera_pop_up = not self.bandera_pop_up
+
+        if key == glfw.KEY_F and action== glfw.PRESS:
+            self.mensaje_pop_up=3#Instrucciones heisenpurr
+            sonido.stop()
+            sonido.play()
+             
+           
             
             
         if key == glfw.KEY_P and action==glfw.PRESS:
@@ -317,8 +317,6 @@ class PersonajeLuis:
         elif abs(self.angulo_personaje) >= 180:
             self.angulo_personaje=0
             mov = [0, 0, 0.3, 0, 0, 0]
-
-
         return mov
 
     def comando_shift(self, key,action):

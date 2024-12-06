@@ -1,7 +1,7 @@
 import os
 
-#ruta_actual = os.path.dirname(__file__)
-ruta_actual = "PersonajeLuis2"
+ruta_actual = os.path.dirname(__file__)
+
 
 sonido1 = os.path.join(ruta_actual, 'Sonidos', 'sonido1.mp3')
 sonido2 = os.path.join(ruta_actual, 'Sonidos', 'sonido2.mp3')
@@ -34,13 +34,14 @@ piso7=os.path.join(ruta_actual, 'Imagenes', ('piso7.jpg'))
 
 menu=os.path.join(ruta_actual, 'Imagenes', ('menu.png'))
 creditos=os.path.join(ruta_actual, 'Imagenes', ('creditos.png'))
+mensaje=os.path.join(ruta_actual, 'Imagenes', ('mensaje.png'))
+instrucciones=os.path.join(ruta_actual, 'Imagenes', ('instrucciones.png'))
 
 e1=(pared1,piso1,sonido1)
 e2=(pared2,piso2,sonido2)
 e3=(pared3,piso3,sonido3)
 e4=(pared4,piso4,sonido4)
 e5=(pared5,piso5,sonido5)
-e6=(pared6,piso6,sonido6)
-e7=(pared7,piso7,sonido7)
 
-ambiente=(e1,e2,e3,e4,e5,e6,e7)
+
+ambiente=(e1,e2,e3,e4,e5)
