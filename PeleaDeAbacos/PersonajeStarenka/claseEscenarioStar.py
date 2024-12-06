@@ -65,7 +65,7 @@ class PersonajeStarenka:
         glPushMatrix()
         glTranslatef(self.PosXPelota,self.PosYPelota,self.PosZPelota)
         lc.iluminacion()
-        oC.BolaDisco('PersonajeStarenka/Imagenes2S/pelota.jpg',2,40,40)
+        oC.BolaDisco('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/pelota.jpg',2,40,40)
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)
         glPopMatrix()
@@ -76,7 +76,7 @@ class PersonajeStarenka:
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
         glTranslatef(self.PosXHamburguesa,self.PosYHamburguesa,self.PosZHamburguesa)
-        oC.BolaDisco('PersonajeStarenka/Imagenes2S/hamburguesa.png',2,40,40)
+        oC.BolaDisco('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/hamburguesa.png',2,40,40)
         glPopMatrix()
 
     def bolaDisco(self,movX,movY): 
@@ -85,7 +85,7 @@ class PersonajeStarenka:
         glEnable(GL_DEPTH_TEST)
         glPushMatrix()
         glTranslatef(self.PosXBola,self.PosYBola,self.PosZBola)
-        oC.BolaDisco('PersonajeStarenka/Imagenes2S/disco.jpg',2,40,40)
+        oC.BolaDisco('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/disco.jpg',2,40,40)
         glPopMatrix()
 
     def corazon(self,movX2, movY2):
@@ -110,7 +110,7 @@ class PersonajeStarenka:
                     quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:  
-                     son.sonido('PersonajeStarenka/Sonido2S/sonidoFijo.wav')
+                     son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonidoFijo.wav')
 
                     if event.key == pygame.K_o:
                         son.stopsonido()
@@ -120,35 +120,35 @@ class PersonajeStarenka:
                     if event.key==pygame.K_2:
                         son.stopsonido()
                         self.bandera=1
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido1.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido1.wav')
                     if event.key==pygame.K_1:
                         self.bandera=0
                     if event.key==pygame.K_3:
                         son.stopsonido()
                         self.bandera=2
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido2.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido2.wav')
                     if event.key==pygame.K_4:
                         son.stopsonido()
                         self.bandera=3
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido3.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido3.wav')
                     if event.key==pygame.K_5:
                         son.stopsonido()
                         self.bandera=4
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido4.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido4.wav')
                     if event.key==pygame.K_6:
                         son.stopsonido()
                         self.bandera=5
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido5.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido5.wav')
                     ##Feliz
                     if event.key==pygame.K_7:
                         son.stopsonido()
                         self.bandera=6
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido6.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido6.wav')
                     #Triste
                     if event.key==pygame.K_8:
                         son.stopsonido()
                         self.bandera=7
-                        son.sonido('PersonajeStarenka/Sonido2S/sonido7.wav')
+                        son.sonido('PeleaDeAbacos/PersonajeStarenka/Sonido2S/sonido7.wav')
                     #Mover brazos
                     if event.key==pygame.K_9:
                         self.bandera=8
@@ -250,7 +250,7 @@ class PersonajeStarenka:
 
                 if self.bandera==0:
                     b.original()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')   
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')   
                     if self.bandera2==1:
                         self.lcFin.iluminacionPhong()
                     elif self.bandera2==2:
@@ -262,63 +262,63 @@ class PersonajeStarenka:
                     
                 if self.bandera==1:
                     b.asustado()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo5.jpg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo5.jpg')
                 if self.bandera==2:
                     b.molesto()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo4.jpg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo4.jpg')
                 if self.bandera==3:
                     b.preocupado()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo2.jpg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo2.jpg')
                 if self.bandera==4:
                     b.drawIndiferencia()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo3.jpg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo3.jpg')
                 if self.bandera==5:
                     b.sorprendido()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo6.jpg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo6.jpg')
                 if self.bandera==6:
                     b.felicidad()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo7.jpg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo7.jpg')
                 if self.bandera==7:
                     b.triste()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/fondo5.jpg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo5.jpg')
                 if self.bandera==8:
                     b.animaLevantar()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
                 if self.bandera==9:
                     b.animaCaminar()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
                 if self.bandera==10:
                     b.animaBrazo2()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
                 if self.bandera==11:
                     b.animaCabeza()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
                 if self.bandera==12:
                     b.animaBrincar()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
                 if self.bandera==13:
                     b.animaBrincarSplit()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
                 if self.bandera==14:
                     b.animaCaida()
-                    es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
+                    es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')
                 if self.bandera==15:
                     txt.draw_text("Usar flechas del teclado para mover los objetos", -40, 40, -1, 25, 255, 255, 255, 0, 0, 0)
                     if(self.bandera1==0 and self.activarColi==True):
                         b.animaCaminar()
-                        es.draw_e('PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')  
+                        es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/descarga_resized_op.jpeg')  
                         self.pelota(0,0)
                     if(self.bandera1==1):
                         b.triste()
-                        es.draw_e('PersonajeStarenka/Imagenes2S/fondo8.jpg')
+                        es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo8.jpg')
                         self.corazon(0,0)
                     if(self.bandera1==2):
                         b.animaBrincarSplit()
-                        es.draw_e('PersonajeStarenka/Imagenes2S/fondo7.jpg')
+                        es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo7.jpg')
                         self.Hamburguesa(0,0)
                     if(self.bandera1==3):
                         b.preocupado()
-                        es.draw_e('PersonajeStarenka/Imagenes2S/fondo2.jpg')
+                        es.draw_e('PeleaDeAbacos/PersonajeStarenka/Imagenes2S/fondo2.jpg')
                         self.bolaDisco(0,0)
                     
                 if self.activarColi:
