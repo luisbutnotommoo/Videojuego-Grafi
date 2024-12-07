@@ -16,6 +16,7 @@ from PersonajeLuis2.AccionesL.pez import Pez
 
 class PersonajeLuis:
     def __init__(self):
+        sonido.stop()
         self.bandera_pop_up, self.mensaje_pop_up = True,2
 
         # configuraciones personaje
@@ -178,6 +179,7 @@ class PersonajeLuis:
 
     def eventos_teclado(self, window, key, scancode, action, mods):
         if key == glfw.KEY_ESCAPE and action== glfw.PRESS:
+            sonido.stop()
             glfw.set_window_should_close(window, True)
 
         if key == glfw.KEY_ENTER and action== glfw.PRESS:
@@ -234,9 +236,6 @@ class PersonajeLuis:
             self.mensaje_pop_up=3#Instrucciones heisenpurr
             sonido.stop()
             sonido.play()
-             
-           
-            
             
         if key == glfw.KEY_P and action==glfw.PRESS:
             if self.pecesito is None:
