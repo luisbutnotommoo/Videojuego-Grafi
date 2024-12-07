@@ -15,7 +15,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-3" value="Despliegue de Menú princicipal (Jugar,Acerca De y Salir)." style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="145" y="80" width="150" height="70" as="geometry" />
+          <mxGeometry x="145" y="90" width="150" height="70" as="geometry" />
         </mxCell>
         <mxCell id="Kyi7t0m_yZwKaOhl6Uo--0" value="Inicio" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="170" y="-20" width="100" height="60" as="geometry" />
@@ -27,7 +27,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Kyi7t0m_yZwKaOhl6Uo--4" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="170" y="210" width="100" height="100" as="geometry" />
+          <mxGeometry x="170" y="220" width="100" height="100" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
