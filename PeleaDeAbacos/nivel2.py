@@ -292,9 +292,6 @@ class Nivel2:
             if event.type == pygame.QUIT:
                 return False
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.bandera = 1
-                    return False
                  # Configurar pausa
                 if event.key == pygame.K_p:
                     self.snd_seleccion.play()
@@ -320,13 +317,7 @@ class Nivel2:
                             self.bandera_pausa = not self.bandera_pausa
                         #Reiniciar
                         elif self.opc_sel == 2:
-                            pygame.mixer.music.stop()
-                            pygame.mixer.music.play(loops=-1)
-                            self.jugador_1_score=0
-                            self.jugador_2_score=0
-                            self.bandera_instrucciones=not self.bandera_instrucciones
-                            self.bandera_control_instrucciones=not self.bandera_control_instrucciones
-                            self.bandera_pausa=not self.bandera_pausa
+                            self.reinicioJuego()
                         #Mostrar instrucciones
                         elif self.opc_sel == 3:
                             self.bandera_pausa = not self.bandera_pausa
@@ -365,13 +356,7 @@ class Nivel2:
                             self.estado_general = "nivel2"
                             return False
                         elif self.opc_sel == 2:
-                            pygame.mixer.music.stop()
-                            pygame.mixer.music.play(loops=-1)
-                            self.jugador_1_score=0
-                            self.jugador_2_score=0
-                            self.bandera_instrucciones=not self.bandera_instrucciones
-                            self.bandera_control_instrucciones=not self.bandera_control_instrucciones
-                            self.bandera_ganador=0
+                            self.reinicioJuego()
                         elif self.opc_sel == 3:
                             pygame.mixer.music.stop()
                             self.banderaMenuPrincipal=False
@@ -440,26 +425,28 @@ class Nivel2:
         self.preguntaActual=None
 
     def teclasJugador1(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_w]:
-            self.pocima(0, 1)
-        if keys[pygame.K_s]:
-            self.pocima(0, -1)
-        if keys[pygame.K_a]:
-            self.pocima(-1, 0)
-        if keys[pygame.K_d]:
-            self.pocima(1, 0)
+        if not self.bandera_pausa:
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_w]:
+                self.pocima(0, 1)
+            if keys[pygame.K_s]:
+                self.pocima(0, -1)
+            if keys[pygame.K_a]:
+                self.pocima(-1, 0)
+            if keys[pygame.K_d]:
+                self.pocima(1, 0)
     
     def teclasJugador2(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP]:
-            self.esferaMagia(0, 1)
-        if keys[pygame.K_DOWN]:
-            self.esferaMagia(0, -1)
-        if keys[pygame.K_LEFT]:
-            self.esferaMagia(-1, 0)
-        if keys[pygame.K_RIGHT]:
-            self.esferaMagia(1, 0)
+        if not self.bandera_pausa:
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_UP]:
+                self.esferaMagia(0, 1)
+            if keys[pygame.K_DOWN]:
+                self.esferaMagia(0, -1)
+            if keys[pygame.K_LEFT]:
+                self.esferaMagia(-1, 0)
+            if keys[pygame.K_RIGHT]:
+                self.esferaMagia(1, 0)
 
     def respuesta(self, key, player):
         key_answer_map = {
@@ -580,6 +567,28 @@ class Nivel2:
         except Exception as e:
             print(f"Error en cleanup: {e}")
 
+    def reinicioJuego(self):
+        pygame.mixer.music.stop()
+        pygame.mixer.music.play(loops=-1)
+        glPushMatrix()
+        glColor3f(1, 1, 1)
+        self.torre2()
+        glPopMatrix()
+        glPushMatrix()
+        glColor3f(1, 1, 1)
+        self.torre1()
+        glPopMatrix()
+        self.banderaColision=0
+        self.reduc1=40
+        self.reduc2=40
+        self.jugador_1_score=0
+        self.jugador_2_score=0
+        self.bandera_instrucciones=not self.bandera_instrucciones
+        self.bandera_control_instrucciones=not self.bandera_control_instrucciones
+        self.bandera_pausa=not self.bandera_pausa
+        self.actualizar_estado_emocional(self.personaje[0]["nombre"], 0)
+        self.actualizar_estado_emocional(self.personaje[1]["nombre"], 0)
+        
 
 if __name__ == "__main__":
     sP = Nivel2()

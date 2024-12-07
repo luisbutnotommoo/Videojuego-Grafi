@@ -297,9 +297,6 @@ class Nivel1:
             if event.type == pygame.QUIT:
                 return False
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.bandera = 1
-                    return False
                  # Configurar pausa
                 if event.key == pygame.K_p:
                     self.snd_seleccion.play()
