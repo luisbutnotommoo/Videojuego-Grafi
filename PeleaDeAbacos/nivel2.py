@@ -362,7 +362,7 @@ class Nivel2:
                         self.snd_seleccion.play()
                         if self.opc_sel == 1:
                             self.banderaSiguienteNivel=False
-                            self.estado_general = "nivel2"
+                            self.estado_general = "nivel3"
                             return False
                         elif self.opc_sel == 2:
                             pygame.mixer.music.stop()
