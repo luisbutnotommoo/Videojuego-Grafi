@@ -160,28 +160,28 @@ class SeleccionPersonaje:
 
     def dibuja_textos(self):
         glColor4f(2, 2, 2, 1)
-        self.render_text_2d(self.display,"Duelo de Abacos",135,530,self.font_titulo)
-        self.render_text_2d(self.display,"Menú de selección",195,490,self.font_menu)
+        self.render_text_2d(self.display,"Duelo de Abacos",135,590,self.font_titulo)
+        self.render_text_2d(self.display,"Menú de selección",195,520,self.font_menu)
         self.render_text_2d(self.display,"Dr. Newt",70,200,self.font_personajes)
         self.render_text_2d(self.display,"Heisenpurr",250,200,self.font_personajes)
         self.render_text_2d(self.display,"Blue",460,198,self.font_personajes)
         self.render_text_2d(self.display,"Amargando",580,200,self.font_personajes)
-        self.render_text_2d(self.display,"Teclas |1||2||3||4| - Selección de personaje\n|Enter| - Confirma selección\n|M| - Visualizar personaje",10,40,self.font_instrucciones)
-        self.render_text_2d(self.display,"Teclas de modo visualizar personaje:\n|ESC| - Salir De Visualizar",460,40,self.font_instrucciones)
+        self.render_text_2d(self.display,"Teclas |1||2||3||4| - Selección de personaje\n|Enter| - Confirma selección\n|M| - Visualizar personaje",10,70,self.font_instrucciones)
+        self.render_text_2d(self.display,"Teclas de modo visualizar personaje:\n|ESC| - Salir De Visualizar",460,70,self.font_instrucciones)
         if(self.selected_character!=-1) and self.contador==0:
-            self.render_text_2d(self.display, f"Personaje jugador 1:{self.personaje[self.selected_character].nombre}", 60, 450, self.font_personajes2)
+            self.render_text_2d(self.display, f"Personaje jugador 1:{self.personaje[self.selected_character].nombre}", 60, 460, self.font_personajes2)
             self.nom1=self.personaje[self.selected_character].nombre
-            self.render_text_2d(self.display, "Personaje jugador 2:", 450, 450, self.font_personajes2)
+            self.render_text_2d(self.display, "Personaje jugador 2:", 450, 460, self.font_personajes2)
         elif(self.selected_character!=-1) and self.contador==1:
-            self.render_text_2d(self.display, f"Personaje jugador 1:{self.nom1}", 60, 450, self.font_personajes2)
-            self.render_text_2d(self.display, f"Personaje jugador 2:{self.personaje[self.selected_character].nombre}", 450, 450, self.font_personajes2)
+            self.render_text_2d(self.display, f"Personaje jugador 1:{self.nom1}", 60, 460, self.font_personajes2)
+            self.render_text_2d(self.display, f"Personaje jugador 2:{self.personaje[self.selected_character].nombre}", 450, 460, self.font_personajes2)
             self.nom2=self.personaje[self.selected_character].nombre
         elif(self.selected_character!=-1) and self.contador==2:
-            self.render_text_2d(self.display, f"Personaje jugador 1:{self.nom1}", 60, 450, self.font_personajes2)
-            self.render_text_2d(self.display, f"Personaje jugador 2:{self.nom2}", 450, 450, self.font_personajes2)
+            self.render_text_2d(self.display, f"Personaje jugador 1:{self.nom1}", 60, 460, self.font_personajes2)
+            self.render_text_2d(self.display, f"Personaje jugador 2:{self.nom2}", 450, 460, self.font_personajes2)
         elif self.selected_character==-1:
-            self.render_text_2d(self.display,"Personaje jugador 1: "+self.nom1,60 ,450,self.font_personajes2)
-            self.render_text_2d(self.display, "Personaje jugador 2:", 450, 450, self.font_personajes2)
+            self.render_text_2d(self.display,"Personaje jugador 1: "+self.nom1,60 ,460,self.font_personajes2)
+            self.render_text_2d(self.display, "Personaje jugador 2:", 450, 460, self.font_personajes2)
 
     def dibujar_piso_pared(self):
        
@@ -261,42 +261,75 @@ class SeleccionPersonaje:
 
 
     def render_text_2d(self, display, text, x, y, font, line_height=18):
-        lines = text.split('\n')  # Dividir el texto en líneas donde haya saltos de línea (\n)
-        
-        for i, line in enumerate(lines):
-            text_surface = font.render(line, True, (255, 255, 255), None)  # Fondo transparente
-            text_data = pygame.image.tostring(text_surface, "RGBA", True)
-            text_width, text_height = text_surface.get_size()
-            glEnable(GL_TEXTURE_2D)
-            texture_id = glGenTextures(1)
-            glBindTexture(GL_TEXTURE_2D, texture_id)
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, text_width, text_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, text_data)
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
-            glEnable(GL_BLEND)
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-            glMatrixMode(GL_PROJECTION)
-            glPushMatrix()
-            glLoadIdentity()
-            glOrtho(0, display[0], 0, display[1], -1, 1)
-            glMatrixMode(GL_MODELVIEW)
-            glPushMatrix()
-            glLoadIdentity()
+        # Caché para texturas
+        if not hasattr(self, '_text_texture_cache'):
+            self._text_texture_cache = {}
+
+        # Verificar si el texto ya tiene textura generada
+        if text not in self._text_texture_cache:
+            lines = text.split('\n')  # Dividir texto en líneas
+            textures = []
+
+            for line in lines:
+                text_surface = font.render(line, True, (255, 255, 255))  # Fondo transparente
+                text_data = pygame.image.tostring(text_surface, "RGBA", True)
+                text_width, text_height = text_surface.get_size()
+
+                texture_id = glGenTextures(1)
+                glBindTexture(GL_TEXTURE_2D, texture_id)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, text_width, text_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, text_data)
+                glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+                glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+
+                textures.append((texture_id, text_width, text_height))
+
+            # Guardar en la caché
+            self._text_texture_cache[text] = textures
+
+        # Recuperar texturas de la caché
+        textures = self._text_texture_cache[text]
+
+        # Configuración de OpenGL
+        glEnable(GL_TEXTURE_2D)
+        glEnable(GL_BLEND)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+
+        # Configuración de proyección
+        glMatrixMode(GL_PROJECTION)
+        glPushMatrix()
+        glLoadIdentity()
+        glOrtho(0, display[0], 0, display[1], -1, 1)
+
+        glMatrixMode(GL_MODELVIEW)
+        glPushMatrix()
+        glLoadIdentity()
+
+        # Dibujar las texturas
+        for i, (texture_id, text_width, text_height) in enumerate(textures):
             glBindTexture(GL_TEXTURE_2D, texture_id)
             glBegin(GL_QUADS)
-            glTexCoord2f(0, 0); glVertex2f(x, y - i * line_height)  
-            glTexCoord2f(1, 0); glVertex2f(x + text_width, y - i * line_height)
-            glTexCoord2f(1, 1); glVertex2f(x + text_width, y + text_height - i * line_height)
-            glTexCoord2f(0, 1); glVertex2f(x, y + text_height - i * line_height)
+            # Asegúrate de que las coordenadas de la textura estén correctamente alineadas
+            glTexCoord2f(0, 1); glVertex2f(x, y - i * line_height)  # Esquina inferior izquierda
+            glTexCoord2f(1, 1); glVertex2f(x + text_width, y - i * line_height)  # Esquina inferior derecha
+            glTexCoord2f(1, 0); glVertex2f(x + text_width, y - i * line_height - text_height)  # Esquina superior derecha
+            glTexCoord2f(0, 0); glVertex2f(x, y - i * line_height - text_height)  # Esquina superior izquierda
             glEnd()
-            
-          #  glDeleteTextures(int(texture_id))
-            glPopMatrix()
-            glMatrixMode(GL_PROJECTION)
-            glPopMatrix()
-            glMatrixMode(GL_MODELVIEW)
-            glDisable(GL_BLEND)
-            glDisable(GL_TEXTURE_2D)
+
+        # Restaurar matrices
+        glPopMatrix()
+        glMatrixMode(GL_PROJECTION)
+        glPopMatrix()
+        glMatrixMode(GL_MODELVIEW)
+
+        # Deshabilitar modos
+        glDisable(GL_BLEND)
+        glDisable(GL_TEXTURE_2D)
+
+        # Limpieza opcional de texturas si cambian dinámicamente
+        # for texture_id, _, _ in textures:
+        #     glDeleteTextures(1, [texture_id])
+
+
 
 
     def draw_scene(self):
@@ -324,9 +357,9 @@ class SeleccionPersonaje:
                 if event.type == pygame.QUIT:
                     return False
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
+                    """if event.key == pygame.K_ESCAPE:
                         self.bandera=1
-                        return False
+                        return False"""
                     if event.key == pygame.K_p:
                         if self.bandera_control_instrucciones:
                             self.bandera_instrucciones =  not self.bandera_instrucciones
